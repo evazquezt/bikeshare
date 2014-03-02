@@ -1,4 +1,5 @@
 exportPattern("^[[:alpha:]]+")
+export("WAS")
 exportClasses(
-    "BikeshareData" 
+    "BikeshareData" , "BikeshareCity"
 )

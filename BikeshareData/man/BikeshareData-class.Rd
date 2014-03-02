@@ -6,21 +6,20 @@
 
 \title{Class \code{"BikeshareData"}}
 \description{
-%%  ~~ A concise (1-5 lines) description of what the class is. ~~
+Object for storing bikeshare data
 }
 \section{Objects from the Class}{
 Objects can be created by calls of the form \code{BikeshareData(...)}.
-%%  ~~ describe objects here ~~ 
 }
 \section{Slots}{
   \describe{
-    \item{\code{location}:}{Object of class \code{"character"} ~~ }
-    \item{\code{startTime}:}{Object of class \code{"POSIXt"} ~~ }
-    \item{\code{endTime}:}{Object of class \code{"POSIXt"} ~~ }
-    \item{\code{startLoc}:}{Object of class \code{"integer"} ~~ }
-    \item{\code{endLoc}:}{Object of class \code{"integer"} ~~ }
-    \item{\code{bike}:}{Object of class \code{"integer"} ~~ }
-    \item{\code{memberType}:}{Object of class \code{"character"} ~~ }
+    \item{\code{location}:}{Name of city }
+    \item{\code{startTime}:}{Start time of trip }
+    \item{\code{endTime}:}{End time of trip}
+    \item{\code{startLoc}:}{Start location of trip}
+    \item{\code{endLoc}:}{End location of trip}
+    \item{\code{bike}:}{Bike used}
+    \item{\code{memberType}:}{Type of membership (member, guest)}
   }
 }
 \section{Methods}{
@@ -30,7 +29,7 @@ No methods defined with class "BikeshareData" in the signature.
 %%  ~~put references to the literature/web site here~~
 }
 \author{
-%%  ~~who you are~~
+John Sears
 }
 \note{
 %%  ~~further notes~~
@@ -48,9 +47,4 @@ showClass("BikeshareData")
 \keyword{classes}
 \usage{
 BikeshareData(...)
-}
-\arguments{
-  \item{\dots}{
-%%     ~~Describe \code{\dots} here~~
-}
 }

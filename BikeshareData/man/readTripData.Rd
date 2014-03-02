@@ -2,35 +2,40 @@
 \alias{readTripData}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-%%  ~~function to do ... ~~
+  Read trip data from a downloaded trip history data file
+  %%  ~~function to do ... ~~
 }
 \description{
+  After you download a bikeshare trip data file, use this function
+  to read in the data into a BikeshareData object.
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{
-readTripData(path)
+readTripData("data/2010-4th-quarter.csv","WAS")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{path}{
-%%     ~~Describe \code{path} here~~
-}
+    Path to the data file
+  }
+  \item{city}{
+    City for which the data comes from
+    }
 }
 \details{
-%%  ~~ If necessary, more details than the description above ~~
+
+  Implementation uses the city argument to automatically retrieve data
+  file conventions
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+  BikeshareData object containing all of the standard information from the data file.
 }
 \references{
 %% ~put references to the literature/web site here ~
 }
 \author{
-%%  ~~who you are~~
+  %%  ~~who you are~~
+  John Sears
 }
 \note{
 %%  ~~further notes~~
@@ -42,16 +47,7 @@ readTripData(path)
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (path) 
-{
-  }
+bd = readTripData("data/2010-4th-quarter.csv","WAS")
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
 \keyword{ ~kwd1 }
 \keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
