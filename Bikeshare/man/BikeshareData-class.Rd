@@ -22,8 +22,7 @@ Objects can be created by calls of the form
     \item{\code{endLoc}:}{End location of trip}
     \item{\code{bike}:}{Bike used}
     \item{\code{memberType}:}{Type of membership (member, guest)}
-    \item{\code{stationNames}:}{Names of stations in data file (to be
-      matched with BikeshareStation objects)}
+    \item{\code{stations}:}{List of BikeshareStation objects}
   }
 }
 \section{Methods}{

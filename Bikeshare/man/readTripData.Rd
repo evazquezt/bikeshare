@@ -18,6 +18,9 @@ readTripData(path,city)
   }
   \item{city}{
     City for which the data comes from
+  }
+  \item{stations}{
+    List of BikeshareStation objects
     }
 }
 \details{
@@ -33,5 +36,5 @@ readTripData(path,city)
 }
 
 \examples{
-#bd = readTripData(path="data/2010-4th-quarter.csv",city="WAS")
+#bd = readTripData(path="data/2010-4th-quarter.csv",city="WAS", stations=stations)
 }

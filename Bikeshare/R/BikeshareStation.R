@@ -4,4 +4,5 @@ BikeshareStation <- setClass("BikeshareStation",
                                  long="numeric",
                                  installDate="POSIXt",
                                  removalDate="POSIXt",
+                                 stationId="numeric",
                                  numBikes="numeric"))
