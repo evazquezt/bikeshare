@@ -15,7 +15,8 @@ Type: \tab Package\cr
 Version: \tab 1.0\cr
 Date: \tab 2014-03-01\cr
 License: \tab MIT\cr
-Depends: \tab methods\cr
+Depends: \tab R (>= 2.15.1)\cr
+Imports: \tab XML \cr
 }
 }
 \author{

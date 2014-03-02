@@ -1,7 +1,7 @@
 \name{BikeshareStation-class}
 \docType{class}
 \alias{BikeshareStation-class}
-
+\alias{BikeshareStation}
 \title{Class "BikeshareStation"}
 \description{Object representing city-specific bikeshare data}
 \section{Objects from the Class}{

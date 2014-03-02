@@ -19,9 +19,6 @@ readStationData(stationPath, city)
     City object identifying bikeshare city
 }
 }
-\details{
-%%  ~~ If necessary, more details than the description above ~~
-}
 \value{
  List of BikeshareStation objects
 }

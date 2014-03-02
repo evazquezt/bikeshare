@@ -3,7 +3,7 @@
 \docType{class}
 \alias{BikeshareData-class}
 \alias{BikeshareData}
-
+\alias{as.data.frame.BikeshareData}
 \title{Class \code{"BikeshareData"}}
 \description{
 Object for storing bikeshare data
@@ -27,23 +27,16 @@ Objects can be created by calls of the form
   }
 }
 \section{Methods}{
-No methods defined with class "BikeshareData" in the signature.
-}
-\references{
+as.data.frame
 }
 \author{
 John Sears
 }
-\note{
-}
-
 
 \seealso{
+  readTripData
 }
 \examples{
 showClass("BikeshareData")
 }
 \keyword{classes}
-\usage{
-BikeshareData(...)
-}

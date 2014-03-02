@@ -1,4 +1,4 @@
-Package: BikeshareData
+Package: Bikeshare
 Type: Package
 Title: Tools for Analyzing Bikeshare Data
 Version: 0.0.1
