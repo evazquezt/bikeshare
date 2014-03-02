@@ -3,3 +3,4 @@ export("WAS")
 exportClasses(
     "BikeshareData" , "BikeshareCity","BikeshareStation"
 )
+S3method("as.data.frame","BikeshareData")

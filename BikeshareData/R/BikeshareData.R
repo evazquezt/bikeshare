@@ -8,7 +8,7 @@ BikeshareData <- setClass("BikeshareData",
              memberType = "integer",
              stationNames = "character"))
 
-as.data.frame.BikeshareData = function(from){data.frame(from@startTime,from@endTime, from@startLoc, from@endLoc, from@bike, from@memberType)}
+as.data.frame.BikeshareData = function(x,row.names, optional,...){data.frame(x@startTime,x@endTime, x@startLoc, x@endLoc, x@bike, x@memberType)}
 
 setValidity("BikeshareData",
             function(object) {

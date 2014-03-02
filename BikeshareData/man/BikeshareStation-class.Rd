@@ -14,7 +14,7 @@ Objects can be created by calls of the form \code{new("BikeshareStation", ...)},
 	   \item{\code{long}}{Longitude of station}
 	   \item{\code{installDate}}{Date when station was installed}
 	   \item{\code{removalDate}}{Date when station was removed (NA otherwise)}
-	   \item{\code{numbikes}}{Max number of bikes in station}
+	   \item{\code{numBikes}}{Max number of bikes in station}
   }
 }
 

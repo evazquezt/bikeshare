@@ -9,7 +9,9 @@
 Object for storing bikeshare data
 }
 \section{Objects from the Class}{
-Objects can be created by calls of the form \code{BikeshareData(...)}.
+Objects can be created by calls of the form
+\code{BikeshareData(location, startTime, endTime, startLoc, endLoc,
+  bike, memberType, stationNames)}.
 }
 \section{Slots}{
   \describe{

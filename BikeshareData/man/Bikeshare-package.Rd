@@ -1,6 +1,6 @@
-\name{BikeshareData-package}
-\alias{BikeshareData-package}
-\alias{BikeshareData}
+\name{Bikeshare-package}
+\alias{Bikeshare-package}
+\alias{Bikeshare}
 \docType{package}
 \title{
 Tools for Analyzing Bikeshare Data
@@ -10,7 +10,7 @@ Tools for Analyzing Bikeshare Data
 }
 \details{
 \tabular{ll}{
-Package: \tab BikeshareData\cr
+Package: \tab Bikeshare\cr
 Type: \tab Package\cr
 Version: \tab 1.0\cr
 Date: \tab 2014-03-01\cr
