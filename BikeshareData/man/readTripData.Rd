@@ -11,7 +11,7 @@
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{
-readTripData("data/2010-4th-quarter.csv","WAS")
+readTripData(path,city)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -47,7 +47,7 @@ readTripData("data/2010-4th-quarter.csv","WAS")
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-bd = readTripData("data/2010-4th-quarter.csv","WAS")
+#bd = readTripData(path="data/2010-4th-quarter.csv",city="WAS")
 }
 \keyword{ ~kwd1 }
 \keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

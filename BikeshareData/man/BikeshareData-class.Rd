@@ -20,26 +20,23 @@ Objects can be created by calls of the form \code{BikeshareData(...)}.
     \item{\code{endLoc}:}{End location of trip}
     \item{\code{bike}:}{Bike used}
     \item{\code{memberType}:}{Type of membership (member, guest)}
+    \item{\code{stationNames}:}{Names of stations in data file (to be
+      matched with BikeshareStation objects)}
   }
 }
 \section{Methods}{
 No methods defined with class "BikeshareData" in the signature.
 }
 \references{
-%%  ~~put references to the literature/web site here~~
 }
 \author{
 John Sears
 }
 \note{
-%%  ~~further notes~~
 }
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%%  ~~objects to See Also as \code{\link{~~fun~~}}, ~~~
-%%  ~~or \code{\linkS4class{CLASSNAME}} for links to other classes ~~~
 }
 \examples{
 showClass("BikeshareData")
