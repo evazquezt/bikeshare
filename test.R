@@ -10,3 +10,18 @@ bd.df = as.data.frame(bd)
 
 # Merge on starting location
 merged = merge(bd.df, stations.df, by.y="stationId", by.x ="startLoc")
+
+# Let's analyze  "Massachusetts Ave & Dupont Circle NW"
+station = stations.df[stations.df$name == "Massachusetts Ave & Dupont Circle NW",]
+
+# Pull out only trips that started there
+data = bd.df[bd.df$startLoc == station$stationId,]
+# Figure out where people went
+destinations = unique(data$endLoc)
+# Count number of times going to each destination
+counts = sapply(destinations, FUN=function(x){sum(data$endLoc == as.integer(x), na.rm=TRUE)}, USE.NAMES=FALSE)
+
+cbind(destinations, counts)
+
+bd.df[is.na(bd.df$endLoc),]
+
