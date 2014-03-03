@@ -10,7 +10,7 @@
   to read in the data into a BikeshareData object.
 }
 \usage{
-readTripData(path,city)
+readTripData(path,city, stations)
 }
 \arguments{
   \item{path}{
