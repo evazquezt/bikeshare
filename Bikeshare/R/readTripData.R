@@ -1,5 +1,4 @@
 readTripData <-  function(path, city, stations){
-    library(stringr)
     # Allow user to enter String format for city
     if(class(city) == "character"){
         city = get(city)
