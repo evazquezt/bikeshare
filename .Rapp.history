@@ -1,0 +1,57 @@
+library("bikehsare")
+library("Bikehsare")
+library("Bikeshare")
+getwd()
+setwd("/Users/Sara/Desktop/github/bikeshare/Bikeshare")
+setwd("/Users/Sara/Desktop/github/bikeshare/Bikeshare/extData")
+setwd("/Users/Sara/Desktop/github/bikeshare/Bikeshare/inst/extData")
+setwd("/Users/Sara/Desktop/github/bikeshare")
+stations = readStationData("Bikeshare/inst/extData/bikeStations.xml", WAS)#
+#
+bd = readTripData("Bikeshare/inst/extData/2010-4th-quarter.csv", WAS, stations)
+head(bd)
+stations.df = makeStationDataFrame(stations)#
+bd.df = as.data.frame(bd)
+install.packages("Bikeshare_0.0.1.tar.gz")#
+library(Bikeshare)#
+#
+stations = readStationData("Bikeshare/inst/extData/bikeStations.xml", WAS)#
+#
+bd = readTripData("Bikeshare/inst/extData/2010-4th-quarter.csv", WAS, stations)#
+#
+stations.df = makeStationDataFrame(stations)#
+bd.df = as.data.frame(bd)
+install.packages("Bikeshare_0.0.1.tar.gz")#
+library(Bikeshare)
+library(Bikeshare)#
+#
+stations = readStationData("Bikeshare/inst/extData/bikeStations.xml", WAS)
+bd = readTripData("Bikeshare/inst/extData/2010-4th-quarter.csv", WAS, stations)
+stations.df = makeStationDataFrame(stations)#
+bd.df = as.data.frame(bd)
+bd
+head(bd)
+str(bd)
+stations = readStationData("Bikeshare/inst/extData/bikeStations.xml", WAS)
+length(stations)
+str(stations)
+bd = readTripData("Bikeshare/inst/extData/2010-4th-quarter.csv", WAS, stations)
+head(bd)
+bd = readTripData("Bikeshare/inst/extData/2010-4th-quarter.csv", WAS, stations)
+merged = merge(bd.df, stations.df, by.y="stationId", by.x ="startLoc")
+stations.df = makeStationDataFrame(stations)
+head(stations.df)
+plotStations("Bikeshare/inst/extData/bikeStations.xml", WAS)
+plotStations <- function(data,city,zoom=13){#
+	stations <- readStationData(data,city)#
+	stations.df <- makeStationDataFrame(stations)#
+	locations <- unique(stations.df[,c("lat","long")])#
+	center <- c(mean(locations$long),mean(locations$lat))#
+	map <- get_map(location=center,zoom=zoom,source="google")#
+	mapbg <- ggmap(map,fullpage=TRUE)#
+	mapbg + geom_point(data = locations, aes(x = long, y = lat), colour = "red", size = 2)#
+}
+plotStations("Bikeshare/inst/extData/bikeStations.xml", WAS)
+library(Bikeshare)
+?plotStations
+plotStations("Bikeshare/inst/extData/bikeStations.xml", WAS)
