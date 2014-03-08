@@ -16,8 +16,10 @@ readTripData <-  function(path, city, stations){
     # Do city-level cleaning
     if(identical(city, WAS)){
         # Capital Bikeshare data comes in with station id in station name.  Strip it out
-        data$startLoc = as.integer(gsub("[\\(\\)]","",sapply(data$startLoc, function(x){str_extract_all(x, "\\(([0-9]+)\\)")[[1]]})))
-        data$endLoc   = as.integer(gsub("[\\(\\)]","",sapply(data$endLoc, function(x){str_extract_all(x, "\\(([0-9]+)\\)")[[1]]})))
+        data$startLoc = suppressWarnings(as.integer(sapply(data$startLoc, function(x){substr(x, nchar(x)-5, nchar(x)-1)}, USE.NAMES=FALSE)))
+        data$endLoc = suppressWarnings(as.integer(sapply(data$endLoc, function(x){substr(x, nchar(x)-5, nchar(x)-1)}, USE.NAMES=FALSE)))
+        # Kill the rows that don't have start/end locs
+        data = subset(data,!(is.na(startLoc) | is.na(endLoc)))
     }
     # Similarly deal with other start/end locs
     
