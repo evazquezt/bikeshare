@@ -39,8 +39,6 @@ Sara Kwasnick
 This function can be used in conjunction with \code{getDrivingDistance} to see when biking and driving distances between particular stations are significantly different!
 }
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
 \seealso{
 \code{getDrivingDistance}
 
@@ -53,7 +51,7 @@ The Google Maps Distance Matrix API, \url{http://code.google.com/apis/maps/docum
 ## Not run
 from.subset <- "stationId <= 31001"
 to.subset <- "numBikes <= 10"
-#stations <- readStationData("Bikeshare/inst/extData/bikeStations.xml", .cities()$WAS)
+stations <- readStationData(system.file("extData/bikeStations.xml", package="Bikeshare"),.cities()$WAS)
 getBikingDistance(stations,from.subset,to.subset)
 }
 }
