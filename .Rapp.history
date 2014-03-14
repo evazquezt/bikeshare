@@ -1,0 +1,2089 @@
+interval2 <- sqrt(qchisq(1-alpha,p+1) * diag(X %*% cov %*% t(X)))
+n = 100 # number of obs#
+alpha = 0.1 # want 90% CIs#
+p = 4 # degrees of freedom#
+#
+## Generate data and specify true model#
+x <- rnorm(n)#
+X <- matrix(c(x^0,x, x^2,x^3,x^4),nrow=n)#
+sigma2 <- 4 # known#
+e <- rnorm(n,mean=0,sd=sqrt(sigma2)) # errors#
+b <- rep(1,5) # true betas#
+y <- X %*% b + e # ys#
+## Estimate parameters by OLS#
+data <- data.frame(y,X)#
+ols.model <- lm(y ~ X2 + X3 + X4 + X5, data=data)#
+b.hat <- ols.model$coefficients#
+y.hat <- predict(ols.model)#
+cov <- solve(t(X)%*%X)*sigma2#
+## Method 1#
+interval1 <- qnorm(1-alpha/2) * sqrt(diag(X %*% cov %*% t(X)))#
+lb1 <- y.hat - interval # lower bound#
+ub1 <- y.hat + interval # upper bound#
+#
+## Method 2#
+interval2 <- sqrt(qchisq(1-alpha,p+1) * diag(X %*% cov %*% t(X)))
+n = 100 # number of obs#
+alpha = 0.1 # want 90% CIs#
+p = 4 # degrees of freedom#
+#
+## Generate data and specify true model#
+x <- rnorm(n)#
+X <- matrix(c(x^0,x, x^2,x^3,x^4),nrow=n)#
+sigma2 <- 4 # known#
+e <- rnorm(n,mean=0,sd=sqrt(sigma2)) # errors#
+b <- rep(1,5) # true betas#
+y <- X %*% b + e # ys#
+## Estimate parameters by OLS#
+data <- data.frame(y,X)#
+ols.model <- lm(y ~ X2 + X3 + X4 + X5, data=data)#
+b.hat <- ols.model$coefficients#
+y.hat <- predict(ols.model)#
+cov <- solve(t(X)%*%X)*sigma2#
+## Method 1#
+interval1 <- qnorm(1-alpha/2) * sqrt(diag(X %*% cov %*% t(X)))#
+lb1 <- y.hat - interval1 # lower bound#
+ub1 <- y.hat + interval1 # upper bound#
+#
+## Method 2#
+interval2 <- sqrt(qchisq(1-alpha,p+1) * diag(X %*% cov %*% t(X)))
+interval1
+interval2
+?plot
+plot(x,y)
+par(new=T)#
+plot(x,y.hat)
+plot(x,y.hat,type="l")
+plot(sort(x),y.hat)
+plot(sort(x),y.hat,type="l")
+sort(x)
+n = 100 # number of obs#
+alpha = 0.1 # want 90% CIs#
+p = 4 # degrees of freedom#
+#
+## Generate data and specify true model#
+x <- sort(rnorm(n))#
+X <- matrix(c(x^0,x, x^2,x^3,x^4),nrow=n)#
+sigma2 <- 4 # known#
+e <- rnorm(n,mean=0,sd=sqrt(sigma2)) # errors#
+b <- rep(1,5) # true betas#
+y <- X %*% b + e # ys#
+## Estimate parameters by OLS#
+data <- data.frame(y,X)#
+ols.model <- lm(y ~ X2 + X3 + X4 + X5, data=data)#
+b.hat <- ols.model$coefficients#
+y.hat <- predict(ols.model)#
+cov <- solve(t(X)%*%X)*sigma2#
+## Method 1#
+interval1 <- qnorm(1-alpha/2) * sqrt(diag(X %*% cov %*% t(X)))#
+lb1 <- y.hat - interval1 # lower bound#
+ub1 <- y.hat + interval1 # upper bound#
+#
+## Method 2#
+interval2 <- sqrt(qchisq(1-alpha,p+1) * diag(X %*% cov %*% t(X)))#
+lb2 <- y.hat - interval2 # lower bound#
+ub2 <- y.hat + interval2 # upper bound#
+#
+## Plot results!#
+plot(x,y)#
+par(new=T)#
+plot(x,y.hat,type="l")
+plot(x,y)#
+par(new=T)#
+plot(x,y.hat,type="l",ltd=2)
+?plot
+plot(x,y)#
+par(new=T)#
+plot(x,y.hat,type="l",lwd=3)
+plot(x,y)#
+par(new=T)#
+plot(x,y.hat,type="l",lwd=3)#
+par(new=T)#
+plot(x,lb1,type="l",col="green")#
+par(new=T)#
+plot(x,ub1,type="l",col="green")#
+par(new=T)#
+plot(x,lb1,type="l",col="red")#
+par(new=T)#
+plot(x,ub1,type="l",col="red")
+lb1
+plot(x,y)#
+par(new=T)#
+plot(x,y.hat,type="l",lwd=3)#
+par(new=T)#
+plot(x,lb1,type="l",col="green")#
+par(new=T)#
+plot(x,ub1,type="l",col="green")#
+par(new=T)#
+plot(x,lb2,type="l",col="red")#
+par(new=T)#
+plot(x,ub2,type="l",col="red")
+Preliminaries#
+n = 100 # number of obs#
+alpha = 0.1 # want 90% CIs#
+p = 4 # degrees of freedom#
+#
+## Generate data and specify true model#
+x <- sort(rnorm(n))#
+X <- matrix(c(x^0,x, x^2,x^3,x^4),nrow=n)#
+sigma2 <- 10 # known#
+e <- rnorm(n,mean=0,sd=sqrt(sigma2)) # errors#
+b <- rep(1,5) # true betas#
+y <- X %*% b + e # ys#
+## Estimate parameters by OLS#
+data <- data.frame(y,X)#
+ols.model <- lm(y ~ X2 + X3 + X4 + X5, data=data)#
+b.hat <- ols.model$coefficients#
+y.hat <- predict(ols.model)#
+cov <- solve(t(X)%*%X)*sigma2#
+## Method 1#
+interval1 <- qnorm(1-alpha/2) * sqrt(diag(X %*% cov %*% t(X)))#
+lb1 <- y.hat - interval1 # lower bound#
+ub1 <- y.hat + interval1 # upper bound#
+#
+## Method 2#
+interval2 <- sqrt(qchisq(1-alpha,p+1) * diag(X %*% cov %*% t(X)))#
+lb2 <- y.hat - interval2 # lower bound#
+ub2 <- y.hat + interval2 # upper bound#
+#
+## Plot results!#
+plot(x,y)#
+par(new=T)#
+plot(x,y.hat,type="l",lwd=3)#
+par(new=T)#
+plot(x,lb1,type="l",col="green")#
+par(new=T)#
+plot(x,ub1,type="l",col="green")#
+par(new=T)#
+plot(x,lb2,type="l",col="red")#
+par(new=T)#
+plot(x,ub2,type="l",col="red")
+Preliminaries#
+n = 100 # number of obs#
+alpha = 0.1 # want 90% CIs#
+p = 4 # degrees of freedom#
+#
+## Generate data and specify true model#
+x <- sort(rnorm(n))#
+X <- matrix(c(x^0,x, x^2,x^3,x^4),nrow=n)#
+sigma2 <- 10 # known#
+e <- rnorm(n,mean=0,sd=sqrt(sigma2)) # errors#
+b <- rnorm(5) # true betas#
+y <- X %*% b + e # ys#
+## Estimate parameters by OLS#
+data <- data.frame(y,X)#
+ols.model <- lm(y ~ X2 + X3 + X4 + X5, data=data)#
+b.hat <- ols.model$coefficients#
+y.hat <- predict(ols.model)#
+cov <- solve(t(X)%*%X)*sigma2#
+## Method 1#
+interval1 <- qnorm(1-alpha/2) * sqrt(diag(X %*% cov %*% t(X)))#
+lb1 <- y.hat - interval1 # lower bound#
+ub1 <- y.hat + interval1 # upper bound#
+#
+## Method 2#
+interval2 <- sqrt(qchisq(1-alpha,p+1) * diag(X %*% cov %*% t(X)))#
+lb2 <- y.hat - interval2 # lower bound#
+ub2 <- y.hat + interval2 # upper bound#
+#
+## Plot results!#
+plot(x,y)#
+par(new=T)#
+plot(x,y.hat,type="l",lwd=3)#
+par(new=T)#
+plot(x,lb1,type="l",col="green")#
+par(new=T)#
+plot(x,ub1,type="l",col="green")#
+par(new=T)#
+plot(x,lb2,type="l",col="red")#
+par(new=T)#
+plot(x,ub2,type="l",col="red")
+This code does question 4a of HW1#
+## Stats 315a#
+## Sara Kwasnick#
+###
+###
+#
+## Preliminaries#
+n = 100 # number of obs#
+alpha = 0.1 # want 90% CIs#
+p = 4 # degrees of freedom#
+#
+## Generate data and specify true model#
+x <- sort(rnorm(n))#
+X <- matrix(c(x^0,x, x^2,x^3,x^4),nrow=n)#
+sigma2 <- 10 # known#
+e <- rnorm(n,mean=0,sd=sqrt(sigma2)) # errors#
+b <- rnorm(5) # true betas#
+y <- X %*% b + e # ys#
+## Estimate parameters by OLS#
+data <- data.frame(y,X)#
+ols.model <- lm(y ~ X2 + X3 + X4 + X5, data=data)#
+b.hat <- ols.model$coefficients#
+y.hat <- predict(ols.model)#
+cov <- solve(t(X)%*%X)*sigma2#
+## Method 1#
+interval1 <- qnorm(1-alpha/2) * sqrt(diag(X %*% cov %*% t(X)))#
+lb1 <- y.hat - interval1 # lower bound#
+ub1 <- y.hat + interval1 # upper bound#
+#
+## Method 2#
+interval2 <- sqrt(qchisq(1-alpha,p+1) * diag(X %*% cov %*% t(X)))#
+lb2 <- y.hat - interval2 # lower bound#
+ub2 <- y.hat + interval2 # upper bound#
+#
+## Plot results!#
+plot(x,y)#
+par(new=T)#
+plot(x,y.hat,type="l",lwd=3)#
+par(new=T)#
+plot(x,lb1,type="l",col="green")#
+par(new=T)#
+plot(x,ub1,type="l",col="green")#
+par(new=T)#
+plot(x,lb2,type="l",col="red")#
+par(new=T)#
+plot(x,ub2,type="l",col="red")#
+#}
+interval(1)
+interval1
+interval2
+y.hat
+Plot results!#
+plot(x,y)#
+par(new=T)#
+plot(x,y.hat,type="l",lwd=3,axes=FALSE)#
+par(new=T)#
+plot(x,lb1,type="l",col="green",axes=FALSE)#
+par(new=T)#
+plot(x,ub1,type="l",col="green",axes=FALSE)#
+par(new=T)#
+plot(x,lb2,type="l",col="red",axes=FALSE)#
+par(new=T)#
+plot(x,ub2,type="l",col="red",axes=FALSE)
+ub2
+lb2
+Plot results!#
+plot(x,y)#
+par(new=T)#
+plot(x,y.hat,type="l",lwd=3,axes=FALSE,xlab="",ylab="")#
+par(new=T)#
+plot(x,lb1,type="l",col="green",axes=FALSE,xlab="",ylab="")#
+par(new=T)#
+plot(x,ub1,type="l",col="green",axes=FALSE,xlab="",ylab="")#
+par(new=T)#
+plot(x,lb2,type="l",col="red",axes=FALSE,xlab="",ylab="")#
+par(new=T)#
+plot(x,ub2,type="l",col="red",axes=FALSE,xlab="",ylab="")
+ub2
+lb2
+x
+lb
+lb2
+lb1
+plot(x,y)#
+par(new=T)#
+plot(x,y.hat,type="l",lwd=3,axes=FALSE,xlab="",ylab="")#
+par(new=T)#
+plot(x,lb1,type="l",col="green",axes=FALSE,xlab="",ylab="")#
+par(new=T)#
+plot(x,ub1,type="l",col="green",axes=FALSE,xlab="",ylab="")#
+par(new=T)#
+plot(x,lb2,type="p",col="red",axes=FALSE,xlab="",ylab="")#
+par(new=T)#
+plot(x,ub2,type="p",col="red",axes=FALSE,xlab="",ylab="")
+plot(x,y)#
+par(new=T)
+plot(x,ub2,type="l",col="red",axes=FALSE,xlab="",ylab="")
+x
+ub2
+plot(x,y)#
+par(new=T)
+plot(x,lb2,type="l",col="red",axes=FALSE,xlab="",ylab="")#
+par(new=T)
+sqrt(qchisq(1-alpha,p+1) * diag(X %*% cov %*% t(X)))
+y.hat
+lb2
+plot(x,lb2)
+par(new=T)
+x
+ub2
+data.frame(ub2,lb2)
+ub2>lb2
+plot(x,ub2)
+plot(x,y)
+par(new=T)#
+plot(x,y.hat,type="l",lwd=3,axes=FALSE,xlab="",ylab="")
+lb2
+plot(x[1],lb2[1])
+plot(x,y)#
+par(new=T)#
+plot(x,y.hat,type="l",lwd=3,axes=FALSE,xlab="",ylab="")#
+par(new=T)
+plot(x[1],lb2[1])
+plot(x[1],lb2[1],col="red")
+plot(x,y)#
+par(new=T)#
+plot(x,y.hat,type="l",lwd=3,axes=FALSE,xlab="",ylab="")#
+par(new=T)
+plot(x[1],lb2[1],col="red")
+x[1]
+lb2[1]
+plot(x,y)
+lines(x,y.hat,type="l",lwd=3,axes=FALSE,xlab="",ylab="")
+lines(x,y.hat,type="l",lwd=3)
+plot(x,y)#
+lines(x,y.hat,type="l",lwd=3)#
+lines(x,lb1,type="l",col="green")#
+lines(x,ub1,type="l",col="green")#
+lines(x,lb2,type="l",col="red")#
+lines(x,ub2,type="l",col="red")
+This code does question 4a of HW1#
+## Stats 315a#
+## Sara Kwasnick#
+###
+###
+#
+## Preliminaries#
+n = 100 # number of obs#
+alpha = 0.1 # want 90% CIs#
+p = 4 # degrees of freedom#
+#
+## Generate data and specify true model#
+x <- sort(rnorm(n))#
+X <- matrix(c(x^0,x, x^2,x^3,x^4),nrow=n)#
+sigma2 <- 10 # known#
+e <- rnorm(n,mean=0,sd=sqrt(sigma2)) # errors#
+b <- rnorm(5) # true betas#
+y <- X %*% b + e # ys#
+## Estimate parameters by OLS#
+data <- data.frame(y,X)#
+ols.model <- lm(y ~ X2 + X3 + X4 + X5, data=data)#
+b.hat <- ols.model$coefficients#
+y.hat <- predict(ols.model)#
+cov <- solve(t(X)%*%X)*sigma2#
+## Method 1#
+interval1 <- qnorm(1-alpha/2) * sqrt(diag(X %*% cov %*% t(X)))#
+lb1 <- y.hat - interval1 # lower bound#
+ub1 <- y.hat + interval1 # upper bound#
+#
+## Method 2#
+interval2 <- sqrt(qchisq(1-alpha,p+1) * diag(X %*% cov %*% t(X)))#
+lb2 <- y.hat - interval2 # lower bound#
+ub2 <- y.hat + interval2 # upper bound#
+#
+## Plot results!#
+plot(x,y)#
+lines(x,y.hat,type="l",lwd=3)#
+lines(x,lb1,type="l",col="green")#
+lines(x,ub1,type="l",col="green")#
+lines(x,lb2,type="l",col="red")#
+lines(x,ub2,type="l",col="red")#
+#}
+This code does question 4a of HW1#
+## Stats 315a#
+## Sara Kwasnick#
+###
+###
+#
+## Preliminaries#
+n = 100 # number of obs#
+alpha = 0.1 # want 90% CIs#
+p = 4 # degrees of freedom#
+#
+## Generate data and specify true model#
+x <- sort(rnorm(n))#
+X <- matrix(c(x^0,x, x^2,x^3,x^4),nrow=n)#
+sigma2 <- 10 # known#
+e <- rnorm(n,mean=0,sd=sqrt(sigma2)) # errors#
+#b <- rnorm(5) # true betas#
+b <- rep(1,5)#
+y <- X %*% b + e # ys#
+## Estimate parameters by OLS#
+data <- data.frame(y,X)#
+ols.model <- lm(y ~ X2 + X3 + X4 + X5, data=data)#
+b.hat <- ols.model$coefficients#
+y.hat <- predict(ols.model)#
+cov <- solve(t(X)%*%X)*sigma2#
+## Method 1#
+interval1 <- qnorm(1-alpha/2) * sqrt(diag(X %*% cov %*% t(X)))#
+lb1 <- y.hat - interval1 # lower bound#
+ub1 <- y.hat + interval1 # upper bound#
+#
+## Method 2#
+interval2 <- sqrt(qchisq(1-alpha,p+1) * diag(X %*% cov %*% t(X)))#
+lb2 <- y.hat - interval2 # lower bound#
+ub2 <- y.hat + interval2 # upper bound#
+#
+## Plot results!#
+plot(x,y)#
+lines(x,y.hat,type="l",lwd=3)#
+lines(x,lb1,type="l",col="green")#
+lines(x,ub1,type="l",col="green")#
+lines(x,lb2,type="l",col="red")#
+lines(x,ub2,type="l",col="red")#
+#}
+This code does question 4a of HW1#
+## Stats 315a#
+## Sara Kwasnick#
+###
+###
+#
+## Preliminaries#
+n = 100 # number of obs#
+alpha = 0.1 # want 90% CIs#
+p = 4 # degrees of freedom#
+#
+## Generate data and specify true model#
+x <- sort(rnorm(n))#
+X <- matrix(c(x^0,x, x^2,x^3,x^4),nrow=n)#
+sigma2 <- 10 # known#
+e <- rnorm(n,mean=0,sd=sqrt(sigma2)) # errors#
+#b <- rnorm(5) # true betas#
+b <- rep(2,5)#
+y <- X %*% b + e # ys#
+## Estimate parameters by OLS#
+data <- data.frame(y,X)#
+ols.model <- lm(y ~ X2 + X3 + X4 + X5, data=data)#
+b.hat <- ols.model$coefficients#
+y.hat <- predict(ols.model)#
+cov <- solve(t(X)%*%X)*sigma2#
+## Method 1#
+interval1 <- qnorm(1-alpha/2) * sqrt(diag(X %*% cov %*% t(X)))#
+lb1 <- y.hat - interval1 # lower bound#
+ub1 <- y.hat + interval1 # upper bound#
+#
+## Method 2#
+interval2 <- sqrt(qchisq(1-alpha,p+1) * diag(X %*% cov %*% t(X)))#
+lb2 <- y.hat - interval2 # lower bound#
+ub2 <- y.hat + interval2 # upper bound#
+#
+## Plot results!#
+plot(x,y)#
+lines(x,y.hat,type="l",lwd=3)#
+lines(x,lb1,type="l",col="green")#
+lines(x,ub1,type="l",col="green")#
+lines(x,lb2,type="l",col="red")#
+lines(x,ub2,type="l",col="red")#
+#}
+This code does question 4a of HW1#
+## Stats 315a#
+## Sara Kwasnick#
+###
+###
+#
+## Preliminaries#
+n = 100 # number of obs#
+alpha = 0.1 # want 90% CIs#
+p = 4 # degrees of freedom#
+#
+## Generate data and specify true model#
+x <- sort(rnorm(n))#
+X <- matrix(c(x^0,x, x^2,x^3,x^4),nrow=n)#
+sigma2 <- 10 # known#
+e <- rnorm(n,mean=0,sd=sqrt(sigma2)) # errors#
+#b <- rnorm(5) # true betas#
+b <- 5:1#
+y <- X %*% b + e # ys#
+## Estimate parameters by OLS#
+data <- data.frame(y,X)#
+ols.model <- lm(y ~ X2 + X3 + X4 + X5, data=data)#
+b.hat <- ols.model$coefficients#
+y.hat <- predict(ols.model)#
+cov <- solve(t(X)%*%X)*sigma2#
+## Method 1#
+interval1 <- qnorm(1-alpha/2) * sqrt(diag(X %*% cov %*% t(X)))#
+lb1 <- y.hat - interval1 # lower bound#
+ub1 <- y.hat + interval1 # upper bound#
+#
+## Method 2#
+interval2 <- sqrt(qchisq(1-alpha,p+1) * diag(X %*% cov %*% t(X)))#
+lb2 <- y.hat - interval2 # lower bound#
+ub2 <- y.hat + interval2 # upper bound#
+#
+## Plot results!#
+plot(x,y)#
+lines(x,y.hat,type="l",lwd=3)#
+lines(x,lb1,type="l",col="green")#
+lines(x,ub1,type="l",col="green")#
+lines(x,lb2,type="l",col="red")#
+lines(x,ub2,type="l",col="red")#
+#}
+This code does question 4a of HW1#
+## Stats 315a#
+## Sara Kwasnick#
+###
+###
+#
+## Preliminaries#
+n = 100 # number of obs#
+alpha = 0.1 # want 90% CIs#
+p = 4 # degrees of freedom#
+#
+## Generate data and specify true model#
+x <- sort(rnorm(n))#
+X <- matrix(c(x^0,x, x^2,x^3,x^4),nrow=n)#
+sigma2 <- 10 # known#
+e <- rnorm(n,mean=0,sd=sqrt(sigma2)) # errors#
+b <- rnorm(5) # true betas#
+y <- X %*% b + e # ys#
+## Estimate parameters by OLS#
+data <- data.frame(y,X)#
+ols.model <- lm(y ~ X2 + X3 + X4 + X5, data=data)#
+b.hat <- ols.model$coefficients#
+y.hat <- predict(ols.model)#
+cov <- solve(t(X)%*%X)*sigma2#
+## Method 1#
+interval1 <- qnorm(1-alpha/2) * sqrt(diag(X %*% cov %*% t(X)))#
+lb1 <- y.hat - interval1 # lower bound#
+ub1 <- y.hat + interval1 # upper bound#
+#
+## Method 2#
+interval2 <- sqrt(qchisq(1-alpha,p+1) * diag(X %*% cov %*% t(X)))#
+lb2 <- y.hat - interval2 # lower bound#
+ub2 <- y.hat + interval2 # upper bound#
+#
+## Plot results!#
+plot(x,y)#
+lines(x,y.hat,type="l",lwd=3)#
+lines(x,lb1,type="l",col="green")#
+lines(x,ub1,type="l",col="green")#
+lines(x,lb2,type="l",col="red")#
+lines(x,ub2,type="l",col="red")#
+#}
+This code does question 4a of HW1#
+## Stats 315a#
+## Sara Kwasnick#
+###
+###
+#
+## Preliminaries#
+n = 100 # number of obs#
+alpha = 0.1 # want 90% CIs#
+p = 4 # degrees of freedom#
+#
+## Generate data and specify true model#
+x <- sort(rnorm(n))#
+X <- matrix(c(x^0,x, x^2,x^3,x^4),nrow=n)#
+sigma2 <- 10 # known#
+e <- rnorm(n,mean=0,sd=sqrt(sigma2)) # errors#
+b <- rnorm(5,0,2) # true betas#
+y <- X %*% b + e # ys#
+## Estimate parameters by OLS#
+data <- data.frame(y,X)#
+ols.model <- lm(y ~ X2 + X3 + X4 + X5, data=data)#
+b.hat <- ols.model$coefficients#
+y.hat <- predict(ols.model)#
+cov <- solve(t(X)%*%X)*sigma2#
+## Method 1#
+interval1 <- qnorm(1-alpha/2) * sqrt(diag(X %*% cov %*% t(X)))#
+lb1 <- y.hat - interval1 # lower bound#
+ub1 <- y.hat + interval1 # upper bound#
+#
+## Method 2#
+interval2 <- sqrt(qchisq(1-alpha,p+1) * diag(X %*% cov %*% t(X)))#
+lb2 <- y.hat - interval2 # lower bound#
+ub2 <- y.hat + interval2 # upper bound#
+#
+## Plot results!#
+plot(x,y)#
+lines(x,y.hat,type="l",lwd=3)#
+lines(x,lb1,type="l",col="green")#
+lines(x,ub1,type="l",col="green")#
+lines(x,lb2,type="l",col="red")#
+lines(x,ub2,type="l",col="red")#
+title(main="Confidence Interval Approaches")#
+#}
+This code does question 4a of HW1#
+## Stats 315a#
+## Sara Kwasnick#
+###
+###
+#
+## Preliminaries#
+n = 100 # number of obs#
+alpha = 0.1 # want 90% CIs#
+p = 4 # degrees of freedom#
+#
+## Generate data and specify true model#
+x <- sort(rnorm(n))#
+X <- matrix(c(x^0,x, x^2,x^3,x^4),nrow=n)#
+sigma2 <- 10 # known#
+e <- rnorm(n,mean=0,sd=sqrt(sigma2)) # errors#
+b <- rnorm(p+1) # true betas#
+y <- X %*% b + e # ys#
+## Estimate parameters by OLS#
+data <- data.frame(y,X)#
+ols.model <- lm(y ~ X2 + X3 + X4 + X5, data=data)#
+b.hat <- ols.model$coefficients#
+y.hat <- predict(ols.model)#
+cov <- solve(t(X)%*%X)*sigma2#
+## Method 1#
+interval1 <- qnorm(1-alpha/2) * sqrt(diag(X %*% cov %*% t(X)))#
+lb1 <- y.hat - interval1 # lower bound#
+ub1 <- y.hat + interval1 # upper bound#
+#
+## Method 2#
+interval2 <- sqrt(qchisq(1-alpha,p+1) * diag(X %*% cov %*% t(X)))#
+lb2 <- y.hat - interval2 # lower bound#
+ub2 <- y.hat + interval2 # upper bound#
+#
+## Plot results!#
+plot(x,y)#
+lines(x,y.hat,type="l",lwd=3)#
+lines(x,lb1,type="l",col="green")#
+lines(x,ub1,type="l",col="green")#
+lines(x,lb2,type="l",col="red")#
+lines(x,ub2,type="l",col="red")#
+title(main="Confidence Interval Approaches")#
+#}
+This code does question 4a of HW1#
+## Stats 315a#
+## Sara Kwasnick#
+###
+###
+#
+## Preliminaries#
+n = 100 # number of obs#
+alpha = 0.1 # want 90% CIs#
+p = 4 # degrees of freedom#
+#
+## Generate data and specify true model#
+x <- sort(rnorm(n))#
+X <- matrix(c(x^0,x, x^2,x^3,x^4),nrow=n)#
+sigma2 <- 10 # known#
+e <- rnorm(n,mean=0,sd=sqrt(sigma2)) # errors#
+b <- rnorm(p+1,1,1) # true betas#
+y <- X %*% b + e # ys#
+## Estimate parameters by OLS#
+data <- data.frame(y,X)#
+ols.model <- lm(y ~ X2 + X3 + X4 + X5, data=data)#
+b.hat <- ols.model$coefficients#
+y.hat <- predict(ols.model)#
+cov <- solve(t(X)%*%X)*sigma2#
+## Method 1#
+interval1 <- qnorm(1-alpha/2) * sqrt(diag(X %*% cov %*% t(X)))#
+lb1 <- y.hat - interval1 # lower bound#
+ub1 <- y.hat + interval1 # upper bound#
+#
+## Method 2#
+interval2 <- sqrt(qchisq(1-alpha,p+1) * diag(X %*% cov %*% t(X)))#
+lb2 <- y.hat - interval2 # lower bound#
+ub2 <- y.hat + interval2 # upper bound#
+#
+## Plot results!#
+plot(x,y)#
+lines(x,y.hat,type="l",lwd=3)#
+lines(x,lb1,type="l",col="green")#
+lines(x,ub1,type="l",col="green")#
+lines(x,lb2,type="l",col="red")#
+lines(x,ub2,type="l",col="red")#
+title(main="Confidence Interval Approaches")#
+#}
+This code does question 4a of HW1#
+## Stats 315a#
+## Sara Kwasnick#
+###
+###
+#
+## Preliminaries#
+n = 100 # number of obs#
+alpha = 0.1 # want 90% CIs#
+p = 4 # degrees of freedom#
+#
+## Generate data and specify true model#
+x <- sort(rnorm(n))#
+X <- matrix(c(x^0,x, x^2,x^3,x^4),nrow=n)#
+sigma2 <- 10 # known#
+e <- rnorm(n,mean=0,sd=sqrt(sigma2)) # errors#
+b <- rnorm(p+1,2,1) # true betas#
+y <- X %*% b + e # ys#
+## Estimate parameters by OLS#
+data <- data.frame(y,X)#
+ols.model <- lm(y ~ X2 + X3 + X4 + X5, data=data)#
+b.hat <- ols.model$coefficients#
+y.hat <- predict(ols.model)#
+cov <- solve(t(X)%*%X)*sigma2#
+## Method 1#
+interval1 <- qnorm(1-alpha/2) * sqrt(diag(X %*% cov %*% t(X)))#
+lb1 <- y.hat - interval1 # lower bound#
+ub1 <- y.hat + interval1 # upper bound#
+#
+## Method 2#
+interval2 <- sqrt(qchisq(1-alpha,p+1) * diag(X %*% cov %*% t(X)))#
+lb2 <- y.hat - interval2 # lower bound#
+ub2 <- y.hat + interval2 # upper bound#
+#
+## Plot results!#
+plot(x,y)#
+lines(x,y.hat,type="l",lwd=3)#
+lines(x,lb1,type="l",col="green")#
+lines(x,ub1,type="l",col="green")#
+lines(x,lb2,type="l",col="red")#
+lines(x,ub2,type="l",col="red")#
+title(main="Confidence Interval Approaches")#
+#}
+This code does question 4a of HW1#
+## Stats 315a#
+## Sara Kwasnick#
+###
+###
+#
+## Preliminaries#
+n = 100 # number of obs#
+alpha = 0.1 # want 90% CIs#
+p = 4 # degrees of freedom#
+#
+## Generate data and specify true model#
+x <- sort(rnorm(n))#
+X <- matrix(c(x^0,x, x^2,x^3,x^4),nrow=n)#
+sigma2 <- 10 # known#
+e <- rnorm(n,mean=0,sd=sqrt(sigma2)) # errors#
+b <- rnorm(p+1,0,2) # true betas#
+y <- X %*% b + e # ys#
+## Estimate parameters by OLS#
+data <- data.frame(y,X)#
+ols.model <- lm(y ~ X2 + X3 + X4 + X5, data=data)#
+b.hat <- ols.model$coefficients#
+y.hat <- predict(ols.model)#
+cov <- solve(t(X)%*%X)*sigma2#
+## Method 1#
+interval1 <- qnorm(1-alpha/2) * sqrt(diag(X %*% cov %*% t(X)))#
+lb1 <- y.hat - interval1 # lower bound#
+ub1 <- y.hat + interval1 # upper bound#
+#
+## Method 2#
+interval2 <- sqrt(qchisq(1-alpha,p+1) * diag(X %*% cov %*% t(X)))#
+lb2 <- y.hat - interval2 # lower bound#
+ub2 <- y.hat + interval2 # upper bound#
+#
+## Plot results!#
+plot(x,y)#
+lines(x,y.hat,type="l",lwd=3)#
+lines(x,lb1,type="l",col="green")#
+lines(x,ub1,type="l",col="green")#
+lines(x,lb2,type="l",col="red")#
+lines(x,ub2,type="l",col="red")#
+title(main="Confidence Interval Approaches")#
+#}
+This code does question 4a of HW1#
+## Stats 315a#
+## Sara Kwasnick#
+###
+###
+#
+## Preliminaries#
+n = 100 # number of obs#
+alpha = 0.1 # want 90% CIs#
+p = 4 # degrees of freedom#
+#
+## Generate data and specify true model#
+x <- sort(rnorm(n))#
+X <- matrix(c(x^0,x, x^2,x^3,x^4),nrow=n)#
+sigma2 <- 10 # known#
+e <- rnorm(n,mean=0,sd=sqrt(sigma2)) # errors#
+b <- .1 + rnorm(p+1,0,2) # true betas#
+y <- X %*% b + e # ys#
+## Estimate parameters by OLS#
+data <- data.frame(y,X)#
+ols.model <- lm(y ~ X2 + X3 + X4 + X5, data=data)#
+b.hat <- ols.model$coefficients#
+y.hat <- predict(ols.model)#
+cov <- solve(t(X)%*%X)*sigma2#
+## Method 1#
+interval1 <- qnorm(1-alpha/2) * sqrt(diag(X %*% cov %*% t(X)))#
+lb1 <- y.hat - interval1 # lower bound#
+ub1 <- y.hat + interval1 # upper bound#
+#
+## Method 2#
+interval2 <- sqrt(qchisq(1-alpha,p+1) * diag(X %*% cov %*% t(X)))#
+lb2 <- y.hat - interval2 # lower bound#
+ub2 <- y.hat + interval2 # upper bound#
+#
+## Plot results!#
+plot(x,y)#
+lines(x,y.hat,type="l",lwd=3)#
+lines(x,lb1,type="l",col="green")#
+lines(x,ub1,type="l",col="green")#
+lines(x,lb2,type="l",col="red")#
+lines(x,ub2,type="l",col="red")#
+title(main="Confidence Interval Approaches")#
+#}
+This code does question 4a of HW1#
+## Stats 315a#
+## Sara Kwasnick#
+###
+###
+#
+## Preliminaries#
+n = 100 # number of obs#
+alpha = 0.1 # want 90% CIs#
+p = 4 # degrees of freedom#
+#
+## Generate data and specify true model#
+x <- sort(rnorm(n))#
+X <- matrix(c(x^0,x, x^2,x^3,x^4),nrow=n)#
+sigma2 <- 10 # known#
+e <- rnorm(n,mean=0,sd=sqrt(sigma2)) # errors#
+b <- 1 + rnorm(p+1) # true betas#
+y <- X %*% b + e # ys#
+## Estimate parameters by OLS#
+data <- data.frame(y,X)#
+ols.model <- lm(y ~ X2 + X3 + X4 + X5, data=data)#
+b.hat <- ols.model$coefficients#
+y.hat <- predict(ols.model)#
+cov <- solve(t(X)%*%X)*sigma2#
+## Method 1#
+interval1 <- qnorm(1-alpha/2) * sqrt(diag(X %*% cov %*% t(X)))#
+lb1 <- y.hat - interval1 # lower bound#
+ub1 <- y.hat + interval1 # upper bound#
+#
+## Method 2#
+interval2 <- sqrt(qchisq(1-alpha,p+1) * diag(X %*% cov %*% t(X)))#
+lb2 <- y.hat - interval2 # lower bound#
+ub2 <- y.hat + interval2 # upper bound#
+#
+## Plot results!#
+plot(x,y)#
+lines(x,y.hat,type="l",lwd=3)#
+lines(x,lb1,type="l",col="green")#
+lines(x,ub1,type="l",col="green")#
+lines(x,lb2,type="l",col="red")#
+lines(x,ub2,type="l",col="red")#
+title(main="Confidence Interval Approaches")#
+#}
+This code does question 4a of HW1#
+## Stats 315a#
+## Sara Kwasnick#
+###
+###
+#
+## Preliminaries#
+n = 100 # number of obs#
+alpha = 0.1 # want 90% CIs#
+p = 4 # degrees of freedom#
+#
+## Generate data and specify true model#
+x <- sort(rnorm(n))#
+X <- matrix(c(x^0,x, x^2,x^3,x^4),nrow=n)#
+sigma2 <- 10 # known#
+e <- rnorm(n,mean=0,sd=sqrt(sigma2)) # errors#
+b <- rnorm(p+1) # true betas#
+y <- X %*% b + e # ys#
+## Estimate parameters by OLS#
+data <- data.frame(y,X)#
+ols.model <- lm(y ~ X2 + X3 + X4 + X5, data=data)#
+b.hat <- ols.model$coefficients#
+y.hat <- predict(ols.model)#
+cov <- solve(t(X)%*%X)*sigma2#
+## Method 1#
+interval1 <- qnorm(1-alpha/2) * sqrt(diag(X %*% cov %*% t(X)))#
+lb1 <- y.hat - interval1 # lower bound#
+ub1 <- y.hat + interval1 # upper bound#
+#
+## Method 2#
+interval2 <- sqrt(qchisq(1-alpha,p+1) * diag(X %*% cov %*% t(X)))#
+lb2 <- y.hat - interval2 # lower bound#
+ub2 <- y.hat + interval2 # upper bound#
+#
+## Plot results!#
+plot(x,y)#
+lines(x,y.hat,type="l",lwd=3)#
+lines(x,lb1,type="l",col="green")#
+lines(x,ub1,type="l",col="green")#
+lines(x,lb2,type="l",col="red")#
+lines(x,ub2,type="l",col="red")#
+title(main="Confidence Interval Approaches")#
+#}
+?legend
+legend("topmiddle",legend=c("Approach 1","Approach 2"), col=c("green","red"))
+legend("topcenter",legend=c("Approach 1","Approach 2"), col=c("green","red"))
+legend("top",legend=c("Approach 1","Approach 2"), col=c("green","red"))
+legend("top",legend=c("Approach 1","Approach 2"), col=c("green","red"),lty=1:2)
+legend("top",legend=c("Approach 1","Approach 2"), col=c("green","red"),lty=c(1,1))
+This code does question 4a of HW1#
+## Stats 315a#
+## Sara Kwasnick#
+###
+###
+#
+## Preliminaries#
+n = 100 # number of obs#
+alpha = 0.1 # want 90% CIs#
+p = 4 # degrees of freedom#
+#
+## Generate data and specify true model#
+x <- sort(rnorm(n))#
+X <- matrix(c(x^0,x, x^2,x^3,x^4),nrow=n)#
+sigma2 <- 10 # known#
+e <- rnorm(n,mean=0,sd=sqrt(sigma2)) # errors#
+b <- rnorm(p+1) # true betas#
+y <- X %*% b + e # ys#
+## Estimate parameters by OLS#
+data <- data.frame(y,X)#
+ols.model <- lm(y ~ X2 + X3 + X4 + X5, data=data)#
+b.hat <- ols.model$coefficients#
+y.hat <- predict(ols.model)#
+cov <- solve(t(X)%*%X)*sigma2#
+## Method 1#
+interval1 <- qnorm(1-alpha/2) * sqrt(diag(X %*% cov %*% t(X)))#
+lb1 <- y.hat - interval1 # lower bound#
+ub1 <- y.hat + interval1 # upper bound#
+#
+## Method 2#
+interval2 <- sqrt(qchisq(1-alpha,p+1) * diag(X %*% cov %*% t(X)))#
+lb2 <- y.hat - interval2 # lower bound#
+ub2 <- y.hat + interval2 # upper bound#
+#
+## Plot results!#
+plot(x,y)#
+lines(x,y.hat,type="l",lwd=3)#
+lines(x,lb1,type="l",col="green")#
+lines(x,ub1,type="l",col="green")#
+lines(x,lb2,type="l",col="red")#
+lines(x,ub2,type="l",col="red")#
+title(main="Confidence Interval Approaches")#
+legend("top",legend=c("Approach 1","Approach 2"), col=c("green","red"), lty=c(1,1))#
+#}
+This code does question 4a of HW1#
+## Stats 315a#
+## Sara Kwasnick#
+###
+###
+#
+## Preliminaries#
+n = 100 # number of obs#
+alpha = 0.1 # want 90% CIs#
+p = 4 # degrees of freedom#
+#
+## Generate data and specify true model#
+x <- sort(rnorm(n))#
+X <- matrix(c(x^0,x, x^2,x^3,x^4),nrow=n)#
+sigma2 <- 10 # known#
+e <- rnorm(n,mean=0,sd=sqrt(sigma2)) # errors#
+b <- rnorm(p+1) # true betas#
+y <- X %*% b + e # ys#
+## Estimate parameters by OLS#
+data <- data.frame(y,X)#
+ols.model <- lm(y ~ X2 + X3 + X4 + X5, data=data)#
+b.hat <- ols.model$coefficients#
+y.hat <- predict(ols.model)#
+cov <- solve(t(X)%*%X)*sigma2#
+## Method 1#
+interval1 <- qnorm(1-alpha/2) * sqrt(diag(X %*% cov %*% t(X)))#
+lb1 <- y.hat - interval1 # lower bound#
+ub1 <- y.hat + interval1 # upper bound#
+#
+## Method 2#
+interval2 <- sqrt(qchisq(1-alpha,p+1) * diag(X %*% cov %*% t(X)))#
+lb2 <- y.hat - interval2 # lower bound#
+ub2 <- y.hat + interval2 # upper bound#
+#
+## Plot results!#
+plot(x,y)#
+lines(x,y.hat,type="l",lwd=3)#
+lines(x,lb1,type="l",col="green")#
+lines(x,ub1,type="l",col="green")#
+lines(x,lb2,type="l",col="red")#
+lines(x,ub2,type="l",col="red")#
+title(main="4(a) Confidence Interval Approaches")#
+legend("top",legend=c("Approach 1","Approach 2"), col=c("green","red"), lty=c(1,1))
+This code does question 4a of HW1#
+## Stats 315a#
+## Sara Kwasnick#
+###
+###
+#
+## Preliminaries#
+n = 100 # number of obs#
+alpha = 0.1 # want 90% CIs#
+p = 4 # degrees of freedom#
+#
+## Generate data and specify true model#
+x <- sort(rnorm(n))#
+X <- matrix(c(x^0,x, x^2,x^3,x^4),nrow=n)#
+sigma2 <- 10 # known#
+e <- rnorm(n,mean=0,sd=sqrt(sigma2)) # errors#
+b <- rnorm(p+1) # true betas#
+y <- X %*% b + e # ys#
+## Estimate parameters by OLS#
+data <- data.frame(y,X)#
+ols.model <- lm(y ~ X2 + X3 + X4 + X5, data=data)#
+b.hat <- ols.model$coefficients#
+y.hat <- predict(ols.model)#
+cov <- solve(t(X)%*%X)*sigma2#
+## Method 1#
+interval1 <- qnorm(1-alpha/2) * sqrt(diag(X %*% cov %*% t(X)))#
+lb1 <- y.hat - interval1 # lower bound#
+ub1 <- y.hat + interval1 # upper bound#
+#
+## Method 2#
+interval2 <- sqrt(qchisq(1-alpha,p+1) * diag(X %*% cov %*% t(X)))#
+lb2 <- y.hat - interval2 # lower bound#
+ub2 <- y.hat + interval2 # upper bound#
+#
+## Plot results!#
+plot(x,y)#
+lines(x,y.hat,type="l",lwd=3)#
+lines(x,lb1,type="l",col="green")#
+lines(x,ub1,type="l",col="green")#
+lines(x,lb2,type="l",col="red")#
+lines(x,ub2,type="l",col="red")#
+title(main="4(a) Confidence Interval Approaches")#
+legend("top",legend=c("Estimate f(x)","90% CI Approach 1","90% CI Approach 2"), col=c("black","green","red"), lty=c(1,1,1),lwd=c(2,1,1))
+This code does question 4a of HW1#
+## Stats 315a#
+## Sara Kwasnick#
+###
+###
+#
+## Preliminaries#
+n = 100 # number of obs#
+alpha = 0.1 # want 90% CIs#
+p = 4 # degrees of freedom#
+#
+## Generate data and specify true model#
+x <- sort(rnorm(n))#
+X <- matrix(c(x^0,x, x^2,x^3,x^4),nrow=n)#
+sigma2 <- 10 # known#
+e <- rnorm(n,mean=0,sd=sqrt(sigma2)) # errors#
+b <- rnorm(p+1) # true betas#
+y <- X %*% b + e # ys#
+## Estimate parameters by OLS#
+data <- data.frame(y,X)#
+ols.model <- lm(y ~ X2 + X3 + X4 + X5, data=data)#
+b.hat <- ols.model$coefficients#
+y.hat <- predict(ols.model)#
+cov <- solve(t(X)%*%X)*sigma2#
+## Method 1#
+interval1 <- qnorm(1-alpha/2) * sqrt(diag(X %*% cov %*% t(X)))#
+lb1 <- y.hat - interval1 # lower bound#
+ub1 <- y.hat + interval1 # upper bound#
+#
+## Method 2#
+interval2 <- sqrt(qchisq(1-alpha,p+1) * diag(X %*% cov %*% t(X)))#
+lb2 <- y.hat - interval2 # lower bound#
+ub2 <- y.hat + interval2 # upper bound#
+#
+## Plot results!#
+plot(x,y,ylab="f(x)")#
+lines(x,y.hat,type="l",lwd=3)#
+lines(x,lb1,type="l",col="green")#
+lines(x,ub1,type="l",col="green")#
+lines(x,lb2,type="l",col="red")#
+lines(x,ub2,type="l",col="red")#
+title(main="4(a) Confidence Interval Approaches")#
+legend("top",legend=c("Estimate f(x)","90% CI Approach 1","90% CI Approach 2"), col=c("black","green","red"), lty=c(1,1,1),lwd=c(2,1,1))
+This code does question 4a of HW1#
+## Stats 315a#
+## Sara Kwasnick#
+###
+###
+#
+## Preliminaries#
+n = 100 # number of obs#
+alpha = 0.1 # want 90% CIs#
+p = 4 # degrees of freedom#
+#
+## Generate data and specify true model#
+x <- sort(rnorm(n))#
+X <- matrix(c(x^0,x, x^2,x^3,x^4),nrow=n)#
+sigma2 <- 10 # known#
+e <- rnorm(n,mean=0,sd=sqrt(sigma2)) # errors#
+b <- rnorm(p+1) # true betas#
+y <- X %*% b + e # ys#
+## Estimate parameters by OLS#
+data <- data.frame(y,X)#
+ols.model <- lm(y ~ X2 + X3 + X4 + X5, data=data)#
+b.hat <- ols.model$coefficients#
+y.hat <- predict(ols.model)#
+cov <- solve(t(X)%*%X)*sigma2#
+## Method 1#
+interval1 <- qnorm(1-alpha/2) * sqrt(diag(X %*% cov %*% t(X)))#
+lb1 <- y.hat - interval1 # lower bound#
+ub1 <- y.hat + interval1 # upper bound#
+#
+## Method 2#
+interval2 <- sqrt(qchisq(1-alpha,p+1) * diag(X %*% cov %*% t(X)))#
+lb2 <- y.hat - interval2 # lower bound#
+ub2 <- y.hat + interval2 # upper bound#
+#
+## Plot results!#
+plot(x,y,ylab="f(x)")#
+lines(x,y.hat,type="l",lwd=3)#
+lines(x,lb1,type="l",col="green")#
+lines(x,ub1,type="l",col="green")#
+lines(x,lb2,type="l",col="red")#
+lines(x,ub2,type="l",col="red")#
+title(main="4(a) Confidence Interval Approaches")#
+legend("top",legend=c("f(x), least squares fit","90% CI Approach 1","90% CI Approach 2"), col=c("black","green","red"), lty=c(1,1,1),lwd=c(2,1,1))
+This code does question 4a of HW1#
+## Stats 315a#
+## Sara Kwasnick#
+###
+###
+#
+## Preliminaries#
+n = 100 # number of obs#
+alpha = 0.1 # want 90% CIs#
+p = 4 # degrees of freedom#
+#
+## Generate data and specify true model#
+x <- sort(rnorm(n))#
+X <- matrix(c(x^0,x, x^2,x^3,x^4),nrow=n)#
+sigma2 <- 10 # known#
+e <- rnorm(n,mean=0,sd=sqrt(sigma2)) # errors#
+b <- rnorm(p+1) # true betas#
+y <- X %*% b + e # ys#
+## Estimate parameters by OLS#
+data <- data.frame(y,X)#
+ols.model <- lm(y ~ X2 + X3 + X4 + X5, data=data)#
+b.hat <- ols.model$coefficients#
+y.hat <- predict(ols.model)#
+cov <- solve(t(X)%*%X)*sigma2#
+## Method 1#
+interval1 <- qnorm(1-alpha/2) * sqrt(diag(X %*% cov %*% t(X)))#
+lb1 <- y.hat - interval1 # lower bound#
+ub1 <- y.hat + interval1 # upper bound#
+#
+## Method 2#
+interval2 <- sqrt(qchisq(1-alpha,p+1) * diag(X %*% cov %*% t(X)))#
+lb2 <- y.hat - interval2 # lower bound#
+ub2 <- y.hat + interval2 # upper bound#
+#
+## Plot results!#
+plot(x,y,ylab="f(x)")#
+lines(x,y.hat,type="l",lwd=3)#
+lines(x,lb1,type="l",col="green")#
+lines(x,ub1,type="l",col="green")#
+lines(x,lb2,type="l",col="red")#
+lines(x,ub2,type="l",col="red")#
+title(main="4(a) Confidence Interval Approaches")#
+legend("top",legend=c("f(x), OLS fit","90% CI Approach 1","90% CI Approach 2"), col=c("black","green","red"), lty=c(1,1,1),lwd=c(2,1,1))
+clear
+This code does question 4a of HW1#
+## Stats 315a#
+## Sara Kwasnick#
+###
+###
+#
+## Preliminaries#
+n = 100 # number of obs#
+alpha = 0.1 # want 90% CIs#
+p = 4 # degrees of freedom#
+#
+## Generate data and specify true model#
+x <- sort(rnorm(n))#
+X <- matrix(c(x^0,x, x^2,x^3,x^4),nrow=n)#
+sigma2 <- 10 # known#
+e <- rnorm(n,mean=0,sd=sqrt(sigma2)) # errors#
+b <- rnorm(p+1) # true betas#
+y <- X %*% b + e # ys#
+## Estimate parameters by OLS#
+data <- data.frame(y,X)#
+ols.model <- lm(y ~ X2 + X3 + X4 + X5, data=data)#
+b.hat <- ols.model$coefficients#
+y.hat <- predict(ols.model)#
+cov <- solve(t(X)%*%X)*sigma2#
+## Method 1#
+interval1 <- qnorm(1-alpha/2) * sqrt(diag(X %*% cov %*% t(X)))#
+lb1 <- y.hat - interval1 # lower bound#
+ub1 <- y.hat + interval1 # upper bound#
+#
+## Method 2#
+interval2 <- sqrt(qchisq(1-alpha,p+1) * diag(X %*% cov %*% t(X)))#
+lb2 <- y.hat - interval2 # lower bound#
+ub2 <- y.hat + interval2 # upper bound#
+#
+## Plot results!#
+plot(x,y,ylab="f(x)")#
+lines(x,y.hat,type="l",lwd=3)#
+lines(x,lb1,type="l",col="green")#
+lines(x,ub1,type="l",col="green")#
+lines(x,lb2,type="l",col="red")#
+lines(x,ub2,type="l",col="red")#
+title(main="4(a) Confidence Interval Approaches")#
+legend("top",legend=c("f(x), OLS fit","90% CI Approach 1","90% CI Approach 2"), col=c("black","green","red"), lty=c(1,1,1),lwd=c(2,1,1))
+print(\hat{f(x)})
+print($\hat{f(x)}$)
+print("$\hat{f(x)}$")
+This code does question 4a of HW1#
+## Stats 315a#
+## Sara Kwasnick#
+###
+###
+#
+## Preliminaries#
+n = 100 # number of obs#
+alpha = 0.1 # want 90% CIs#
+p = 4 # degrees of freedom#
+#
+## Generate data and specify true model#
+x <- sort(rnorm(n))#
+X <- matrix(c(x^0,x, x^2,x^3,x^4),nrow=n)#
+sigma2 <- 10 # known#
+e <- rnorm(n,mean=0,sd=sqrt(sigma2)) # errors#
+b <- rnorm(p+1) # true betas#
+y <- X %*% b + e # ys#
+## Estimate parameters by OLS#
+data <- data.frame(y,X)#
+ols.model <- lm(y ~ X2 + X3 + X4 + X5, data=data)#
+b.hat <- ols.model$coefficients#
+y.hat <- predict(ols.model)#
+cov <- solve(t(X)%*%X)*sigma2#
+## Method 1#
+interval1 <- qnorm(1-alpha/2) * sqrt(diag(X %*% cov %*% t(X)))#
+lb1 <- y.hat - interval1 # lower bound#
+ub1 <- y.hat + interval1 # upper bound#
+#
+## Method 2#
+interval2 <- sqrt(qchisq(1-alpha,p+1) * diag(X %*% cov %*% t(X)))#
+lb2 <- y.hat - interval2 # lower bound#
+ub2 <- y.hat + interval2 # upper bound#
+#
+## Plot results!#
+plot(x,y,ylab="f(x)")#
+lines(x,y.hat,type="l",lwd=3)#
+lines(x,lb1,type="l",col="green")#
+lines(x,ub1,type="l",col="green")#
+lines(x,lb2,type="l",col="red")#
+lines(x,ub2,type="l",col="red")#
+title(main="4(a) Confidence Interval Approaches")#
+legend("top",legend=c("f(x), OLS fit","90% CI, Approach 1","90% CI, Approach 2"), col=c("black","green","red"), lty=c(1,1,1),lwd=c(2,1,1))
+This code does question 4a of HW1#
+## Stats 315a#
+## Sara Kwasnick#
+###
+###
+#
+## Preliminaries#
+n = 100 # number of obs#
+alpha = 0.1 # want 90% CIs#
+p = 4 # degrees of freedom#
+#
+## Generate data and specify true model#
+x <- sort(rnorm(n))#
+X <- matrix(c(x^0,x, x^2,x^3,x^4),nrow=n)#
+sigma2 <- 10 # known#
+e <- rnorm(n,mean=0,sd=sqrt(sigma2)) # errors#
+b <- rnorm(p+1) # true betas#
+y <- X %*% b + e # ys#
+## Estimate parameters by OLS#
+data <- data.frame(y,X)#
+ols.model <- lm(y ~ X2 + X3 + X4 + X5, data=data)#
+b.hat <- ols.model$coefficients#
+y.hat <- predict(ols.model)#
+cov <- solve(t(X)%*%X)*sigma2#
+## Method 1#
+interval1 <- qnorm(1-alpha/2) * sqrt(diag(X %*% cov %*% t(X)))#
+lb1 <- y.hat - interval1 # lower bound#
+ub1 <- y.hat + interval1 # upper bound#
+#
+## Method 2#
+interval2 <- sqrt(qchisq(1-alpha,p+1) * diag(X %*% cov %*% t(X)))#
+lb2 <- y.hat - interval2 # lower bound#
+ub2 <- y.hat + interval2 # upper bound#
+#
+## Plot results!#
+plot(x,y,ylab="f(x)")#
+lines(x,y.hat,type="l",lwd=3)#
+lines(x,lb1,type="l",col="green")#
+lines(x,ub1,type="l",col="green")#
+lines(x,lb2,type="l",col="red")#
+lines(x,ub2,type="l",col="red")#
+title(main="4(a) Confidence Interval Approaches")#
+legend("top",legend=c("f(x), OLS fit","90% CI, Approach 1","90% CI, Approach 2"), col=c("black","green","red"), lty=c(1,1,1),lwd=c(3,1,1))
+set.seed(1)
+This code does question 4a of HW1#
+## Stats 315a#
+## Sara Kwasnick#
+###
+###
+#
+## Preliminaries#
+n = 100 # number of obs#
+alpha = 0.1 # want 90% CIs#
+p = 4 # degrees of freedom#
+#
+## Generate data and specify true model#
+x <- sort(rnorm(n))#
+X <- matrix(c(x^0,x, x^2,x^3,x^4),nrow=n)#
+sigma2 <- 10 # known#
+e <- rnorm(n,mean=0,sd=sqrt(sigma2)) # errors#
+b <- rnorm(p+1) # true betas#
+y <- X %*% b + e # ys#
+## Estimate parameters by OLS#
+data <- data.frame(y,X)#
+ols.model <- lm(y ~ X2 + X3 + X4 + X5, data=data)#
+b.hat <- ols.model$coefficients#
+y.hat <- predict(ols.model)#
+cov <- solve(t(X)%*%X)*sigma2#
+## Method 1#
+interval1 <- qnorm(1-alpha/2) * sqrt(diag(X %*% cov %*% t(X)))#
+lb1 <- y.hat - interval1 # lower bound#
+ub1 <- y.hat + interval1 # upper bound#
+#
+## Method 2#
+interval2 <- sqrt(qchisq(1-alpha,p+1) * diag(X %*% cov %*% t(X)))#
+lb2 <- y.hat - interval2 # lower bound#
+ub2 <- y.hat + interval2 # upper bound#
+#
+## Plot results!#
+plot(x,y,ylab="f(x)")#
+lines(x,y.hat,type="l",lwd=3)#
+lines(x,lb1,type="l",col="green")#
+lines(x,ub1,type="l",col="green")#
+lines(x,lb2,type="l",col="red")#
+lines(x,ub2,type="l",col="red")#
+title(main="4(a) Confidence Interval Approaches")#
+legend("top",legend=c("f(x), OLS fit","90% CI, Approach 1","90% CI, Approach 2"), col=c("black","green","red"), lty=c(1,1,1),lwd=c(3,1,1))
+set.seed(100)
+This code does question 4a of HW1#
+## Stats 315a#
+## Sara Kwasnick#
+###
+###
+#
+## Preliminaries#
+n = 100 # number of obs#
+alpha = 0.1 # want 90% CIs#
+p = 4 # degrees of freedom#
+#
+## Generate data and specify true model#
+x <- sort(rnorm(n))#
+X <- matrix(c(x^0,x, x^2,x^3,x^4),nrow=n)#
+sigma2 <- 10 # known#
+e <- rnorm(n,mean=0,sd=sqrt(sigma2)) # errors#
+b <- rnorm(p+1) # true betas#
+y <- X %*% b + e # ys#
+## Estimate parameters by OLS#
+data <- data.frame(y,X)#
+ols.model <- lm(y ~ X2 + X3 + X4 + X5, data=data)#
+b.hat <- ols.model$coefficients#
+y.hat <- predict(ols.model)#
+cov <- solve(t(X)%*%X)*sigma2#
+## Method 1#
+interval1 <- qnorm(1-alpha/2) * sqrt(diag(X %*% cov %*% t(X)))#
+lb1 <- y.hat - interval1 # lower bound#
+ub1 <- y.hat + interval1 # upper bound#
+#
+## Method 2#
+interval2 <- sqrt(qchisq(1-alpha,p+1) * diag(X %*% cov %*% t(X)))#
+lb2 <- y.hat - interval2 # lower bound#
+ub2 <- y.hat + interval2 # upper bound#
+#
+## Plot results!#
+plot(x,y,ylab="f(x)")#
+lines(x,y.hat,type="l",lwd=3)#
+lines(x,lb1,type="l",col="green")#
+lines(x,ub1,type="l",col="green")#
+lines(x,lb2,type="l",col="red")#
+lines(x,ub2,type="l",col="red")#
+title(main="4(a) Confidence Interval Approaches")#
+legend("top",legend=c("f(x), OLS fit","90% CI, Approach 1","90% CI, Approach 2"), col=c("black","green","red"), lty=c(1,1,1),lwd=c(3,1,1))
+This code does question 4a of HW1#
+## Stats 315a#
+## Sara Kwasnick#
+###
+###
+#
+## Preliminaries#
+n = 100 # number of obs#
+alpha = 0.1 # want 90% CIs#
+p = 4 # degrees of freedom#
+#
+## Generate data and specify true model#
+x <- sort(rnorm(n))#
+X <- matrix(c(x^0,x, x^2,x^3,x^4),nrow=n)#
+sigma2 <- 10 # known#
+e <- rnorm(n,mean=0,sd=sqrt(sigma2)) # errors#
+b <- rnorm(p+1) # true betas#
+y <- X %*% b + e # ys#
+## Estimate parameters by OLS#
+data <- data.frame(y,X)#
+ols.model <- lm(y ~ X2 + X3 + X4 + X5, data=data)#
+b.hat <- ols.model$coefficients#
+y.hat <- predict(ols.model)#
+cov <- solve(t(X)%*%X)*sigma2#
+## Method 1#
+interval1 <- qnorm(1-alpha/2) * sqrt(diag(X %*% cov %*% t(X)))#
+lb1 <- y.hat - interval1 # lower bound#
+ub1 <- y.hat + interval1 # upper bound#
+#
+## Method 2#
+interval2 <- sqrt(qchisq(1-alpha,p+1) * diag(X %*% cov %*% t(X)))#
+lb2 <- y.hat - interval2 # lower bound#
+ub2 <- y.hat + interval2 # upper bound#
+#
+## Plot results!#
+plot(x,y,ylab="f(x)")#
+lines(x,y.hat,type="l",lwd=3)#
+lines(x,lb1,type="l",col="green")#
+lines(x,ub1,type="l",col="green")#
+lines(x,lb2,type="l",col="red")#
+lines(x,ub2,type="l",col="red")#
+title(main="4(a) Confidence Interval Approaches")#
+legend("top",legend=c("f(x), OLS fit","90% CI, Approach 1","90% CI, Approach 2"), col=c("black","green","red"), lty=c("l","l","l"),lwd=c(3,1,1))
+This code does question 4a of HW1#
+## Stats 315a#
+## Sara Kwasnick#
+###
+###
+#
+## Preliminaries#
+n = 100 # number of obs#
+alpha = 0.1 # want 90% CIs#
+p = 4 # degrees of freedom#
+#
+## Generate data and specify true model#
+x <- sort(rnorm(n))#
+X <- matrix(c(x^0,x, x^2,x^3,x^4),nrow=n)#
+sigma2 <- 10 # known#
+e <- rnorm(n,mean=0,sd=sqrt(sigma2)) # errors#
+b <- rnorm(p+1) # true betas#
+y <- X %*% b + e # ys#
+## Estimate parameters by OLS#
+data <- data.frame(y,X)#
+ols.model <- lm(y ~ X2 + X3 + X4 + X5, data=data)#
+b.hat <- ols.model$coefficients#
+y.hat <- predict(ols.model)#
+cov <- solve(t(X)%*%X)*sigma2#
+## Method 1#
+interval1 <- qnorm(1-alpha/2) * sqrt(diag(X %*% cov %*% t(X)))#
+lb1 <- y.hat - interval1 # lower bound#
+ub1 <- y.hat + interval1 # upper bound#
+#
+## Method 2#
+interval2 <- sqrt(qchisq(1-alpha,p+1) * diag(X %*% cov %*% t(X)))#
+lb2 <- y.hat - interval2 # lower bound#
+ub2 <- y.hat + interval2 # upper bound#
+#
+## Plot results!#
+plot(x,y,ylab="f(x)")#
+lines(x,y.hat,type="l",lwd=3)#
+lines(x,lb1,type="l",col="green")#
+lines(x,ub1,type="l",col="green")#
+lines(x,lb2,type="l",col="red")#
+lines(x,ub2,type="l",col="red")#
+title(main="4(a) Confidence Interval Approaches")#
+legend("top",legend=c("f(x), OLS fit","90% CI, Approach 1","90% CI, Approach 2"), col=c("black","green","red"), lty=c(1,1,1),lwd=c(3,1,1))
+This code does problem 3b of Stat315a homework 1#
+#
+N <- 15 # number of observations#
+B <- 10 # number of simulations#
+#
+## generate and plot true f#
+x <- seq(-.5,1.5,by=.01)#
+f <- x+3*x^2 -1.5 * x^3#
+par(new=F)#
+plot(x,f,type="l",col="blue",lty="solid", lwd=3,xlab="",ylab="",axes=FALSE)#
+axis(1, -.5:1.5)#
+axis(2,0:3)#
+par(new=T)#
+#
+Y = list(NA)#
+for(i in 1:B){#
+	## generate X, uniformly on [-0.5,1.5]#
+	xi <- runif(N,-.5,1.5)#
+	X <- cbind(rep(1,N),xi)#
+	## get f (no error term, so we can compute it directly based on xi)#
+	f <- xi+3*xi^2 -1.5 * xi^3#
+	## estimate beta hat#
+	b <- solve((t(X) %*% X)) %*% t(X) %*% f #
+	Y[[i]] = b[1] + b[2]*x#
+}#
+#
+## Compute true E(betahat|X) = (X'X)\X'f(x)#
+X <- cbind(rep(1,length(x)),x)#
+b <- solve((t(X) %*% X)) %*% t(X) %*% (x+3*x^2 -1.5 * x^3)#
+#
+## add betas to the graph#
+matplot(sapply(Y,rbind),type="l",lty="dotdash",col="red", lwd=.75,xlab="",ylab="",axes=FALSE)#
+par(new=T)#
+plot(b[1] + b[2]*x,x,type="l",lty="solid",lwd=3,xlab="",ylab="",axes=FALSE)#
+title(main = "3(b) Function vs. Linear Approximations", ylab = "f(x)", xlab = "x")#
+legend("top",legend=c("True function","Simulated Estimates of E(b|X)","True E(b|X)"),col=c("black","red","blue"),lty=c(1,"dotdash",1),lwd=c(3,.75,3))
+This code does problem 3b of Stat315a homework 1#
+#
+N <- 15 # number of observations#
+B <- 10 # number of simulations#
+#
+## generate and plot true f#
+x <- seq(-.5,1.5,by=.01)#
+f <- x+3*x^2 -1.5 * x^3#
+par(new=F)#
+plot(x,f,type="l",col="blue",lty="solid", lwd=3,xlab="",ylab="",axes=FALSE)#
+axis(1, -.5:1.5)#
+axis(2,0:3)#
+par(new=T)#
+#
+Y = list(NA)#
+for(i in 1:B){#
+	## generate X, uniformly on [-0.5,1.5]#
+	xi <- runif(N,-.5,1.5)#
+	X <- cbind(rep(1,N),xi)#
+	## get f (no error term, so we can compute it directly based on xi)#
+	f <- xi+3*xi^2 -1.5 * xi^3#
+	## estimate beta hat#
+	b <- solve((t(X) %*% X)) %*% t(X) %*% f #
+	Y[[i]] = b[1] + b[2]*x#
+}#
+#
+## Compute true E(betahat|X) = (X'X)\X'f(x)#
+X <- cbind(rep(1,length(x)),x)#
+b <- solve((t(X) %*% X)) %*% t(X) %*% (x+3*x^2 -1.5 * x^3)#
+#
+## add betas to the graph#
+matplot(sapply(Y,rbind),type="l",lty="dotdash",col="red", lwd=.75,xlab="",ylab="",axes=FALSE)#
+par(new=T)#
+plot(b[1] + b[2]*x,x,type="l",lty="solid",lwd=3,xlab="",ylab="",axes=FALSE)#
+title(main = "3(b) Function vs. Linear Approximations", ylab = "f(x)", xlab = "x")#
+legend("top",legend=c("True function","Simulated Estimates of E(b|X)","True E(b|X)"),col=c("black","red","blue"),lty=c(1,2,1),lwd=c(3,.75,3))
+This code does problem 3b of Stat315a homework 1#
+#
+N <- 15 # number of observations#
+B <- 10 # number of simulations#
+#
+## generate and plot true f#
+x <- seq(-.5,1.5,by=.01)#
+f <- x+3*x^2 -1.5 * x^3#
+par(new=F)#
+plot(x,f,type="l",col="blue",lty="solid", lwd=3,xlab="",ylab="",axes=FALSE)#
+axis(1, -.5:1.5)#
+axis(2,0:3)#
+par(new=T)#
+#
+Y = list(NA)#
+for(i in 1:B){#
+	## generate X, uniformly on [-0.5,1.5]#
+	xi <- runif(N,-.5,1.5)#
+	X <- cbind(rep(1,N),xi)#
+	## get f (no error term, so we can compute it directly based on xi)#
+	f <- xi+3*xi^2 -1.5 * xi^3#
+	## estimate beta hat#
+	b <- solve((t(X) %*% X)) %*% t(X) %*% f #
+	Y[[i]] = b[1] + b[2]*x#
+}#
+#
+## Compute true E(betahat|X) = (X'X)\X'f(x)#
+X <- cbind(rep(1,length(x)),x)#
+b <- solve((t(X) %*% X)) %*% t(X) %*% (x+3*x^2 -1.5 * x^3)#
+#
+## add betas to the graph#
+matplot(sapply(Y,rbind),type="l",lty="dotdash",col="red", lwd=.75,xlab="",ylab="",axes=FALSE)#
+par(new=T)#
+plot(b[1] + b[2]*x,x,type="l",lty="solid",lwd=3,xlab="",ylab="",axes=FALSE)#
+title(main = "3(b) Function vs. Linear Approximations", ylab = "f(x)", xlab = "x")#
+legend("top",legend=c("True function","Simulated Estimates of E(b|X)","True E(b|X)"),col=c("black","red","blue"),lty=c(1,3,1),lwd=c(3,.75,3))
+This code does problem 3b of Stat315a homework 1#
+#
+N <- 15 # number of observations#
+B <- 10 # number of simulations#
+#
+## generate and plot true f#
+x <- seq(-.5,1.5,by=.01)#
+f <- x+3*x^2 -1.5 * x^3#
+par(new=F)#
+plot(x,f,type="l",col="blue",lty="solid", lwd=3,xlab="",ylab="",axes=FALSE)#
+axis(1, -.5:1.5)#
+axis(2,0:3)#
+par(new=T)#
+#
+Y = list(NA)#
+for(i in 1:B){#
+	## generate X, uniformly on [-0.5,1.5]#
+	xi <- runif(N,-.5,1.5)#
+	X <- cbind(rep(1,N),xi)#
+	## get f (no error term, so we can compute it directly based on xi)#
+	f <- xi+3*xi^2 -1.5 * xi^3#
+	## estimate beta hat#
+	b <- solve((t(X) %*% X)) %*% t(X) %*% f #
+	Y[[i]] = b[1] + b[2]*x#
+}#
+#
+## Compute true E(betahat|X) = (X'X)\X'f(x)#
+X <- cbind(rep(1,length(x)),x)#
+b <- solve((t(X) %*% X)) %*% t(X) %*% (x+3*x^2 -1.5 * x^3)#
+#
+## add betas to the graph#
+matplot(sapply(Y,rbind),type="l",lty="dotdash",col="red", lwd=.75,xlab="",ylab="",axes=FALSE)#
+par(new=T)#
+plot(b[1] + b[2]*x,x,type="l",lty="solid",lwd=3,xlab="",ylab="",axes=FALSE)#
+title(main = "3(b) Function vs. Linear Approximations", ylab = "f(x)", xlab = "x")#
+legend("top",legend=c("True function","Simulated Estimates of E(b|X)","True E(b|X)"),col=c("black","red","blue"),lty=c(1,4,1),lwd=c(3,.75,3))
+This code does problem 3b of Stat315a homework 1#
+#
+N <- 15 # number of observations#
+B <- 10 # number of simulations#
+#
+## generate and plot true f#
+x <- seq(-.5,1.5,by=.01)#
+f <- x+3*x^2 -1.5 * x^3#
+par(new=F)#
+plot(x,f,type="l",col="blue",lty="solid", lwd=3,xlab="",ylab="",axes=FALSE)#
+axis(1, -.5:1.5)#
+axis(2,0:3)#
+par(new=T)#
+#
+Y = list(NA)#
+for(i in 1:B){#
+	## generate X, uniformly on [-0.5,1.5]#
+	xi <- runif(N,-.5,1.5)#
+	X <- cbind(rep(1,N),xi)#
+	## get f (no error term, so we can compute it directly based on xi)#
+	f <- xi+3*xi^2 -1.5 * xi^3#
+	## estimate beta hat#
+	b <- solve((t(X) %*% X)) %*% t(X) %*% f #
+	Y[[i]] = b[1] + b[2]*x#
+}#
+#
+## Compute true E(betahat|X) = (X'X)\X'f(x)#
+X <- cbind(rep(1,length(x)),x)#
+b <- solve((t(X) %*% X)) %*% t(X) %*% (x+3*x^2 -1.5 * x^3)#
+#
+## add betas to the graph#
+matplot(sapply(Y,rbind),type="l",lty="dotdash",col="red", lwd=.75,xlab="",ylab="",axes=FALSE)#
+par(new=T)#
+plot(b[1] + b[2]*x,x,type="l",lty="solid",lwd=3,xlab="",ylab="",axes=FALSE)#
+title(main = "3(b) Function vs. Linear Approximations", ylab = "f(x)", xlab = "x")#
+legend("top",legend=c("True function","Simulated Estimates of E(b|X)","True E(b|X)"),col=c("blue","red","black"),lty=c(1,4,1),lwd=c(3,.75,3))
+This code does problem 3b of Stat315a homework 1#
+#
+N <- 15 # number of observations#
+B <- 10 # number of simulations#
+#
+## generate and plot true f#
+x <- seq(-.5,1.5,by=.01)#
+f <- x+3*x^2 -1.5 * x^3#
+par(new=F)#
+plot(x,f,type="l",col="blue",lty="solid", lwd=4,xlab="",ylab="",axes=FALSE)#
+axis(1, -.5:1.5)#
+axis(2,0:3)#
+par(new=T)#
+#
+Y = list(NA)#
+for(i in 1:B){#
+	## generate X, uniformly on [-0.5,1.5]#
+	xi <- runif(N,-.5,1.5)#
+	X <- cbind(rep(1,N),xi)#
+	## get f (no error term, so we can compute it directly based on xi)#
+	f <- xi+3*xi^2 -1.5 * xi^3#
+	## estimate beta hat#
+	b <- solve((t(X) %*% X)) %*% t(X) %*% f #
+	Y[[i]] = b[1] + b[2]*x#
+}#
+#
+## Compute true E(betahat|X) = (X'X)\X'f(x)#
+X <- cbind(rep(1,length(x)),x)#
+b <- solve((t(X) %*% X)) %*% t(X) %*% (x+3*x^2 -1.5 * x^3)#
+#
+## add betas to the graph#
+matplot(sapply(Y,rbind),type="l",lty="dotdash",col="red", lwd=.75,xlab="",ylab="",axes=FALSE)#
+par(new=T)#
+plot(b[1] + b[2]*x,x,type="l",lty="solid",lwd=3,xlab="",ylab="",axes=FALSE)#
+title(main = "3(b) Function vs. Linear Approximations", ylab = "f(x)", xlab = "x")#
+legend("top",legend=c("True function","Simulated Estimates of E(b|X)","True E(b|X)"),col=c("blue","red","black"),lty=c(1,4,1),lwd=c(4,.75,3))
+x <- seq(-1,5,by=.1)
+x
+f <- function(x,L) {#
+	return((1+L)*x^2 - 6*L*x + 1 + 8*L))#
+}
+f <- function(x,L) {#
+	result <- (1+L)*x^2 - 6*L*x + 1 + 8*L)#
+	return(result)#
+}
+f <- function(x,L) {#
+	result <- (1+L)*x^2 - 6*L*x + 1 + 8*L#
+	return(result)#
+}
+f(1,1)
+f(2,0)
+Ls <- matrix[0:3]
+Ls <- matrix(0:3)
+Ls
+Ys <- mapply(f,x,Ls)
+rep(0,1)
+rep(0,10)
+Ys <- NA#
+for(i in 1:length(Ls)){#
+	Ys[[i]] <- sapply(x,f,Ls[i])#
+}
+sapply(x,f,Ls[1])
+Ys <- list(NA)
+Ys
+Ys <- list(rep(NA,length(Ls))) # allocate memory
+Ys
+Ys <- as.list(rep(NA,length(Ls))) # allocate memory
+Ys
+for(i in 1:length(Ls)){#
+	Ys[[i]] <- sapply(x,f,Ls[i])#
+}
+Ys
+sapply(Ys, cbind)
+Ys <- sapply(Ys, cbind)
+?mplot
+?matplot
+matplot(x,Ys)
+matplot(x,Ys,type="l")
+lines(x=c(2,2),y=c(0,30))
+lines(x=0)
+lines(x=c(2,2),y=c(0,1000))
+lines(x=c(2,2),y=c(-100,100))
+matplot(x,Ys,type="l")#
+lines(x=c(2,2),y=c(-100,100),lty=3)
+matplot(x,Ys,type="l", lty=c(1,1,1,1))#
+lines(x=c(2,2),y=c(-100,100),lty=3)
+lines(x=c(4,4),y=c(-100,100),lty=3)
+matplot(x,Ys,type="l", lty=c(rep(1,length(Ls))))
+x <- seq(-1,5,by=.1)#
+Ls <- seq(0,3,by=.5)#
+#
+f <- function(x,L) {#
+	result <- (1+L)*x^2 - 6*L*x + 1 + 8*L#
+	return(result)#
+}#
+#
+Ys <- as.list(rep(NA,length(Ls))) # allocate memory#
+for(i in 1:length(Ls)){#
+	Ys[[i]] <- sapply(x,f,Ls[i])#
+}#
+#
+Ys <- sapply(Ys, cbind)#
+#
+matplot(x,Ys,type="l", lty=c(rep(1,length(Ls))))#
+lines(x=c(2,2),y=c(-100,100),lty=3)#
+lines(x=c(4,4),y=c(-100,100),lty=3)
+matplot(x,Ys,type="l", lty=c(rep(1,length(Ls))),ylab="f(x)")#
+lines(x=c(2,2),y=c(-100,100),lty=3)#
+lines(x=c(4,4),y=c(-100,100),lty=3)
+matplot(x,Ys,type="l", lty=c(rep(1,length(Ls))),ylab="f(x)",col=c("black"))
+matplot(x,Ys,type="l", lty=c(rep(1,length(Ls))),ylab="f(x)",col="black",lwd=c(3,rep(1,length(Ls)-1)))#
+lines(x=c(2,2),y=c(-100,100),lty=3)#
+lines(x=c(4,4),y=c(-100,100),lty=3)
+This code makes a graph for problem 5.1 (b) of HW3#
+#
+## Sara Kwasnick#
+## EE364a#
+#
+## 5.1 (b)#
+#
+x <- seq(-1,5,by=.1)#
+Ls <- seq(0,3,by=.5)#
+#
+Ls <- 3#
+#
+f <- function(x,L) {#
+	result <- (1+L)*x^2 - 6*L*x + 1 + 8*L#
+	return(result)#
+}#
+#
+Ys <- as.list(rep(NA,length(Ls))) # allocate memory#
+for(i in 1:length(Ls)){#
+	Ys[[i]] <- sapply(x,f,Ls[i])#
+}#
+#
+Ys <- sapply(Ys, cbind)#
+#
+matplot(x,Ys,type="l", lty=c(rep(1,length(Ls))),ylab="f(x)",col="black",lwd=c(3,rep(1,length(Ls)-1)))#
+lines(x=c(2,2),y=c(-100,100),lty=3)#
+lines(x=c(4,4),y=c(-100,100),lty=3)
+This code makes a graph for problem 5.1 (b) of HW3#
+#
+## Sara Kwasnick#
+## EE364a#
+#
+## 5.1 (b)#
+#
+x <- seq(-1,5,by=.1)#
+Ls <- seq(0,3,by=.5)#
+#
+Ls <- c(0,3)#
+#
+f <- function(x,L) {#
+	result <- (1+L)*x^2 - 6*L*x + 1 + 8*L#
+	return(result)#
+}#
+#
+Ys <- as.list(rep(NA,length(Ls))) # allocate memory#
+for(i in 1:length(Ls)){#
+	Ys[[i]] <- sapply(x,f,Ls[i])#
+}#
+#
+Ys <- sapply(Ys, cbind)#
+#
+matplot(x,Ys,type="l", lty=c(rep(1,length(Ls))),ylab="f(x)",col="black",lwd=c(3,rep(1,length(Ls)-1)))#
+lines(x=c(2,2),y=c(-100,100),lty=3)#
+lines(x=c(4,4),y=c(-100,100),lty=3)
+This code makes a graph for problem 5.1 (b) of HW3#
+#
+## Sara Kwasnick#
+## EE364a#
+#
+## 5.1 (b)#
+#
+x <- seq(-1,5,by=.1)#
+Ls <- seq(0,3,by=.5)#
+#
+Ls <- c(0,1.5,3)#
+#
+f <- function(x,L) {#
+	result <- (1+L)*x^2 - 6*L*x + 1 + 8*L#
+	return(result)#
+}#
+#
+Ys <- as.list(rep(NA,length(Ls))) # allocate memory#
+for(i in 1:length(Ls)){#
+	Ys[[i]] <- sapply(x,f,Ls[i])#
+}#
+#
+Ys <- sapply(Ys, cbind)#
+#
+matplot(x,Ys,type="l", lty=c(rep(1,length(Ls))),ylab="f(x)",col="black",lwd=c(3,rep(1,length(Ls)-1)))#
+lines(x=c(2,2),y=c(-100,100),lty=3)#
+lines(x=c(4,4),y=c(-100,100),lty=3)
+install.packages("ff")
+library(ff)
+?bigsample
+temp <-function() 5
+tem
+temp
+temp()
+temo <- function(what) tulip <<- what
+temo
+temo()
+Showing use of scoping, replacement functions, and <<-#
+makePerson <- function(lastName="", firstName="") {#
+  getLastName <- function() lastName#
+  getFirstName <- function() firstName#
+  setLastName <- function(what)#
+      lastName <<- what#
+  setFirstName <- function(what)#
+      firstName <<- what#
+  getFullName <- function()#
+      paste(lastName, firstName, sep=", ")#
+  list(getFullName=getFullName,#
+       getFirstName=getFirstName,#
+       getLastName=getLastName,#
+       setFirstName=setFirstName,#
+       setLastName=setLastName)#
+}#
+#
+`setFirstName<-` <- function(x, value) { x$setFirstName(value); x}#
+`setLastName<-` <- function(x, value) { x$setLastName(value); x}#
+#
+getFirstName <- function(x) x$getFirstName()#
+getLastName <- function(x) x$getLastName()#
+getFullName <- function(x) x$getFullName()#
+#
+p <- makePerson(lastName="Blow", firstName="Joe")#
+getFullName(p)#
+#
+setLastName(p) <- "Sixpack"#
+getFullName(p)
+setLastName
+setLastName()
+lastName
+what
+setLastName(p)
+getFirstName <- function(x) x$getFirstName()#
+getLastName <- function(x) x$getLastName()#
+getFullName <- function(x) x$getFullName()
+p <- makePerson(lastName="Blow", firstName="Joe")
+p
+getFullName(p)
+setLastName(p)
+`setFirstName<-` <- function(x, value) { x$setFirstName(value); x}#
+`setLastName<-` <- function(x, value) { x$setLastName(value); x}
+setLastName(p)
+makePerson <- function(lastName="", firstName="") {#
+  getLastName <- function() lastName#
+  getFirstName <- function() firstName#
+  setLastName <- function(what)#
+      lastName <<- what#
+  setFirstName <- function(what)#
+      firstName <<- what#
+  getFullName <- function()#
+      paste(lastName, firstName, sep=", ")#
+  list(getFullName=getFullName,#
+       getFirstName=getFirstName,#
+       getLastName=getLastName,#
+       setFirstName=setFirstName,#
+       setLastName=setLastName)#
+}#
+#
+`setFirstName<-` <- function(x, value) { x$setFirstName(value); x}#
+`setLastName<-` <- function(x, value) { x$setLastName(value); x}
+getFirstName <- function(x) x$getFirstName()#
+getLastName <- function(x) x$getLastName()#
+getFullName <- function(x) x$getFullName()
+setFirstName
+setFirstName()
+`setFirstName`
+`setFirstName<-`
+`like this` <- 2#
+"like that" <- 3#
+print(`like this`)#
+print("like that")
+`setFirstName<-` <- function(x, value) { x$setFirstName(value); x}#
+`setLastName<-` <- function(x, value) { x$setLastName(value); x}#
+#
+getFirstName <- function(x) x$getFirstName()#
+getLastName <- function(x) x$getLastName()#
+getFullName <- function(x) x$getFullName()
+p <- makePerson(lastName="Blow", firstName="Joe")
+p
+setLastName(p)
+setLastName(p) <- "tulip"
+getFullName(p)
+p
+setLastName(p) <- "scar"
+p
+getFullName(p)
+makePerson <- function(x="", y="") {#
+  getLastName <- function() lastName#
+  getFirstName <- function() firstName#
+  setLastName <- function(what)#
+      lastName <<- what#
+  setFirstName <- function(what)#
+      firstName <<- what#
+  getFullName <- function()#
+      paste(lastName, firstName, sep=", ")#
+  list(getFullName=getFullName,#
+       getFirstName=getFirstName,#
+       getLastName=getLastName,#
+       setFirstName=setFirstName,#
+       setLastName=setLastName)#
+}#
+#
+`setFirstName<-` <- function(x, value) { x$setFirstName(value); x}#
+`setLastName<-` <- function(x, value) { x$setLastName(value); x}#
+#
+getFirstName <- function(x) x$getFirstName()#
+getLastName <- function(x) x$getLastName()#
+getFullName <- function(x) x$getFullName()
+p <- makePerson(lastName="Blow", firstName="Joe")
+p <- makePerson(x = "Blow", y = "Joe")
+o
+p
+rm(p)
+p$setLastName("Blow")
+p <- makePerson(lastName="Blow",firstName="Joe")
+p <- makePerson(x="Blow",y="Joe")
+p
+p <- makePerson(x="Hello",y="World")
+p$setLastName("Blow")
+p$setFirstName("Joe")
+p$getFullName()
+p <- makePerson("Hello","World")
+p$setFirstName("Joe")
+p$setLastName("Blow")
+p$getFullName()
+p <- makePerson("Hello","World")
+p$getFullName()
+rem(p)
+rm(p)
+p <- makePerson("Hello","World")
+p$getFullName()
+rm(makePerson)
+makePerson <- function(x="", y="") {#
+  getLastName <- function() lastName#
+  getFirstName <- function() firstName#
+  setLastName <- function(what)#
+      lastName <<- what#
+  setFirstName <- function(what)#
+      firstName <<- what#
+  getFullName <- function()#
+      paste(lastName, firstName, sep=", ")#
+  list(getFullName=getFullName,#
+       getFirstName=getFirstName,#
+       getLastName=getLastName,#
+       setFirstName=setFirstName,#
+       setLastName=setLastName)#
+}
+p <- makePerson("Hello","World")
+p$getFullName()
+Showing use of scoping, replacement functions, and <<-#
+makePerson <- function(x="", y="") {#
+  getLastName <- function() lastName#
+  getFirstName <- function() firstName#
+  setLastName <- function(what)#
+      lastName <<- what#
+  setFirstName <- function(what)#
+      firstName <<- what#
+  getFullName <- function()#
+      paste(lastName, firstName, sep=", ")#
+  list(getFullName=getFullName,#
+       getFirstName=getFirstName,#
+       getLastName=getLastName,#
+       setFirstName=setFirstName,#
+       setLastName=setLastName)#
+}
+`setFirstName<-` <- function(x, value) { x$setFirstName(value); x}#
+`setLastName<-` <- function(x, value) { x$setLastName(value); x}#
+#
+getFirstName <- function(x) x$getFirstName()#
+getLastName <- function(x) x$getLastName()#
+getFullName <- function(x) x$getFullName()
+p <- makePerson("Hello","World")
+getFullName(p)
+p <- makePerson(x="Hello",y="World")
+p
+getFullName(p)
+p$setFirstName("Hello")
+p$setLastName("World")
+getFullName(p)
+p$setFirstName("Joe")
+p$setLastName("Blow")
+getFullName(p)
+makePerson <- function(x="", y="") {#
+  getLastName <- function() lastName#
+  getFirstName <- function() firstName#
+  setLastName <- function(what)#
+      lastName <<- what#
+  setFirstName <- function(what)#
+      firstName <<- what#
+  getFullName <- function()#
+      paste(lastName, firstName, sep=", ")#
+  list(getFullName=getFullName,#
+       getFirstName=getFirstName,#
+       getLastName=getLastName,#
+       setFirstName=setFirstName,#
+       setLastName=setLastName)#
+}#
+#
+`setFirstName<-` <- function(x, value) { x$setFirstName(value); x}#
+`setLastName<-` <- function(x, value) { x$setLastName(value); x}#
+#
+getFirstName <- function(x) x$getFirstName()#
+getLastName <- function(x) x$getLastName()#
+getFullName <- function(x) x$getFullName()
+these error, since p wasn't defined yet#
+p$setLastName("Blow")#
+p$setFirstName("Joe")#
+p$getFullName()
+now I define p, and things start to work...#
+p <- makePerson("Hello","World")#
+# But if I check FullName  now, I get an error, since lastName and firstName have no value in p:#
+getFullName(p)
+However, if I set lastName and firstName, everything will work:#
+p$setLastName("Blow")#
+p$setFirstName("Joe")#
+p$getFullName()
+getwd()
+setwd("/Users/Sara/Desktop/github/bikeshare")
+library(Bikeshare)
+stations = readStationData("Bikeshare/inst/extData/bikeStations.xml", WAS)
+plotStations(stations)
+plotStations <- function(station.data.object,sbst=TRUE,zoom=13,col="red"){#
+	## convert data object to a dataframe#
+	stations.df <- subset(makeStationDataFrame(station.data.object),sbst)#
+	locations <- unique(stations.df[,c("lat","long")])#
+	center <- c(mean(locations$long),mean(locations$lat))#
+	## plot station locations#
+	map <- get_map(location=center,zoom=zoom,source="google")#
+	mapbg <- ggmap(map,fullpage=TRUE)#
+	mapbg + geom_point(data = locations, aes(x = long, y = lat), colour = col, size = 2)#
+}
+plotStations(stations)
+plotStations(stations,zoom=15)
+plotStations(stations,zoom=3)
