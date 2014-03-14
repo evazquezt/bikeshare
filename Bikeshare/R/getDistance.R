@@ -1,6 +1,6 @@
-## Function to get biking distances over a set of stations
+## Function to get biking or driving distances over a set of stations
 
-getBikingDistance <- function(station.data.object,from.subset=TRUE,to.subset=TRUE,return.limit=FALSE) {
+getDistance <- function(station.data.object,from.subset=TRUE,to.subset=TRUE,mode=c("bicycling","driving"),return.limit=FALSE,api_key) {
 	## Warning: if the subset size is too large, you may exceed the Google API query limit!
 	
 	## convert data object to a dataframe
@@ -40,7 +40,7 @@ getBikingDistance <- function(station.data.object,from.subset=TRUE,to.subset=TRU
 	## two latitude-longitude pairs.
 	get.dist <- function(coord.df){
 		suppressMessages(mapdist(as.character(coord.df[,1]),
-			as.character(coord.df[,2]),mode="bicycling")$km)
+			as.character(coord.df[,2]),mode=mode,api_key)$km)
 	}
 	
 	## Obtain final set of distances between each pair of coordinates

@@ -1,14 +1,14 @@
-\name{getBikingDistance}
-\alias{getBikingDistance}
+\name{getDistance}
+\alias{getDistance}
 
 \title{
-A matrix of biking distances between stations
+A matrix of distances between stations
 }
 \description{
-Given a station data object and subset strings describing starting and ending stations, return a matrix containing the biking distance in kilometers between each pair of stations.  Distances are taken from Google Maps. By using this function you are agreeing to the Google Maps API Terms of Service at \url{https://developers.google.com/maps/terms}. 
+Given a station data object and subset strings describing starting and ending stations, return a matrix containing the either biking or driving distance in kilometers between each pair of stations.  Distances are taken from Google Maps. By using this function you are agreeing to the Google Maps API Terms of Service at \url{https://developers.google.com/maps/terms}. 
 }
 \usage{
-getBikingDistance(station.data.object, from.subset = TRUE, to.subset = TRUE, return.limit = FALSE)
+getDistance(station.data.object, from.subset = TRUE,to.subset = TRUE,mode=c("bicycling","driving"), return.limit = FALSE,api_key)
 }
 
 \arguments{
@@ -21,8 +21,13 @@ getBikingDistance(station.data.object, from.subset = TRUE, to.subset = TRUE, ret
   \item{to.subset}{
 	String describing a subset of \code{station.data.object} to be used as ending stations.  Possible subset names are same as in \code{from.subset}.
 }
+  \item{mode}{
+	Mode of transit between stations.  Equal to either "bicycling" or "driving".	
+}
   \item{return.limit}{
 	If TRUE, returns remaining available Google Maps API queries via \code{distQueryCheck()}.
+}
+	\item{api_key}{ A developer API key for cloudmade maps, if applicable.
 }
 }
 \details{
@@ -35,13 +40,8 @@ Returns a matrix.  Row names are the station IDs for all stations subsetted by f
 \author{
 Sara Kwasnick
 }
-\note{
-This function can be used in conjunction with \code{getDrivingDistance} to see when biking and driving distances between particular stations are significantly different!
-}
 
 \seealso{
-\code{getDrivingDistance}
-
 \code{mapdist} from package \code{ggmap}.
 
 The Google Maps Distance Matrix API, \url{http://code.google.com/apis/maps/documentation/distancematrix/}.
