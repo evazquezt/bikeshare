@@ -1,63 +1,63 @@
 ## Function to get biking distances over a set of stations
 
-### need to finish debugging and run once google lets me run stuff again...
-
-getBikingDistance <- function(station.data.object,sbst=TRUE) {
+getBikingDistance <- function(station.data.object,from.subset=TRUE,to.subset=TRUE,return.limit=FALSE) {
+	## Warning: if the subset size is too large, you may exceed the Google API query limit!
+	
+	## test example:
+	## from.subset <- "stationId <= 31001"
+	## to.subset <- "numBikes <= 10"
+	## station.data.object <- stations
 	
 	## convert data object to a dataframe
-	stations.df <- subset(makeStationDataFrame(station.data.object),sbst)
-	locations <- unique(stations.df[,c("stationId","lat","long")])
+	stations.df <- subset(makeStationDataFrame(station.data.object))
+	from.locations <- unique(subset(stations.df,eval(parse(text=from.subset))))
+	to.locations <- unique(subset(stations.df,eval(parse(text=to.subset))))
 	
-	n <- dim(locations)[1]
-	loc.combos <- as.data.frame(t(combn(locations$stationId,2)))
-	names(loc.combos) <- c("start","end")
-	#loc.list <- list(rep(NA,dim(loc.combos)[1]))
-#	for(i in 1:dim(loc.combos)[1]){
-	#	loc.list[[i]] <- loc.combos[i,]
-	#}
+	## create a dataframe of all from-to station combinations
+
+	loc.combos <- expand.grid(from.locations$stationId,to.locations$stationId)
+	names(loc.combos) <- c("from","to")
 	
 	## allocate memory for output matrix
-	distance.mat <- matrix(rep(NA,n^2),nrow=n,ncol=n)
-	rownames(distance.mat) <- locations$stationId
-	colnames(distance.mat) <- locations$stationId
+	m <- dim(from.locations)[1]
+	n <- dim(to.locations)[1]
+	distance.mat <- matrix(rep(NA,n*m),nrow=m,ncol=n)
+	rownames(distance.mat) <- from.locations$stationId
+	colnames(distance.mat) <- to.locations$stationId
 	
-	coordinates <- mapply(paste,locations$lat, locations$long,sep=" ")
-	names(coordinates) <- locations$stationId
+	## Determine the coordinates of each station
+	from.coordinates <- mapply(paste,from.locations$lat, from.locations$long,sep=" ")
+	names(from.coordinates) <- from.locations$stationId
+	to.coordinates <- mapply(paste,to.locations$lat, to.locations$long,sep=" ")
+	names(to.coordinates) <- to.locations$stationId
+	coordinates <- c(from.coordinates,to.coordinates) # all relevant coordinates in one vector
 	
-	
-	get.coord <- function(coord){
-		paste(coordinates[names(coordinates)==as.character(coord)])
+	## This function gets the coordinates for a given station ID
+	get.coord <- function(id){
+		paste(unique(coordinates[names(coordinates)==as.character(id)]))
 	}
 	
-	coord.combos <- data.frame(start=sapply(loc.combos[,1],get.coord),end=sapply(loc.combos[,	2],get.coord))
+	coord.combos <- data.frame(start=sapply(loc.combos[,1],get.coord),
+		end=sapply(loc.combos[,	2],get.coord))
 	
+	## This function is a wrapper of the ggplot mapdist function.  
+	## It queries the Google Maps API the biking distance in km between 
+	## two latitude-longitude pairs.
 	get.dist <- function(coord.df){
-		suppressMessages(mapdist(as.character(coord.df[,1]),as.character(coord.df[,2]),mode="bicycling")$km)
+		suppressMessages(mapdist(as.character(coord.df[,1]),
+			as.character(coord.df[,2]),mode="bicycling")$km)
 	}
 	
-	
-	#mapdist(as.character(coord.df[,1]),as.character(coord.df[,2]),mode="bicycling",override_limit=TRUE)
-	
+	## Obtain final set of distances between each pair of coordinates
 	distances <- get.dist(coord.combos)
+	if(return.limit){distQueryCheck()} # return remaining available distance queries, if desired
+	names(distances) <- mapply(paste,loc.combos$from, loc.combos$to,sep=" ")
 	
-	## get station distances
-	#get.coord <- function(elem){
-	#	coor1 <- coordinates[names(coordinates)==as.character(elem[1])]
-	#	coor2 <- coordinates[names(coordinates)==as.character(elem[2])]
-	#	paste(as.character(coor1),as.character(coor2),sep=":")
-	#}
-	
-	## compute combinations of station coordinates
-	#coord.combos <- sapply(loc.list,get.coord)
-
-
-
-
-	#get.dist <- function(coord.string) {
-	#	coords <- strsplit(coord.string,":")[[1]]
-	#	suppressMessages(mapdist(as.character(coords[1]),as.character(coords[2]),mode="bicycling")$km)
-	#}
-	
-	distances <- sapply(coord.combos,get.dist)
-	
+	## Fill in the distance.mat matrix
+	for(i in 1:length(distances)){
+		index <- strsplit(names(distances[i]),split=" ")[[1]]
+		distance.mat[index[1],index[2]] <- distances[i]
+	}
+		
+	return(distance.mat)
 }
