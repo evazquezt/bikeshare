@@ -14,7 +14,7 @@ readStationData = function(stationPath, city){
         return(stations)
     }
     if(identical(city,.cities()$CHI)){
-        data = read.table(stationPath, header=TRUE,stringsAsFactors=FALSE, quote="\"", colClasses=c("numeric","character", "numeric","numeric","numeric","character","character"),sep=",")
+        data = read.table(stationPath, header=TRUE,stringsAsFactors=FALSE, quote="\"", sep=",")
         
         stations = apply(X=data,MARGIN=1, FUN=function(x){
             BikeshareStation(name        = x["name"],
@@ -24,6 +24,18 @@ readStationData = function(stationPath, city){
                              removalDate = as.POSIXlt(NA),
                              stationId   = as.numeric(x["id"]),
                              numBikes    = as.numeric(x["dpcapacity"]))})        
+        return(stations)
+    }
+    if(identical(city, .cities()$BOS)){
+        data = read.csv(stationPath, stringsAsFactors=FALSE, quote="\"")
+        stations = apply(X=data,MARGIN=1, FUN=function(x){
+            BikeshareStation(name        = x["station"],
+                             lat         = as.numeric(x["lat"]),
+                             long        = as.numeric(x["lng"]),
+                             installDate = as.POSIXlt(paste(x["install_date"]), format="%m/%d/%Y"),
+                             removalDate = as.POSIXlt(NA),
+                             stationId   = as.numeric(x["id"]),
+                             numBikes    = as.numeric(x["nb_docks"]))})        
         return(stations)
     }
 }
