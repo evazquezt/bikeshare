@@ -1,5 +1,5 @@
 exportPattern("^[[:alpha:]]+")
-export("WAS")
+export(".cities")
 exportClasses(
     "BikeshareData" , "BikeshareCity","BikeshareStation"
 )

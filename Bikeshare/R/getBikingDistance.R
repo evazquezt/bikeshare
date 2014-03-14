@@ -3,11 +3,6 @@
 getBikingDistance <- function(station.data.object,from.subset=TRUE,to.subset=TRUE,return.limit=FALSE) {
 	## Warning: if the subset size is too large, you may exceed the Google API query limit!
 	
-	## test example:
-	## from.subset <- "stationId <= 31001"
-	## to.subset <- "numBikes <= 10"
-	## station.data.object <- stations
-	
 	## convert data object to a dataframe
 	stations.df <- subset(makeStationDataFrame(station.data.object))
 	from.locations <- unique(subset(stations.df,eval(parse(text=from.subset))))

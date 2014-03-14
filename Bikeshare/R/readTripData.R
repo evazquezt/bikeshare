@@ -12,15 +12,17 @@ readTripData <-  function(path, city, stations){
     # Rip out columns that we want
     data = data[, city@keepCols]
     colnames(data) = c("startTime","endTime","startLoc","endLoc", "bike","memberType")
+
     
     # Do city-level cleaning
-    if(identical(city, WAS)){
+    if(identical(city, .cities()$WAS)){        
         # Capital Bikeshare data comes in with station id in station name.  Strip it out
         data$startLoc = suppressWarnings(as.integer(sapply(data$startLoc, function(x){substr(x, nchar(x)-5, nchar(x)-1)}, USE.NAMES=FALSE)))
         data$endLoc = suppressWarnings(as.integer(sapply(data$endLoc, function(x){substr(x, nchar(x)-5, nchar(x)-1)}, USE.NAMES=FALSE)))
         # Kill the rows that don't have start/end locs
         data = subset(data,!(is.na(startLoc) | is.na(endLoc)))
     }
+    
     # Similarly deal with other start/end locs
     
     # Convert dates/times to POSIX

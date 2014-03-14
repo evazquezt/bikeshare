@@ -33,5 +33,5 @@ readStationData(stationPath, city)
 BikeshareStation
 }
 \examples{
-#readStationData("data/was/bikeStations.xml", WAS)
+#readStationData("data/was/bikeStations.xml", .cities[["WAS"]])
 }

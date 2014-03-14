@@ -2,7 +2,7 @@
 \docType{class}
 \alias{BikeshareCity-class}
 \alias{BikeshareCity}
-
+\alias{.cities}
 
 \title{Class "BikeshareCity"  }
 \description{Object representing city-specific bikeshare data}

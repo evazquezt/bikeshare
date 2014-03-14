@@ -1,5 +1,5 @@
 readStationData = function(stationPath, city){
-    if(identical(city,WAS)){
+    if(identical(city,.cities()$WAS)){
         doc = xmlTreeParse(file=stationPath)
         stationNodes = doc$doc$children$stations
         
@@ -8,9 +8,22 @@ readStationData = function(stationPath, city){
                              lat  = as.numeric(xmlValue(station[["lat"]])),
                              long = as.numeric(xmlValue(station[["long"]])),
                              installDate  = as.POSIXlt(as.numeric(xmlValue(station[["installDate"]]))/1000, origin="1970-01-01"),
-                             removalDate  = as.POSIXlt(as.numeric(xmlValue(station[["removalDate"]]))/1000, origin="1970-01-01"),
+                             removalDate  = as.POSIXlt(ifelse(is.null(xmlValue(station[["removalDate"]])), NA,as.numeric(xmlValue(station[["removalDate"]]))/1000), origin="1970-01-01"),
                              stationId = as.numeric(xmlValue(station[["terminalName"]])),
                              numBikes = as.numeric(xmlValue(station[["nbBikes"]])) + as.numeric(xmlValue(station[["nbEmptyDocks"]])))})        
+        return(stations)
+    }
+    if(identical(city,.cities()$CHI)){
+        data = read.table(stationPath, header=TRUE,stringsAsFactors=FALSE, quote="\"", colClasses=c("numeric","character", "numeric","numeric","numeric","character","character"),sep=",")
+        
+        stations = apply(X=data,MARGIN=1, FUN=function(x){
+            BikeshareStation(name        = x["name"],
+                             lat         = as.numeric(x["latitude"]),
+                             long        = as.numeric(x["longitude"]),
+                             installDate = as.POSIXlt(paste(x["online.date"]), format="%m/%d/%Y"),
+                             removalDate = as.POSIXlt(NA),
+                             stationId   = as.numeric(x["id"]),
+                             numBikes    = as.numeric(x["dpcapacity"]))})        
         return(stations)
     }
 }
