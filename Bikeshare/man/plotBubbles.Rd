@@ -54,7 +54,6 @@ Requires \code{ggmap} and \code{ggplot2}.
 \examples{
 \dontrun{
 stations <- readStationData(system.file("extData/bikeStations.xml", package="Bikeshare"),.cities()$WAS)
-plotStations(stations)
 bd <- readTripData(system.file("extData/2010-4th-quarter.csv", package="Bikeshare"), .cities()$WAS, stations)
 trip.subset <- "startLoc==endLoc" ## just look at trips that started and ended at the same station
 plotBubbles(bd,trip.subset=trip.subset)		

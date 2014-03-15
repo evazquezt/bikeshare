@@ -39,7 +39,7 @@ getDistance <- function(stationData,from.subset=TRUE,to.subset=TRUE,mode=c("bicy
 	## two latitude-longitude pairs.
 	get.dist <- function(coord.df){
 		suppressMessages(mapdist(as.character(coord.df[,1]),
-			as.character(coord.df[,2]),mode=mode[1],api_key)$km)
+			as.character(coord.df[,2]),mode=mode[1],api_key=api_key)$km)
 	}
 	
 	## Obtain final set of distances between each pair of coordinates

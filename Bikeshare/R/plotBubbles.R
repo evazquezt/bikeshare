@@ -39,7 +39,7 @@ plotBubbles <- function(bikeshareData,trip.subset=TRUE,station.subset=TRUE,zoom=
 	
 	## Get background map
 	center <- c(mean(total.visits$long),mean(total.visits$lat))
-	map <- get_map(location=center,zoom=zoom,scale = "auto",source="google",api_key)
+	map <- get_map(location=center,zoom=zoom,scale = "auto",source="google",api_key=api_key)
 	b <- ggmap(map)
 	
 	## Plot results

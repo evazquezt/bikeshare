@@ -34,7 +34,7 @@ plotTrips <- function(bikeshareData,trip.subset=TRUE,station.subset=TRUE,zoom=13
 	## Get background map
 	center <- c(mean(c(station.pairs$long1, station.pairs$long2)),
 				mean(c(station.pairs$lat1, station.pairs$lat2)))
-	map <- get_map(location=center,zoom=zoom,scale = "auto",source="google",api_key)
+	map <- get_map(location=center,zoom=zoom,scale = "auto",source="google",api_key=api_key)
 	b <- ggmap(map)
 	
 	## Define color palette
