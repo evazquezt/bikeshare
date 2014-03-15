@@ -56,7 +56,7 @@ Requires \code{ggmap} and \code{ggplot2}.  Avoid setting \code{col="white"}; inf
 stations <- readStationData(system.file("extData/bikeStations.xml", package="Bikeshare"),.cities()$WAS)
 bd <- readTripData(system.file("extData/2010-4th-quarter.csv", package="Bikeshare"), .cities()$WAS, stations)
 station.subset <- "stationId <= 31020"
-plotAlpha(bd,station.subset=station.subset)	
+plotTrips(bd,station.subset=station.subset)	
 }
 }
 
