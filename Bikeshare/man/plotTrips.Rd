@@ -56,7 +56,12 @@ Requires \code{ggmap} and \code{ggplot2}.  Avoid setting \code{col="white"}; inf
 stations <- readStationData(system.file("extData/bikeStations.xml", package="Bikeshare"),.cities()$WAS)
 bd <- readTripData(system.file("extData/2010-4th-quarter.csv", package="Bikeshare"), .cities()$WAS, stations)
 station.subset <- "stationId <= 31020"
-plotTrips(bd,station.subset=station.subset)	
+
+## short example
+plotTrips(bd,station.subset=station.subset,zoom=14,alpha=.3) 
+
+## longer to run, but includes all stations
+plotTrips(bd,zoom=12) 
 }
 }
 
