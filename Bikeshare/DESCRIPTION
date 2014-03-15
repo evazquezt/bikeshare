@@ -7,5 +7,5 @@ Author: Sara Kwasnick and John Sears
 Maintainer: Sara Kwasnick and John Sears <lastnameFirstInitial@stanford.edu>
 Description: Facilitates analysis of bikeshare data from various municipalities.
 License: MIT
-Depends: XML, methods, ggmap, ggplot2, reshape, plyr
+Depends: XML, methods, ggmap, ggplot2, reshape, plyr, sqldf
 

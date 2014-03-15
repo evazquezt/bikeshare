@@ -1,9 +1,9 @@
 ## Function to plot station locations on a map
 
-plotStations <- function(station.data.object,sbst=TRUE,zoom=13,col="red",api_key){
+plotStations <- function(stationData,data.subset=TRUE,zoom=13,col="red",api_key=NULL){
 	
 	## convert data object to a dataframe
-	stations.df <- subset(makeStationDataFrame(station.data.object),sbst)
+	stations.df <- subset(makeStationDataFrame(stationData),data.subset)
 	
 	locations <- unique(stations.df[,c("lat","long")])
 	center <- c(mean(locations$long),mean(locations$lat))

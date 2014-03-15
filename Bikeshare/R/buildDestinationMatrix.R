@@ -1,11 +1,11 @@
-buildDestinationMatrix <-  function(bikeshareData){
+buildDestinationMatrix <-  function(bikeshareData,trip.subset=TRUE,station.subset=TRUE){
     if(class(bikeshareData) != "BikeshareData"){
         stop("Argument must be of class BikeshareData")
     }
     
-    bd.df = as.data.frame(bikeshareData)
+    bd.df = subset(as.data.frame(bikeshareData),eval(parse(text=trip.subset)))
     bd.df$trip = rep(1, nrow(bd.df))
-    stations.df = makeStationDataFrame(bikeshareData@stations)
+    stations.df = subset(makeStationDataFrame(bikeshareData@stations),eval(parse(text=station.subset)))
     n = nrow(stations.df)
 
     # Melt data by starting and ending stations

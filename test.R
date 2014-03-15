@@ -1,9 +1,9 @@
 install.packages("Bikeshare_0.0.1.tar.gz")
 library(Bikeshare)
 
-stations = readStationData("Bikeshare/inst/extData/bikeStations.xml", WAS)
+stations = readStationData(system.file("extData/bikeStations.xml", package="Bikeshare"),.cities()$WAS)
 
-bd = readTripData("Bikeshare/inst/extData/2010-4th-quarter.csv", WAS, stations)
+bd = readTripData(system.file("extData/2010-4th-quarter.csv", package="Bikeshare"), .cities()$WAS, stations)
 
 stations.df = makeStationDataFrame(stations)
 bd.df = as.data.frame(bd)

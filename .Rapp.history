@@ -1,0 +1,477 @@
+stations.df <- subset(makeStationDataFrame(stations))#
+	locations <- unique(stations.df[,c("stationId","lat","long")])
+head(locations)
+from.locations <- subset(locations,from.subset)
+from.subset
+eval(parse(text=from.subset))
+from.locations <- subset(locations,eval(parse(text=from.subset)))
+from.locations
+to.locations <- subset(locations,eval(parse(text=to.subset)))
+to.locations
+dim(stations.df)
+dim(unique(stations.df))
+stations.df <- subset(makeStationDataFrame(station.data.object))#
+	from.locations <- unique(subset(stations.df,eval(parse(text=from.subset))))#
+	to.locations <- unique(subset(stations.df,eval(parse(text=to.subset))))
+stations.df <- subset(makeStationDataFrame(stations))#
+	from.locations <- unique(subset(stations.df,eval(parse(text=from.subset))))#
+	to.locations <- unique(subset(stations.df,eval(parse(text=to.subset))))
+from.locations
+head(stations.df)
+unique(stations.df$numBikes)
+sort(unique(stations.df$numBikes))
+to.subset <- "numBikes <= 19"
+from.locations <- unique(subset(stations.df,eval(parse(text=from.subset))))#
+	to.locations <- unique(subset(stations.df,eval(parse(text=to.subset))))
+from.locations
+to.locations
+head(to.locations)
+dim(stations.df)
+to.subset
+range(stations.df$numBikes)
+unique(subset(stations.df,eval(parse(text=to.subset))))
+to.subset
+names(stations.df)
+stations.df[,1][stations.df$numBikes>=19]
+stations.df[,1][stations.df$numBikes<=19]
+str(to.locations)
+range(to.locations$numBikes)
+to.locations
+dim(to.locations)
+to.subset <- "numBikes <= 10"
+to.locations <- unique(subset(stations.df,eval(parse(text=to.subset))))
+dim(to.locations)
+to.locations
+from.subset
+to.subset
+expand.grid(from.locations,to.locations)
+?expand.grid
+?outer
+?outer
+outer(to.locations,from.locations,rbind)
+?lcm
+to.locations
+from.locations <- from.locations$stationId
+to.locations <- to.locations$stationId
+from.locations
+to.locations
+expand.grid(from.locations,to.locations)
+m <- length(from.locations)#
+	n <- length(to.locations)#
+	loc.combos <- expand.grid(from.locations,to.locations)#
+	names(loc.combos) <- c("from","to")#
+	## allocate memory for output matrix#
+	distance.mat <- matrix(rep(NA,n*m),nrow=m,ncol=n)#
+	rownames(distance.mat) <- from.locations#
+	colnames(distance.mat) <- to.locations
+distance.mat
+from.locations <- unique(subset(stations.df,eval(parse(text=from.subset))))#
+	to.locations <- unique(subset(stations.df,eval(parse(text=to.subset))))#
+	m <- length(from.locations)#
+	n <- length(to.locations)#
+	loc.combos <- expand.grid(from.locations$stationId,to.locations$stationId)#
+	names(loc.combos) <- c("from","to")#
+	## allocate memory for output matrix#
+	distance.mat <- matrix(rep(NA,n*m),nrow=m,ncol=n)#
+	rownames(distance.mat) <- from.locations$stationId#
+	colnames(distance.mat) <- to.locations$stationId
+m <- dim(from.locations)[1]
+m
+m <- dim(from.locations)[1]#
+	n <- length(to.locations)[1]#
+	loc.combos <- expand.grid(from.locations$stationId,to.locations$stationId)#
+	names(loc.combos) <- c("from","to")
+loc.combos
+distance.mat <- matrix(rep(NA,n*m),nrow=m,ncol=n)
+distance.mat
+rownames(distance.mat) <- from.locations$stationId#
+	colnames(distance.mat) <- to.locations$stationId
+rownames(distance.mat) <- from.locations$stationId
+rownames(distance.mat) <- from.locations$stationId#
+	colnames(distance.mat) <- to.locations$stationId
+to.locations$stationId
+n
+to.locations
+dim(to.locations)
+m <- dim(from.locations)[1]#
+	n <- dim(to.locations)[1]#
+	loc.combos <- expand.grid(from.locations$stationId,to.locations$stationId)#
+	names(loc.combos) <- c("from","to")#
+	## allocate memory for output matrix#
+	distance.mat <- matrix(rep(NA,n*m),nrow=m,ncol=n)#
+	rownames(distance.mat) <- from.locations$stationId#
+	colnames(distance.mat) <- to.locations$stationId
+to.locations
+from.coordinates <- mapply(paste,from.locations$lat, from.locations$long,sep=" ")#
+	names(from.coordinates) <- from.locations$stationId#
+	to.coordinates <- mapply(paste,to.locations$lat, to.locations$long,sep=" ")#
+	names(to.coordinates) <- to.locations$stationId
+from.coordinates
+to.coordinates
+get.coord <- function(coord){#
+		paste(coordinates[names(coordinates)==as.character(coord)])#
+	}
+from.coordinates
+loc.combos
+cbin(from.coordinates,to.coordinates)
+cbind(from.coordinates,to.coordinates)
+rbind(from.coordinates,to.coordinates)
+dim(rbind(from.coordinates,to.coordinates))
+from.coordinates
+to.coordinates
+coordinates <- c(from.coordinates,to.coordinates)
+coordinates
+coordinates <- c(coordinates,from.coordinates)
+coordinates
+get.coord <- function(coord){#
+		paste(unique(coordinates[names(coordinates)==as.character(coord)]))#
+	}
+coord.combos <- data.frame(start=sapply(loc.combos[,1],get.coord),#
+		end=sapply(loc.combos[,	2],get.coord))
+coord.combos
+coord.combos
+loc.combos
+get.coord <- function(id){#
+		paste(unique(coordinates[names(coordinates)==as.character(id)]))#
+	}#
+	coord.combos <- data.frame(start=sapply(loc.combos[,1],get.coord),#
+		end=sapply(loc.combos[,	2],get.coord))
+coord.combos
+two latitude-longitude pairs.#
+	get.dist <- function(coord.df){#
+		suppressMessages(mapdist(as.character(coord.df[,1]),#
+			as.character(coord.df[,2]),mode="bicycling")$km)#
+	}
+coord.combos
+distances <- get.dist(coord.combos)
+distances
+?mapdist
+distQueryCheck()
+distances
+loc.combos
+distance.mat
+coord.combos
+distances
+coord.combos
+loc.combos
+paste(loc.combos)
+paste(loc.combos,2)
+paste(loc.combos,1)
+from.coordinates
+loc.combos
+dist.names <- mapply(paste,loc.combos$from, from.locations$to,sep=" ")
+mapply(paste,loc.combos$from, loc.combos$to,sep=" ")
+names(distances) <- mapply(paste,loc.combos$from, loc.combos$to,sep=" ")#
+	## function to fill in the distance.mat matrix#
+	loc.combos$pair <- names(distances)
+loc.combos
+distances
+names(distances)
+dist = distances[1]
+names(dist)
+?strsplit
+strsplit(names(dist),split="")
+strsplit(names(dist),split=" ")
+strsplit(names(dist),split=" ")[[1]]
+distance.mat
+distance.mat["31000","31801"]
+distance.mat["31000","31801"]<-2
+distance.mat
+distance.mat[c("31000","31801")]<-2
+distance.mat[c("31000","31801")]<-3
+distance.mat
+distance.mat <- matrix(rep(NA,n*m),nrow=m,ncol=n)#
+	rownames(distance.mat) <- from.locations$stationId#
+	colnames(distance.mat) <- to.locations$stationId
+distance.mat
+dist
+loc.combos$pair <- names(distances)#
+	fill.in.distance.mat <- function(dist) {#
+		index <- strsplit(names(dist),split=" ")[[1]]#
+		distance.mat[index[1],index[2]] <- dist#
+	}
+loc.combos
+fill.in.distance.mat(dist)
+distance.mat
+dist
+index <- strsplit(names(dist),split=" ")[[1]]
+index
+distance.mat[index[1],index[2]] <- dist
+distance.mat
+dist
+dist[1] <- 2
+dist
+fill.in.distance.mat <- function(dist) {#
+		index <- strsplit(names(dist),split=" ")[[1]]#
+		distance.mat[index[1],index[2]] <- dist#
+	}
+fill.in.distance.mat(dist)
+distance.mat
+distance.mat[index[1],index[2]]
+distances
+dist = distance[2]
+dist = distances[2]
+dist
+fill.in.distance.mat(dist)
+distance.mat
+fill.in.distance.mat <- function(dist) {#
+		index <- strsplit(names(dist),split=" ")[[1]]#
+		distance.mat[index[1],index[2]] <- dist#
+		return(index)#
+	}
+fill.in.distance.mat(dist)
+fill.in.distance.mat <- function(dist) {#
+		index <- strsplit(names(dist),split=" ")[[1]]#
+		distance.mat[index[1],index[2]] <- dist#
+		return(index)#
+		return(distance.mat)#
+	}
+fill.in.distance.mat(dist)
+distance.mat
+fill.in.distance.mat <- function(dist) {#
+		index <- strsplit(names(dist),split=" ")[[1]]#
+		distance.mat[index[1],index[2]] = dist#
+		return(index)#
+	}
+fill.in.distance.mat(dist)
+distance.mat
+names(dist)
+distance.mat
+index
+distance.mat[index[1],index[2]]
+for(i in 1:length(distances)){#
+		index <- strsplit(names(distances[i]),split=" ")[[1]]#
+		distance.mat[index[1],index[2]] <- distances[i]#
+	}
+distance.mat
+return(distance.mat)
+distance.mat
+stations.df
+range(stations.df$stationId)
+from.subset <- "stationId <= 31001"
+to.subset <- "numBikes <= 10"
+stations.data.object <- stations
+stations.df <- subset(makeStationDataFrame(station.data.object))#
+	from.locations <- unique(subset(stations.df,eval(parse(text=from.subset))))#
+	to.locations <- unique(subset(stations.df,eval(parse(text=to.subset))))
+station.data.object <- stations
+stations.df <- subset(makeStationDataFrame(station.data.object))#
+	from.locations <- unique(subset(stations.df,eval(parse(text=from.subset))))#
+	to.locations <- unique(subset(stations.df,eval(parse(text=to.subset))))
+from.locations
+to.locations
+loc.combos <- expand.grid(from.locations$stationId,to.locations$stationId)#
+	names(loc.combos) <- c("from","to")
+loc.combos
+return.limit=TRUE
+allocate memory for output matrix#
+	m <- dim(from.locations)[1]#
+	n <- dim(to.locations)[1]#
+	distance.mat <- matrix(rep(NA,n*m),nrow=m,ncol=n)#
+	rownames(distance.mat) <- from.locations$stationId#
+	colnames(distance.mat) <- to.locations$stationId#
+	## Determine the coordinates of each station#
+	from.coordinates <- mapply(paste,from.locations$lat, from.locations$long,sep=" ")#
+	names(from.coordinates) <- from.locations$stationId#
+	to.coordinates <- mapply(paste,to.locations$lat, to.locations$long,sep=" ")#
+	names(to.coordinates) <- to.locations$stationId#
+	coordinates <- c(from.coordinates,to.coordinates) # all relevant coordinates in one vector#
+	## This function gets the coordinates for a given station ID#
+	get.coord <- function(id){#
+		paste(unique(coordinates[names(coordinates)==as.character(id)]))#
+	}#
+	coord.combos <- data.frame(start=sapply(loc.combos[,1],get.coord),#
+		end=sapply(loc.combos[,	2],get.coord))#
+	## This function is a wrapper of the ggplot mapdist function.  #
+	## It queries the Google Maps API the biking distance in km between #
+	## two latitude-longitude pairs.#
+	get.dist <- function(coord.df){#
+		suppressMessages(mapdist(as.character(coord.df[,1]),#
+			as.character(coord.df[,2]),mode="bicycling")$km)#
+	}#
+	## Obtain final set of distances between each pair of coordinates#
+	distances <- get.dist(coord.combos)#
+	if(return.limit){distQueryCheck()} # return remaining available distance queries, if desired#
+	names(distances) <- mapply(paste,loc.combos$from, loc.combos$to,sep=" ")#
+	## Fill in the distance.mat matrix#
+	for(i in 1:length(distances)){#
+		index <- strsplit(names(distances[i]),split=" ")[[1]]#
+		distance.mat[index[1],index[2]] <- distances[i]#
+	}
+distance.mat
+distQueryCheck()
+?mapdist
+get.dist <- function(coord.df){#
+		suppressMessages(mapdist(as.character(coord.df[,1]),#
+			as.character(coord.df[,2]),mode=c("driving","bicycling")$km)#
+	}
+get.dist <- function(coord.df){#
+		suppressMessages(mapdist(as.character(coord.df[,1]),#
+			as.character(coord.df[,2]),mode=c("driving","bicycling"))$km)#
+	}
+coord.combos
+test <- coord.combos[1,]
+test
+get.dist(test)
+?get.dist <- function(coord.df){#
+		suppressMessages(mapdist(as.character(coord.df[,1]),#
+			as.character(coord.df[,2]),mode=c("driving","bicycling"))$km)#
+	}
+get.dist(test)
+get.dist <- function(coord.df){#
+		suppressMessages(mapdist(as.character(coord.df[,1]),#
+			as.character(coord.df[,2]),mode="bicycling")$km)#
+	}
+get.dist(test)
+Function to get biking distances over a set of stations#
+#
+getBikingDistance <- function(station.data.object,from.subset=TRUE,to.subset=TRUE,return.limit=FALSE) {#
+	## Warning: if the subset size is too large, you may exceed the Google API query limit!#
+	## test example:#
+	## from.subset <- "stationId <= 31001"#
+	## to.subset <- "numBikes <= 10"#
+	## station.data.object <- stations#
+	## convert data object to a dataframe#
+	stations.df <- subset(makeStationDataFrame(station.data.object))#
+	from.locations <- unique(subset(stations.df,eval(parse(text=from.subset))))#
+	to.locations <- unique(subset(stations.df,eval(parse(text=to.subset))))#
+	## create a dataframe of all from-to station combinations#
+#
+	loc.combos <- expand.grid(from.locations$stationId,to.locations$stationId)#
+	names(loc.combos) <- c("from","to")#
+	## allocate memory for output matrix#
+	m <- dim(from.locations)[1]#
+	n <- dim(to.locations)[1]#
+	distance.mat <- matrix(rep(NA,n*m),nrow=m,ncol=n)#
+	rownames(distance.mat) <- from.locations$stationId#
+	colnames(distance.mat) <- to.locations$stationId#
+	## Determine the coordinates of each station#
+	from.coordinates <- mapply(paste,from.locations$lat, from.locations$long,sep=" ")#
+	names(from.coordinates) <- from.locations$stationId#
+	to.coordinates <- mapply(paste,to.locations$lat, to.locations$long,sep=" ")#
+	names(to.coordinates) <- to.locations$stationId#
+	coordinates <- c(from.coordinates,to.coordinates) # all relevant coordinates in one vector#
+	## This function gets the coordinates for a given station ID#
+	get.coord <- function(id){#
+		paste(unique(coordinates[names(coordinates)==as.character(id)]))#
+	}#
+	coord.combos <- data.frame(start=sapply(loc.combos[,1],get.coord),#
+		end=sapply(loc.combos[,	2],get.coord))#
+	## This function is a wrapper of the ggplot mapdist function.  #
+	## It queries the Google Maps API the biking distance in km between #
+	## two latitude-longitude pairs.#
+	get.dist <- function(coord.df){#
+		suppressMessages(mapdist(as.character(coord.df[,1]),#
+			as.character(coord.df[,2]),mode="bicycling")$km)#
+	}#
+	## Obtain final set of distances between each pair of coordinates#
+	distances <- get.dist(coord.combos)#
+	if(return.limit){distQueryCheck()} # return remaining available distance queries, if desired#
+	names(distances) <- mapply(paste,loc.combos$from, loc.combos$to,sep=" ")#
+	## Fill in the distance.mat matrix#
+	for(i in 1:length(distances)){#
+		index <- strsplit(names(distances[i]),split=" ")[[1]]#
+		distance.mat[index[1],index[2]] <- distances[i]#
+	}#
+	return(distance.mat)#
+}
+prompt(getBikingDistance)
+?ggmap
+?mapdist
+?revgeocode
+?mapdist
+typeof(stations)
+typeof(station)
+typeof(stations)
+class(stations)
+head(stations)
+class(station$station)
+str(station)
+str(stations)
+class(stations[[1]])
+?ggmap
+head(stations.df)
+?mapdist
+?ggmap
+?ggmap
+plotStations <- function(station.data.object,sbst=TRUE,zoom=13,col="red",api_key){#
+	## convert data object to a dataframe#
+	stations.df <- subset(makeStationDataFrame(station.data.object),sbst)#
+	locations <- unique(stations.df[,c("lat","long")])#
+	center <- c(mean(locations$long),mean(locations$lat))#
+	## plot station locations#
+	map <- get_map(location=center,zoom=zoom,source="google",api_key)#
+	mapbg <- ggmap(map,fullpage=TRUE)#
+	mapbg + geom_point(data = locations, aes(x = long, y = lat), colour = col, size = 2)#
+}
+plotStations(stations)
+plotStations <- function(station.data.object,sbst=TRUE,zoom=13,col="red",api_key){#
+	## convert data object to a dataframe#
+	stations.df <- subset(makeStationDataFrame(station.data.object),sbst)#
+	locations <- unique(stations.df[,c("lat","long")])#
+	center <- c(mean(locations$long),mean(locations$lat))#
+	## plot station locations#
+	map <- get_map(location=center,zoom=zoom,source="google",api_key)#
+	mapbg <- ggmap(map,fullpage=TRUE)#
+	mapbg + geom_point(data = locations, aes(x = long, y = lat), colour = col, size = 2)#
+}
+?makeStationDataFrame
+head(as.data.frame(stations))
+plotStations(stations)
+?get_map
+stations.df <- subset(makeStationDataFrame(station.data.object),sbst)
+locations <- unique(stations.df[,c("lat","long")])#
+	center <- c(mean(locations$long),mean(locations$lat))
+map <- get_map(location=center,zoom=zoom,source="google",api_key)#
+	mapbg <- ggmap(map,fullpage=TRUE)#
+	mapbg + geom_point(data = locations, aes(x = long, y = lat), colour = col, size = 2)
+zoom=13
+sbs
+sbst
+map <- get_map(location=center,zoom=zoom,source="google",api_key)
+map <- get_map(location=center,zoom=zoom,source="google")
+mapbg <- ggmap(map,fullpage=TRUE)
+mapbg + geom_point(data = locations, aes(x = long, y = lat), colour = col, size = 2)
+mapbg <- ggmap(map)#
+	mapbg + geom_point(data = locations, aes(x = long, y = lat), colour = col, size = 2)
+plotStations <- function(station.data.object,sbst=TRUE,zoom=13,col="red",api_key){#
+	## convert data object to a dataframe#
+	stations.df <- subset(makeStationDataFrame(station.data.object),sbst)#
+	locations <- unique(stations.df[,c("lat","long")])#
+	center <- c(mean(locations$long),mean(locations$lat))#
+	## plot station locations#
+	map <- get_map(location=center,zoom=zoom,source="google",api_key)#
+	mapbg <- ggmap(map)#
+	mapbg + geom_point(data = locations, aes(x = long, y = lat), colour = col, size = 2)#
+}
+plotStations(stations)
+plotStations <- function(station.data.object,sbst=TRUE,zoom=13,col="red"){#
+	## convert data object to a dataframe#
+	stations.df <- subset(makeStationDataFrame(station.data.object),sbst)#
+	locations <- unique(stations.df[,c("lat","long")])#
+	center <- c(mean(locations$long),mean(locations$lat))#
+	## plot station locations#
+	map <- get_map(location=center,zoom=zoom,source="google")#
+	mapbg <- ggmap(map)#
+	mapbg + geom_point(data = locations, aes(x = long, y = lat), colour = col, size = 2)#
+}
+plotStations(stations)
+?get_map
+plotStations <- function(station.data.object,sbst=TRUE,zoom=13,col="red",api_key){#
+	## convert data object to a dataframe#
+	stations.df <- subset(makeStationDataFrame(station.data.object),sbst)#
+	locations <- unique(stations.df[,c("lat","long")])#
+	center <- c(mean(locations$long),mean(locations$lat))#
+	## plot station locations#
+	map <- get_map(location=center,zoom=zoom,scale = "auto",source="google",api_key)#
+	mapbg <- ggmap(map)#
+	mapbg + geom_point(data = locations, aes(x = long, y = lat), colour = col, size = 2)#
+}
+plotStations(stations)
+library(bikeshare)
+library(Bikeshare)
+?getDistance
+?Bikeshare
+?plotStations
+?readTripData
+install.packages("Bikeshare")

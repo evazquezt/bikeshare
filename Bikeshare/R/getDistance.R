@@ -1,19 +1,18 @@
 ## Function to get biking or driving distances over a set of stations
 
-getDistance <- function(station.data.object,from.subset=TRUE,to.subset=TRUE,mode=c("bicycling","driving"),return.limit=FALSE,api_key) {
+getDistance <- function(stationData,from.subset=TRUE,to.subset=TRUE,mode=c("bicycling","driving"),return.limit=FALSE,api_key=NULL) {
 	## Warning: if the subset size is too large, you may exceed the Google API query limit!
 	
-	## convert data object to a dataframe
-	stations.df <- subset(makeStationDataFrame(station.data.object))
+	## Convert data object to a dataframe
+	stations.df <- makeStationDataFrame(stationData)
 	from.locations <- unique(subset(stations.df,eval(parse(text=from.subset))))
 	to.locations <- unique(subset(stations.df,eval(parse(text=to.subset))))
 	
-	## create a dataframe of all from-to station combinations
-
+	## Create a dataframe of all from-to station combinations
 	loc.combos <- expand.grid(from.locations$stationId,to.locations$stationId)
 	names(loc.combos) <- c("from","to")
 	
-	## allocate memory for output matrix
+	## Allocate memory for output matrix
 	m <- dim(from.locations)[1]
 	n <- dim(to.locations)[1]
 	distance.mat <- matrix(rep(NA,n*m),nrow=m,ncol=n)
@@ -40,7 +39,7 @@ getDistance <- function(station.data.object,from.subset=TRUE,to.subset=TRUE,mode
 	## two latitude-longitude pairs.
 	get.dist <- function(coord.df){
 		suppressMessages(mapdist(as.character(coord.df[,1]),
-			as.character(coord.df[,2]),mode=mode,api_key)$km)
+			as.character(coord.df[,2]),mode=mode[1],api_key)$km)
 	}
 	
 	## Obtain final set of distances between each pair of coordinates

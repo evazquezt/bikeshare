@@ -9,16 +9,22 @@
   station i and ending at station j.
 }
 \usage{
-buildDestinationMatrix(bikeshareData)
+buildDestinationMatrix(bikeshareData,trip.subset,station.subset)
 }
-%- maybe also 'usage' for other objects documented here.
+
 \arguments{
   \item{bikeshareData}{
-    A BikeshareData object
+    A BikeshareData object, obtained via \code{readTripData}.
+}
+	\item{trip.subset}{
+	String describing which subset of trips to include in the tally.  Valid column names for subsetting are the trip start time \code{startTime}, trip end time \code{endTime}, trip start location \code{startLoc}, trip end locations \code{endLoc}, bike number \code{bike}, and member type \code{memberType}.
+}
+	\item{station.subset}{
+	String describing which subset of station to include in the matrix.  Valid column names for subsetting are the station full name \code{name}, station latitude \code{lat}, station longitude \code{long}, unique station ID number \code{stationId}, number of bikes at a station \code{numBikes}, station installation date \code{installDate}, and station removal date \code{removalDate}.	
 }
 }
 
 \author{
-  John Sears
+  John Sears & Sara Kwasnick
 }
 
