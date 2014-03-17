@@ -2,7 +2,8 @@ buildDestinationMatrix <-  function(bikeshareData,trip.subset=TRUE,station.subse
     if(class(bikeshareData) != "BikeshareData"){
         stop("Argument must be of class BikeshareData")
     }
-    
+
+    # Subset data per argument
     bd.df = subset(as.data.frame(bikeshareData),eval(parse(text=trip.subset)))
     bd.df$trip = rep(1, nrow(bd.df))
     stations.df = subset(makeStationDataFrame(bikeshareData@stations),eval(parse(text=station.subset)))
@@ -18,7 +19,7 @@ buildDestinationMatrix <-  function(bikeshareData,trip.subset=TRUE,station.subse
     stationIds = stations.df$stationId
     colnames(destinationMatrix) = stationIds
     rownames(destinationMatrix) = stationIds
-    # Tally all of the counts
+    # Tally all of the counts into matrix
     for(i in 1:nrow(counts)){
         destinationMatrix[stationIds == counts[i, "startLoc"], stationIds == counts[i, "endLoc"]] = counts[i, "freq"]
     }

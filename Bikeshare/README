@@ -1,0 +1,1 @@
+The Bikeshare package is designed to aid social science research into municipal bike-sharing programs.  Benefits of use are streamlined data loading (with out-of-the-box support for many cities), graphical data exploration via integration with Google Maps API, and geographic data manipulation such as car versus bike distance calculation.
