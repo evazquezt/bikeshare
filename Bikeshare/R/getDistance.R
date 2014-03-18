@@ -37,13 +37,30 @@ getDistance <- function(stationData,from.subset=TRUE,to.subset=TRUE,mode=c("bicy
 	## This function is a wrapper of the ggplot mapdist function.  
 	## It queries the Google Maps API the biking distance in km between 
 	## two latitude-longitude pairs.
-	get.dist <- function(coord.df){
-		suppressMessages(mapdist(as.character(coord.df[,1]),
-			as.character(coord.df[,2]),mode=mode[1])$km)
+	getDist <- function(coord.df){
+		
+		## we need to break things up into groups of 50 queries so as to work with mapdist
+		groups <- 1:dim(coord.df)[1]
+		groups <- (groups %/% 50) + 1
+		indices <- c(0, cumsum(table(groups)))
+		indexList <- as.list(rep(NA,length(indices)-1))
+		for(i in 1:(length(indices)-1)){
+			indexList[[i]] <- (indices[i]+1):indices[i+1]
+		}
+		
+		## Now run the distance search over each 50-element subgroup
+		dists <- rep(NA,dim(coord.df)[1]) # allocate memory
+		for(i in 1:max(groups)){
+			froms <- coord.df[groups==i,1]
+			tos <- coord.df[groups==i,2]
+			dists[indexList[[i]]] <- suppressMessages(mapdist(as.character(froms),
+				as.character(tos),mode=mode[1])$km)
+		}
+		return(dists)
 	}
 	
 	## Obtain final set of distances between each pair of coordinates
-	distances <- get.dist(coord.combos)
+	distances <- getDist(coord.combos)
 	if(return.limit){distQueryCheck()} # return remaining available distance queries, if desired
 	names(distances) <- mapply(paste,loc.combos$from, loc.combos$to,sep=" ")
 	
