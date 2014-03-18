@@ -10,7 +10,30 @@
 \section{Introduction}
 The Bikeshare package is designed to aid social science research into municipal bike-sharing programs.  Benefits of use are streamlined data loading (with out-of-the-box support for many cities), graphical data exploration via integration with Google Maps API, and geographic data manipulation such as car versus bike distance calculation.
 
-\section{Features}
+Our goal is that this package dramatically reduces the start-up costs of engaging in data-driven research of municipal bikeshare systems. 
 
+We loosely group our functionality into three modules:
+-ease of data loading and cleaning (built-ins)
+-numerical analysis via cutting-edge graph algorithms
+-powerful visualize tools, leveraging google maps API
+
+To illustrate the utility of the \texttt{Bikeshare} package, we will run through a typical use-case scenario based on publicly available data from Capital Bikeshare in Washington, DC.
+
+\section{Loading the Data}
+Bikeshare data typically comprises two data files: a list of stations, and a list of data on individual trips.  The two datasets are tied together by station ID numbers.  In addition to station IDs, the station data contains: station name, latitude, longitude, number of bike spaces, installation date, and removal date, if applicable. The trips data contains: start times, end times, start location, end location, bike ID number, and member type (for example, subscribers vs. one-time users).
+
+The Bikeshare Package comes equipped with Q4 2010 data from Capital Bikeshare pre-loaded as a test dataset.  We load the station data as follows:
+<<>>=
+library(Bikeshare)
+stations = readStationData(system.file("extData/bikeStations.xml", package="Bikeshare"),.cities()$WAS)
+bd = readTripData(system.file("extData/2010-4th-quarter.csv", package="Bikeshare"), .cities()$WAS, stations)
+@
+\subsection{Data Loading and Cleaning} 
+
+\subsection{Graphics} % maps
+
+\subsection{Analysis}
+
+% 
 
 \end{document}
