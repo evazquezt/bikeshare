@@ -7,21 +7,21 @@
 \author{Sara Kwasnick and John Sears}
 \maketitle
 
-\section{Introduction}
+\section{Motivation}
 The Bikeshare package is designed to aid social science research into municipal bike-sharing programs.  Benefits of use are streamlined data loading (with out-of-the-box support for many cities), graphical data exploration via integration with Google Maps API, and geographic data manipulation such as car versus bike distance calculation.
 
 Our goal is that this package dramatically reduces the start-up costs of engaging in data-driven research of municipal bikeshare systems. 
 
-We loosely group our functionality into three modules: 
+We loosely group our functionality into three functional groups: 
 \begin{itemize}
 \item[1.] Ease of data loading and cleaning
 \item[2.] Numerical analysis via cutting-edge graph algorithms
-\item[3.] Powerful visualize tools leveraging the Google Maps API
+\item[3.] Powerful visualization tools leveraging the Google Maps API
 \end{itemize}
 To illustrate the utility of the \texttt{Bikeshare} package, we will run through a typical use-case scenario based on publicly available data from Capital Bikeshare in Washington, DC.
 
 \section{Loading the Data}
-Bikeshare data typically comprises two data files: a list of stations, and a list of data on individual trips.  The two datasets are tied together by station ID numbers.  In addition to station IDs, the station data contains: station name, latitude, longitude, number of bike spaces, installation date, and removal date, if applicable. The trips data contains: start times, end times, start location, end location, bike ID number, and member type (for example, subscribers vs. one-time users).
+Bikeshare data typically comprises two data files: a list of stations and a list of data on individual trips.  The two datasets are tied together by station ID numbers.  In addition to station IDs, the station data contains: station name, latitude, longitude, number of bike spaces, installation date and removal date, if applicable. The trips data contains: start times, end times, start location, end location, bike ID number, and member type (for example, subscribers vs. one-time users).
 
 The Bikeshare Package comes equipped with Q4 2010 data from Capital Bikeshare pre-loaded as a test dataset.  We load the station data as follows:
 <<>>=
@@ -33,14 +33,15 @@ stations = readStationData(system.file("extData/bikeStations.xml",
 bd = readTripData(system.file("extData/2010-4th-quarter.csv", 
                     package="Bikeshare"), .cities()$WAS, stations)
 @
-Note that for every city supported by the \texttt{Bikeshare} Package, we define an S4 BikeshareCity object accessible using \texttt{.cities()}.  All data cleaning is done behind the scenes.
+Note that for every city supported by the \texttt{Bikeshare} Package, we define an S4 BikeshareCity object accessible using \texttt{.cities()}.  All data cleaning is done behind the scenes. What we have now is a list of BikeshareStation objects containig station-level data and a BikeshareData object that wraps all of the trip data.  These two objects will constitute the working unit of analysis.
 
 \section{Graphics}
 At this point the data is ready for analysis.  Before developing any models, we gain insight into the data's structure using \texttt{Bikeshare}'s built-in visualization tools.  We can begin by simply viewing the locations of all stations in our dataset.
 <<fig=TRUE>>=
 plotStations(stations)
 @
-As we can see, the stations tend to be clustered in Northern Virginia and Northwest DC.  Next, we can zoom in only look at stations that are within a two kilometer bike ride of the station at Dupont Circle, station 31200.  To get a sense of the usage rates at each station, we use the \texttt{plotBubbles} tool.
+
+As we can see, the stations tend to be clustered in Northern Virginia and Northwest DC, and the topology of the landscape (visible on the map) appears to influence station location.  Next, we narrow our focus to only look at stations that are within a two kilometer bike ride of the station at Dupont Circle, station 31200.  To get a sense of the usage rates at each station, we use the \texttt{plotBubbles} tool.
 
 <<fig=TRUE>>=
 ## Uses best biking path result from Google Maps API
@@ -52,14 +53,14 @@ closeStations <- distances <= 3
 plotBubbles(bd, stationSubset=closeStations,zoom=14,alpha=.5)
 @
 
-Or, to get a sense of which routes are most frequent amongst the stations within a 3 km ride of the Dupont Circle station, we can use the \texttt{plotTrips} function.
+To get a sense of which routes are most frequent amongst the stations within a 3 km ride of the Dupont Circle station, we can use the \texttt{plotTrips} function.
 
 <<fig=TRUE>>=
 plotTrips(bd,stationSubset=closeStations,zoom=14,alpha=.5)
 @
 
 \section{Analysis}
-Now let's try some simple analysis.  First, suppose we wanted to install a new station.  One way to get a sense of demand for that station is to look at the current usage rates of stations as function of the proximity and attributes of the next nearest station, controlling for number of bikes.  Of course we would also want to factor in outside data like zoning and population of the location, but in general this will give us a rough sense of what demand might be like at a new station.
+Now let's try some simple analysis.  First, suppose we wanted to install a new station.  One way to get a sense of demand for that station is to look at the current usage rates of stations as a function of the proximity to- and attributes of- the next nearest station, controlling for number of bikes.  Of course we would also want to factor in outside data like zoning and population of the location, but in general this will give us a rough sense of what demand might be like at a new station.
 
 For simplicity, we'll limit ourselves to stations in the \texttt{closeStations} subset.  
 
@@ -89,7 +90,7 @@ model <- lm(visits ~ closestVisits + closestStation,data=stationDF)
 model <- lm(visits ~ closestStation,data=stationDF) ## something like this? easy...
 summary(model)
 @
-In general, weregression on usage of station on distance of nearest n stations to try to predict demand at a new station.
+In general, we can regress usage of station on distance of nearest n stations to try to predict demand at a new station.
 
 
 \end{document}

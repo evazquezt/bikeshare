@@ -11,4 +11,5 @@ Bikeshare/vignettes/*tex
 *pdf
 *log
 *synctex.gz
-
+*aux
+*png
