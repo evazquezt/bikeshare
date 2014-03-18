@@ -18,6 +18,7 @@ stationSimRank <- function(bikeshareData, station, tripSubset=TRUE, beta=0.8, er
     tele[which(rownames(destinations) == station)] = 1
 
     # Use power iteration to efficiently derive r
+    rOld = 1e10
     while(sum(abs(rOld - r)) > errorTol){
         rOld = r
         r = beta * M%*% r + (1-beta)*r

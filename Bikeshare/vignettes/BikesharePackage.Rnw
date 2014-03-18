@@ -60,7 +60,26 @@ plotTrips(bd,stationSubset=closeStations,zoom=14,alpha=.5)
 @
 
 \section{Analysis}
-Now let's try some simple analysis.  First, suppose we wanted to install a new station.  One way to get a sense of demand for that station is to look at the current usage rates of stations as a function of the proximity to- and attributes of- the next nearest station, controlling for number of bikes.  Of course we would also want to factor in outside data like zoning and population of the location, but in general this will give us a rough sense of what demand might be like at a new station.
+Now let's try some simple analysis. Suppose, for example, that we wanted to get a sense of how the total number of visits to a station correlates with the number of bike slots. 
+<<>>=
+## convert the station data object to a dataframe
+stationDF <- makeStationDataFrame(stations)
+## Find total visits to each station
+totalVisits <- getTotalVisits(bd)
+names(totalVisits)[1] <- "stationId"
+
+## Merge total visits data into stationDF
+stationDF <- merge(stationDF, totalVisits)
+
+## Run a simple linear regression of station visits on number of bikes
+model <- lm(visits ~ numBikes, data=stationDF)
+summary(model)
+qplot(numBikes, visits, data=stationDF) + 
+  geom_abline(intercept=coef(model)[1],slope=coef(model)[2])
+@
+Generally speaking, we may want to decrease the number of bike slots at points toward the bottom right, and increase the number of bike slots at points toward the top left. 
+
+Now suppose we wanted to install a new station.  One way to get a sense of demand for that station is to look at the current usage rates of stations as a function of the proximity to- and attributes of- the next nearest station, controlling for number of bikes.  Of course we would also want to factor in outside data like zoning and population of the location, but in general this will give us a rough sense of what demand might be like at a new station.
 
 For simplicity, we'll limit ourselves to stations in the \texttt{closeStations} subset.  
 
@@ -91,6 +110,19 @@ model <- lm(visits ~ closestStation,data=stationDF) ## something like this? easy
 summary(model)
 @
 In general, we can regress usage of station on distance of nearest n stations to try to predict demand at a new station.
+
+To explore an alternative concept of "closeness" between stations, we can run the SimRank algorithm on station 31200.  This will give us the likelihood that a cyclist departing from station 31200 goes to each of the other stations.  The results are easy to visualize as a bubble plot weighted by the SimRank coefficients.
+<<>>=
+stationDF <- makeStationDataFrame(stations)
+stationDF$ranks <- data.frame(stationSimRank(bd,31200))[,1]
+
+## visualize results using a bubble plot weighted by rank
+center <- c(mean(stationDF$long),mean(stationDF$lat))
+map <- get_map(location=center,zoom=13,scale = "auto",source="google")
+b <- ggmap(map)
+b + geom_point(data=stationDF, aes(x=long,y=lat,size=ranks),colour="red",alpha=.5)
+@
+
 
 
 \end{document}

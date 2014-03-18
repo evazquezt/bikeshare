@@ -1,7 +1,3 @@
-## Function plotting frequency of travel between stations in a given subset
-## More frequently used routes are darker in color and have the highest overlay
-## Ignores bikes that are returned to the same station
-
 getTotalTrips <- function(bikeshareData,tripSubset=TRUE,stationSubset=TRUE){
   
   ## Get destination matrix
