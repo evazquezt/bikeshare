@@ -35,12 +35,61 @@ bd = readTripData(system.file("extData/2010-4th-quarter.csv",
 @
 Note that for every city supported by the \texttt{Bikeshare} Package, we define an S4 BikeshareCity object accessible using \texttt{.cities()}.  All data cleaning is done behind the scenes.
 
-\Section{Graphics}
+\section{Graphics}
 At this point the data is ready for analysis.  Before developing any models, we gain insight into the data's structure using \texttt{Bikeshare}'s built-in visualization tools.  We can begin by simply viewing the locations of all stations in our dataset.
 <<fig=TRUE>>=
 plotStations(stations)
 @
 As we can see, the stations tend to be clustered in Northern Virginia and Northwest DC.  Next, we can zoom in only look at stations that are within a two kilometer bike ride of the station at Dupont Circle, station 31200.  To get a sense of the usage rates at each station, we use the \texttt{plotBubbles} tool.
+
+<<fig=TRUE>>=
+## Uses best biking path result from Google Maps API
+#distances <- as.data.frame(t(getDistance(stations,fromSubset="stationId==31200",
+#                        mode="bicycling")))
+#closeStations <- (distances[,1] <= 3) | (rownames(distances)=="31200")
+distances <- 20*runif(313)  ## until I can do queries again :\
+closeStations <- distances <= 3
+plotBubbles(bd, stationSubset=closeStations,zoom=14,alpha=.5)
+@
+
+Or, to get a sense of which routes are most frequent amongst the stations within a 3 km ride of the Dupont Circle station, we can use the \texttt{plotTrips} function.
+
+<<fig=TRUE>>=
+plotTrips(bd,stationSubset=closeStations,zoom=14,alpha=.5)
+@
+
+\section{Analysis}
+Now let's try some simple analysis.  First, suppose we wanted to install a new station.  One way to get a sense of demand for that station is to look at the current usage rates of stations as function of the proximity and attributes of the next nearest station, controlling for number of bikes.  Of course we would also want to factor in outside data like zoning and population of the location, but in general this will give us a rough sense of what demand might be like at a new station.
+
+For simplicity, we'll limit ourselves to stations in the \texttt{closeStations} subset.  
+
+<<>>=
+library(geosphere)
+stationDF <- subset(makeStationDataFrame(stations),closeStations)
+distMat <- distm(stationDF[,c("long","lat")])/1000 + 1e10*diag(dim(stationDF)[1])
+closest <- apply(distMat,1,which.min)
+stationDF$closestIndex <- closest
+
+## Add a column to stationDF containing distance to the nearest station
+index <- matrix(c(1:dim(distMat)[1],closest),ncol=2)
+stationDF$closestStation <- distMat[index]
+
+## Add a column to stationDF containing number of bikes at nearest station
+stationDF$closestNumBikes <- stationDF$numBikes[closest]
+
+## Add a column to stationDF containing total visits to station and total visits to closest station
+totalVisits <- getTotalVisits(bd,stationSubset=closeStations)
+names(totalVisits)[1] <- "stationId"
+stationDF <- merge(stationDF,totalVisits)
+stationDF$closestVisits <- stationDF$visits[closest]
+
+## Try some simple linear models
+model <- lm(visits ~ closestStation + closestNumBikes + closestVisits + numBikes,data=stationDF)
+model <- lm(visits ~ closestVisits + closestStation,data=stationDF)
+model <- lm(visits ~ closestStation,data=stationDF) ## something like this? easy...
+summary(model)
+@
+In general, weregression on usage of station on distance of nearest n stations to try to predict demand at a new station.
 
 
 \end{document}

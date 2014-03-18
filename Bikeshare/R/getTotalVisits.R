@@ -3,9 +3,6 @@ getTotalVisits <- function(bikeshareData,tripSubset=TRUE,stationSubset=TRUE,incl
   ## Get total number of trips in tripSubset between each station pair in stationSubset
   stationPairs <- getTotalTrips(bikeshareData,tripSubset,stationSubset)
   
-	## Drop pairs with 0 trips
-	stationPairs <- stationPairs[stationPairs$trips>0,]
-  
   ## If includeSelf==FALSE, drop trips from a station to itself
   if(includeSelf==FALSE){stationPairs <- stationPairs[stationPairs[,1]!=stationPairs[,2]]}
 	
