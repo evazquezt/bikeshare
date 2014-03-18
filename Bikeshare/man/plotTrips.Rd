@@ -8,16 +8,16 @@ Plot routes taken between stations, color-coded by frequency
 Given a bikeshareData object and subset string describing which trips and stations to include, return a plot showing all departure-arrival station pairs color-coded and alpha-blended by frequency.  Background map is taken from Google Maps. By using this function you are agreeing to the Google Maps API Terms of Service at \url{https://developers.google.com/maps/terms}.  
 }
 \usage{
-plotTrips(bikeshareData, trip.subset = TRUE, station.subset = TRUE, zoom = 13, col = "red", alpha = 0.2, api_key = NULL)
+plotTrips(bikeshareData, tripSubset = TRUE, stationSubset = TRUE, zoom = 13, col = "red", alpha = 0.2, apiKey = NULL)
 }
 \arguments{
   \item{bikeshareData}{
 	A bikeshareData object, obtained via \code{readTripData}.
 }
-  \item{trip.subset}{
+  \item{tripSubset}{
 	String describing which subset of trips to include in the plot.  Valid column names for subsetting are the trip start time \code{startTime}, trip end time \code{endTime}, trip start location \code{startLoc}, trip end locations \code{endLoc}, bike number \code{bike}, and member type \code{memberType}.
 }
-  \item{station.subset}{
+  \item{stationSubset}{
 String describing which subset of stations in \code{bikeshareData} to plot.  Valid column names for subsetting are the station full name \code{name}, station latitude \code{lat}, station longitude \code{long}, unique station ID number \code{stationId}, number of bikes at a station \code{numBikes}, station installation date \code{installDate}, and station removal date \code{removalDate}.
 }
   \item{zoom}{
@@ -29,7 +29,7 @@ String describing which subset of stations in \code{bikeshareData} to plot.  Val
   \item{alpha}{
  Alpha blending parameter in [0,1].  Default is 0.2.
 }
-  \item{api_key}{
+  \item{apiKey}{
 	A developer API key for cloudmade maps, if applicable.
 }
 }
@@ -55,10 +55,10 @@ Requires \code{ggmap} and \code{ggplot2}.  Avoid setting \code{col="white"}; inf
 \dontrun{
 stations <- readStationData(system.file("extData/bikeStations.xml", package="Bikeshare"),.cities()$WAS)
 bd <- readTripData(system.file("extData/2010-4th-quarter.csv", package="Bikeshare"), .cities()$WAS, stations)
-station.subset <- "stationId <= 31020"
+stationSubset <- "stationId <= 31020"
 
 ## short example
-plotTrips(bd,station.subset=station.subset,zoom=14,alpha=.3) 
+plotTrips(bd,stationSubset=stationSubset,zoom=14,alpha=.3) 
 
 ## longer to run, but includes all stations
 plotTrips(bd,zoom=12) 

@@ -1,5 +1,5 @@
-stationSimRank <- function(bikeshareData, station, trip.subset=TRUE, beta=0.8, errorTol = 1e-4){ 
-    destinations = buildDestinationMatrix(bikeshareData=bikeshareData, trip.subset=trip.subset)
+stationSimRank <- function(bikeshareData, station, tripSubset=TRUE, beta=0.8, errorTol = 1e-4){ 
+    destinations = buildDestinationMatrix(bikeshareData=bikeshareData, tripSubset=tripSubset)
     
     # See http://www.stanford.edu/class/cs246/slides/10-spam.pdf
     M = t(destinations)

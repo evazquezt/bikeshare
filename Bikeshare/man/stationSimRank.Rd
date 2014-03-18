@@ -11,7 +11,7 @@
   the map if it traversed the system proportional to usage.
 }
 \usage{
-stationSimRank(bikeshareData, station,trip.subset=TRUE, beta = 0.8, errorTol = 1e-04)
+stationSimRank(bikeshareData, station,tripSubset=TRUE, beta = 0.8, errorTol = 1e-04)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -21,7 +21,7 @@ stationSimRank(bikeshareData, station,trip.subset=TRUE, beta = 0.8, errorTol = 1
   \item{station}{
     ID of the particular bikeshare station
   }
-  \item{trip.subset}{
+  \item{tripSubset}{
     Subset information for trip data
   }
   \item{beta}{
