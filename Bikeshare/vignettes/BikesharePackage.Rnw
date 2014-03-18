@@ -25,12 +25,26 @@ Bikeshare data typically comprises two data files: a list of stations, and a lis
 The Bikeshare Package comes equipped with Q4 2010 data from Capital Bikeshare pre-loaded as a test dataset.  We load the station data as follows:
 <<>>=
 library(Bikeshare)
-stations = readStationData(system.file("extData/bikeStations.xml", package="Bikeshare"),.cities()$WAS)
-bd = readTripData(system.file("extData/2010-4th-quarter.csv", package="Bikeshare"), .cities()$WAS, stations)
+## Load station data.
+stations = readStationData(system.file("extData/bikeStations.xml",
+                    package="Bikeshare"),.cities()$WAS)
+## Load trip data
+bd = readTripData(system.file("extData/2010-4th-quarter.csv", 
+                    package="Bikeshare"), .cities()$WAS, stations)
 @
-\subsection{Data Loading and Cleaning} 
+Note that for every city supported by the \texttt{Bikeshare} Package, we define an S4 BikeshareCity object accessible using \texttt{.cities()}.  All data cleaning is done behind the scenes.
 
 \subsection{Graphics} % maps
+At this point the data is ready for analysis.  Before developing any models, we gain insight into the data's structure using \texttt{Bikeshare}'s built-in visualization tools.  We can begin by simply viewing the locations of all stations in our dataset.
+<<fig=TRUE>>=
+plotStations(stations)
+@
+As we can see, the stations tend to be clustered in Northern Virginia and Northwest DC.  Next, we can zoom in only look at stations that are within a three kilometer bike ride of the station at Dupont Circle, station 31200.
+<<>>=
+## Uses best biking path result from Google Maps API
+distances <- getDistance(stations,from.subset="stationId==31200")
+
+@
 
 \subsection{Analysis}
 
