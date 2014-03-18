@@ -9,7 +9,7 @@ Given a station data object and subset strings describing starting and ending st
 }
 \usage{
 getDistance(stationData,from.subset = TRUE,to.subset = TRUE,
-			mode=c("bicycling","driving"),return.limit = FALSE,api_key=NULL)
+			mode=c("bicycling","driving"),return.limit = FALSE)
 }
 
 \arguments{
@@ -27,8 +27,6 @@ getDistance(stationData,from.subset = TRUE,to.subset = TRUE,
 }
   \item{return.limit}{
 	If TRUE, returns remaining available Google Maps API queries via \code{distQueryCheck()}.
-}
-	\item{api_key}{ A developer API key for cloudmade maps, if applicable.
 }
 }
 \details{
