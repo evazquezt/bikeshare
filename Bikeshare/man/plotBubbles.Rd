@@ -7,7 +7,7 @@ Plot stations as bubbles
 Given a bikeshareData object and subset string describing which trips and stations to include, return a bubble plot of stations with bubble size corresponding to usage of that station.  Background map is taken from Google Maps. By using this function you are agreeing to the Google Maps API Terms of Service at \url{https://developers.google.com/maps/terms}.  
 }
 \usage{
-plotBubbles(bikeshareData, trip.subset = TRUE, station.subset = TRUE, zoom = 13, col = "red", alpha = 0.2, api_key = NULL)
+plotBubbles(bikeshareData, trip.subset = TRUE, station.subset = TRUE, weighted=FALSE, zoom = 13, col = "red", alpha = 0.2, api_key = NULL)
 }
 
 \arguments{
@@ -19,6 +19,9 @@ plotBubbles(bikeshareData, trip.subset = TRUE, station.subset = TRUE, zoom = 13,
 }
   \item{station.subset}{
 String describing which subset of stations in \code{bikeshareData} to plot.  Valid column names for subsetting are the station full name \code{name}, station latitude \code{lat}, station longitude \code{long}, unique station ID number \code{stationId}, number of bikes at a station \code{numBikes}, station installation date \code{installDate}, and station removal date \code{removalDate}.
+}
+  \item{weighted}{
+  Specifies whether to weight the station sizes by the numbers of bike slots at each station.  If TRUE, bubbles are sized based on total visits/number of bike slots.
 }
   \item{zoom}{
 Map zoom, integer ranging from 3 to 21 or equal to "auto".  3 is a continent; 21 is a building; default value is 13 = roughly a city center.

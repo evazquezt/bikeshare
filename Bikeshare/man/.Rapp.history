@@ -1,0 +1,231 @@
+library(Bikeshare)
+?getDistance
+?plotTrips
+\documentclass{article}#
+%\VignetteIndexEntry{Using Bikeshare}#
+\begin{document}#
+\SweaveOpts{concordance=TRUE}#
+#
+\title{The Bikeshare Package}#
+\author{Sara Kwasnick and John Sears}#
+\maketitle#
+#
+\section{Introduction}#
+The Bikeshare package is designed to aid social science research into municipal bike-sharing programs.  Benefits of use are streamlined data loading (with out-of-the-box support for many cities), graphical data exploration via integration with Google Maps API, and geographic data manipulation such as car versus bike distance calculation.#
+#
+Our goal is that this package dramatically reduces the start-up costs of engaging in data-driven research of municipal bikeshare systems. #
+#
+We loosely group our functionality into three modules:#
+-ease of data loading and cleaning (built-ins)#
+-numerical analysis via cutting-edge graph algorithms#
+-powerful visualize tools, leveraging google maps API#
+#
+To illustrate the utility of the \texttt{Bikeshare} package, we will run through a typical use-case scenario based on publicly available data from Capital Bikeshare in Washington, DC.#
+#
+\section{Loading the Data}#
+Bikeshare data typically comprises two data files: a list of stations, and a list of data on individual trips.  The two datasets are tied together by station ID numbers.  In addition to station IDs, the station data contains: station name, latitude, longitude, number of bike spaces, installation date, and removal date, if applicable. The trips data contains: start times, end times, start location, end location, bike ID number, and member type (for example, subscribers vs. one-time users).#
+#
+The Bikeshare Package comes equipped with Q4 2010 data from Capital Bikeshare pre-loaded as a test dataset.  We load the station data as follows:#
+<<>>=#
+stations = readStationData(system.file("extData/bikeStations.xml", package="Bikeshare"),.cities()$WAS)#
+#
+bd = readTripData(system.file("extData/2010-4th-quarter.csv", package="Bikeshare"), .cities()$WAS, stations)#
+@#
+\subsection{Data Loading and Cleaning} #
+#
+\subsection{Graphics} % maps#
+#
+\subsection{Analysis}#
+#
+% #
+#
+\end{document}
+stationData=stations
+head(stationData)
+from.subset="stationId==31200"
+stations.df <- makeStationDataFrame(stationData)#
+	from.locations <- unique(subset(stations.df,eval(parse(text=from.subset))))
+head(from.locations)
+to.subset=TRUE
+to.locations <- unique(subset(stations.df,eval(parse(text=to.subset))))
+head(to.locations)
+to.subset="stationId != 31200"
+to.locations <- unique(subset(stations.df,eval(parse(text=to.subset))))
+head(to.locations)
+m <- dim(from.locations)[1]#
+	n <- dim(to.locations)[1]
+distance.mat <- matrix(rep(NA,n*m),nrow=m,ncol=n)#
+	rownames(distance.mat) <- from.locations$stationId#
+	colnames(distance.mat) <- to.locations$stationId
+distance.mat
+from.coordinates <- mapply(paste,from.locations$lat, from.locations$long,sep=" ")#
+	names(from.coordinates) <- from.locations$stationId#
+	to.coordinates <- mapply(paste,to.locations$lat, to.locations$long,sep=" ")#
+	names(to.coordinates) <- to.locations$stationId#
+	coordinates <- c(from.coordinates,to.coordinates) # all relevant coordinates in one vector
+get.coord <- function(id){#
+		paste(unique(coordinates[names(coordinates)==as.character(id)]))#
+	}#
+	coord.combos <- data.frame(start=sapply(loc.combos[,1],get.coord),#
+		end=sapply(loc.combos[,	2],get.coord))
+head(coordinates)
+from.coordinates
+to.coordinates
+get.coord <- function(id){#
+		paste(unique(coordinates[names(coordinates)==as.character(id)]))#
+	}
+loc.combos <- expand.grid(from.locations$stationId,to.locations$stationId)#
+	names(loc.combos) <- c("from","to")
+coord.combos <- data.frame(start=sapply(loc.combos[,1],get.coord),#
+		end=sapply(loc.combos[,	2],get.coord))
+head(coord.combos)
+get.dist <- function(coord.df){#
+		suppressMessages(mapdist(as.character(coord.df[,1]),#
+			as.character(coord.df[,2]),mode=mode[1])$km)#
+	}
+distances <- get.dist(coord.combos)
+get.dist <- function(coord.df){#
+		suppressMessages(mapdist(as.character(coord.df[,1]),#
+			as.character(coord.df[,2]),mode=mode[1])$km)#
+	}
+mode="bicycling"
+distances <- get.dist(coord.combos)
+head(distances)
+distances
+coord.combos
+coord.df=coord.combos
+as.character(coord.df[,1])
+as.character(coord.df[,2])
+mode=mode[1]
+mode
+mapdist(as.character(coord.df[,1]),#
+			as.character(coord.df[,2]),mode=mode[1])
+as.character(coord.df[,1]),#
+			as.character(coord.df[,2])
+mapdist(as.character(coord.df[1,1]),#
+			as.character(coord.df[1,2]),mode=mode[1])
+mapdist(as.character(coord.df[1:2,1]),#
+			as.character(coord.df[1:2,2]),mode=mode[1])
+mapdist(as.character(coord.df[1:3,1]),#
+			as.character(coord.df[1:3,2]),mode=mode[1])
+mapdist(as.character(coord.df[,1]),#
+			as.character(coord.df[,2]),mode=mode[1])
+mapdist(as.character(coord.df[1:10,1]),#
+			as.character(coord.df[1:10,2]),mode=mode[1])
+mapdist(as.character(coord.df[1:30,1]),#
+			as.character(coord.df[1:30,2]),mode=mode[1])
+dim(coord.df)
+mapdist(as.character(coord.df[1:312,1]),#
+			as.character(coord.df[1:312,2]),mode=mode[1])
+mapdist(as.character(coord.df[1:310,1]),#
+			as.character(coord.df[1:310,2]),mode=mode[1])
+mapdist(as.character(coord.df[10:20,1]),#
+			as.character(coord.df[10:20,2]),mode=mode[1])
+coord.df
+mapdist(as.character(coord.df[1:160,1]),#
+			as.character(coord.df[1:160,2]),mode=mode[1])
+mapdist(as.character(coord.df[1:80,1]),#
+			as.character(coord.df[1:80,2]),mode=mode[1])
+mapdist(as.character(coord.df[81:160,1]),#
+			as.character(coord.df[81:160,2]),mode=mode[1])
+distQueryCheck
+distQueryCheck()
+mapdist(as.character(coord.df[1:100,1]),#
+			as.character(coord.df[1:100,2]),mode=mode[1])
+mapdist(as.character(coord.df[1:99,1]),#
+			as.character(coord.df[1:99,2]),mode=mode[1])
+mapdist(as.character(coord.df[1:50,1]),#
+			as.character(coord.df[1:50,2]),mode=mode[1])
+6 %/% 6
+6 %/% 8
+8 %/% 6
+8 %/% 10
+800 %/% 10
+1:100
+1:312
+temp <- 1:312
+temp %/% 50
+head(coord.df)
+groups <- 1:dim(coord.df)[1]#
+		groups <- (groups %/% 50) + 1
+groups
+table(troups)
+table(groups)
+cumsum(groups)
+indices <- table(groups)
+cumsum(elem)
+cumsum(indices)
+indices
+indices <- c(0, cumsum(table(groups)))
+indices
+indices <- c(0, cumsum(table(groups)))#
+		indexList <- rep(NA,length(indices)-1)#
+		for(i in 1:length(indices)){#
+			indexList[i] <- (indices[i]+1):indices[i+1]#
+		}
+indices <- c(0, cumsum(table(groups)))#
+		indexList <- as.list(rep(NA,length(indices)-1))#
+		for(i in 1:length(indices)){#
+			indexList[i] <- (indices[i]+1):indices[i+1]#
+		}
+indexList
+indexList <- as.list(rep(NA,length(indices)-1))#
+		for(i in 1:length(indices)){#
+			indexList[[i]] <- (indices[i]+1):indices[i+1]#
+		}
+indices[1]
+indexList <- as.list(rep(NA,length(indices)-1))#
+		for(i in 1:length(indices)-1){#
+			indexList[[i]] <- (indices[i]+1):indices[i+1]#
+		}
+i
+indexList <- as.list(rep(NA,length(indices)-1))#
+		for(i in 1:(length(indices)-1)){#
+			indexList[[i]] <- (indices[i]+1):indices[i+1]#
+		}
+indexList
+max(groups)
+getDist <- function(coord.df){#
+		## we need to break things up into groups of 50 queries so as to work with mapdist#
+		groups <- 1:dim(coord.df)[1]#
+		groups <- (groups %/% 50) + 1#
+		indices <- c(0, cumsum(table(groups)))#
+		indexList <- as.list(rep(NA,length(indices)-1))#
+		for(i in 1:(length(indices)-1)){#
+			indexList[[i]] <- (indices[i]+1):indices[i+1]#
+		}#
+		dists <- rep(NA,dim(coord.df)[1]) # allocate memory#
+		for(i in 1:max(groups)){#
+			froms <- coord.df[groups==i,1]#
+			tos <- coord.df[groups==i,2]#
+			dists[indices[[i]]] <- suppressMessages(mapdist(as.character(froms),#
+				as.character(tos),mode=mode[1])$km)#
+		}#
+		return(dists)#
+	}
+getDist(coord.df)
+head(coord.df)
+coord.df <- coord.df[1:130,]
+coord.df
+distQueryCheck()
+getDist(coord.df)
+indices[[1]]
+getDist <- function(coord.df){#
+		## we need to break things up into groups of 50 queries so as to work with mapdist#
+		groups <- 1:dim(coord.df)[1]#
+		groups <- (groups %/% 50) + 1#
+		indices <- c(0, cumsum(table(groups)))#
+		indexList <- as.list(rep(NA,length(indices)-1))#
+		for(i in 1:(length(indices)-1)){#
+			indexList[[i]] <- (indices[i]+1):indices[i+1]#
+		}#
+		dists <- rep(NA,dim(coord.df)[1]) # allocate memory#
+		for(i in 1:max(groups)){#
+			froms <- coord.df[groups==i,1]#
+			tos <- coord.df[groups==i,2]#
+			dists[indexList[[i]]] <- suppressMessages(mapdist(as.character(froms),#
+				as.character(tos),mode=mode[1])$km)#
+		}#
+		return(dists)#
+	}
+getDist(coord.df)

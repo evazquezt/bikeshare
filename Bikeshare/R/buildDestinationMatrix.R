@@ -2,13 +2,24 @@ buildDestinationMatrix <-  function(bikeshareData,trip.subset=TRUE,station.subse
     if(class(bikeshareData) != "BikeshareData"){
         stop("Argument must be of class BikeshareData")
     }
-
-    # Subset data per argument
-    bd.df = subset(as.data.frame(bikeshareData),eval(parse(text=trip.subset)))
-    bd.df$trip = rep(1, nrow(bd.df))
-    stations.df = subset(makeStationDataFrame(bikeshareData@stations),eval(parse(text=station.subset)))
-    n = nrow(stations.df)
-
+    
+    ## Subset data per argument
+	if(typeof(trip.subset)=="character"){
+   	 	bd.df = subset(as.data.frame(bikeshareData),eval(parse(text=trip.subset)))
+   	}
+   	if(typeof(trip.subset)=="logical"){
+   	 	bd.df = subset(as.data.frame(bikeshareData),trip.subset)
+	}
+	if(typeof(station.subset)=="character"){
+   		stations.df = subset(makeStationDataFrame(bikeshareData@stations),eval(parse(text=station.subset)))
+   	}
+   	if(typeof(station.subset)=="logical"){
+   		stations.df = subset(makeStationDataFrame(bikeshareData@stations),station.subset)	
+   	}   	
+	
+	bd.df$trip = rep(1, nrow(bd.df))
+	n = nrow(stations.df)
+	
     # Melt data by starting and ending stations
     melted = melt(data=bd.df, id.vars = c("startLoc","endLoc"), measure.vars="trip")
     # Aggregate by trip

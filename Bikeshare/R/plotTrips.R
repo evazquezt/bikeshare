@@ -20,9 +20,14 @@ plotTrips <- function(bikeshareData,trip.subset=TRUE,station.subset=TRUE,zoom=13
 	station.pairs <- station.pairs[station.pairs$trips>0,]
 	
 	## Look up latitude and longitude of stations
+	if(typeof(station.subset)=="character"){
 	coords <- subset(makeStationDataFrame(bikeshareData@stations),
 					eval(parse(text=station.subset)))[,c("stationId","lat","long")]
-	
+	}
+	if(typeof(station.subset)=="logical"){
+	  coords <- subset(makeStationDataFrame(bikeshareData@stations),
+	                   station.subset)[,c("stationId","lat","long")]
+	}
 	get.lat <- function(id){return(coords$lat[coords$stationId==id])}
 	get.long <- function(id){return(coords$long[coords$stationId==id])}
 	
