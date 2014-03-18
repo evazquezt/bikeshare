@@ -4,7 +4,7 @@ Title: Tools for Analyzing Bikeshare Data
 Version: 0.0.1
 Date: 2014-03-01
 Author: Sara Kwasnick and John Sears 
-Maintainer: Sara Kwasnick and John Sears <lastnameFirstInitial@stanford.edu>
+Maintainer: Sara Kwasnick and John Sears <kwasnick@stanford.edu>
 Description: Facilitates analysis of bikeshare data from various municipalities.
 License: MIT
 Depends: XML, methods, ggmap, ggplot2, reshape, plyr, sqldf
