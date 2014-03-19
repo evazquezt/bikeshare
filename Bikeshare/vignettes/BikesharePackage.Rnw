@@ -41,6 +41,7 @@ stations = readStationData(system.file("extData/bikeStations.xml",
 bd = readTripData(system.file("extData/2010-4th-quarter.csv", 
                     package="Bikeshare"), .cities()$WAS, stations)
 @
+
 Note that for every city supported by the \texttt{Bikeshare} Package, we define an S4 BikeshareCity object accessible using \texttt{.cities()}.  All data cleaning is done behind the scenes. What we have now is a list of BikeshareStation objects containig station-level data and a BikeshareData object that wraps all of the trip data.  These two objects will constitute the working unit of analysis.
 
 \section{Graphics}
@@ -59,8 +60,8 @@ plotTrips(bd,stationSubset=closeStations,zoom=14,alpha=.5)
 @
 
 \section{Analysis}
-Now let's try some simple analysis. Suppose, for example, that we wanted to get a sense of how the total number of visits to a station correlates with the number of bike slots. Since we have already created a \texttt{stations} data object, it easy to obtain the relevant data frame.
-<<fig=TRUE>>=
+Now let's try some simple analysis. Suppose, for example, that we wanted to get a sense of how the total number of visits to a station correlates with the number of bike slots. Since we have already created a \texttt{stations} data object, it is easy to obtain the relevant data frame.
+<<>>=
 ## convert the station data object to a dataframe
 stationDF <- makeStationDataFrame(stations)
 ## Find total visits to each station
@@ -74,14 +75,14 @@ stationDF <- merge(stationDF, totalVisits)
 model <- lm(visits ~ numBikes, data=stationDF)
 summary(model)
 @
+
 We can visualize the linear fit using \texttt{qplot}.  Generally speaking, we may want to decrease the number of bike slots at points toward the bottom right, and increase the number of bike slots at points toward the top left.
 <<fig=TRUE>>=
 qplot(numBikes, visits, data=stationDF) + 
   geom_abline(intercept=coef(model)[1],slope=coef(model)[2])
 @
 
-
-To explore an alternative concept of "closeness" between stations, we can run the SimRank algorithm on station 31200.  This will give us the likelihood that a "random cyclist" departing from station 31200 traverses the system via each of the other stations.
+To explore an alternative concept of ``closeness'' between stations, we can run the SimRank algorithm on station 31200.  This will give us the likelihood that a ``random cyclist'' departing from station 31200 traverses the system via each of the other stations.
 <<>>=
 stationDF <- makeStationDataFrame(stations)
 stationDF$ranks <- data.frame(stationSimRank(bd,31200))[,1]
@@ -93,5 +94,4 @@ center <- c(mean(stationDF$long),mean(stationDF$lat))
 map <- get_map(location=center,zoom=13,scale = "auto",source="google")
 ggmap(map) + geom_point(data=stationDF, aes(x=long,y=lat,size=ranks),colour="red",alpha=.5)
 @
-
 \end{document}
