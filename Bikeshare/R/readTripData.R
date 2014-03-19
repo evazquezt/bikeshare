@@ -11,7 +11,8 @@ readTripData <-  function(path, city, stations){
     
     # Rip out columns that we want
     data = data[, city@keepCols]
-    colnames(data) = c("startTime","endTime","startLoc","endLoc", "bike","memberType")
+    
+    colnames(data)[1:6] = c("startTime","endTime","startLoc","endLoc", "bike","memberType")
 
     
     # Do city-level cleaning
@@ -22,8 +23,13 @@ readTripData <-  function(path, city, stations){
         # Kill the rows that don't have start/end locs
         data = subset(data,!(is.na(startLoc) | is.na(endLoc)))
     }
+    if(identical(city, .cities()$LON)){
+        data$memberType = rep("", nrow(data))
+        data$startTime = paste(data$startTime, data$Start.Time)
+        data$endTime = paste(data$endTime, data$End.Time)
+        data=data[,1:6]
+    }
     
-    # Similarly deal with other start/end locs
     
     # Convert dates/times to POSIX
     startTime = as.POSIXlt(data$startTime, format=city@timeFormat)
@@ -34,6 +40,10 @@ readTripData <-  function(path, city, stations){
     bike = sapply(data$bike, FUN = function(x){which(bikeNames == x)}, USE.NAMES=FALSE)
     
     # Member types
-    memberType = sapply(data$memberType, FUN=function(x){which(city@memberTypes == x)}, USE.NAMES=FALSE)    
+    memberType = sapply(data$memberType, FUN=function(x){which(city@memberTypes == x)}, USE.NAMES=FALSE)
+    # London doesn't do member types
+    if(identical(city, .cities()$LON)){
+        memberType = rep(-1L, nrow(data))
+    }
     bd = BikeshareData(location = city@name, startTime=startTime, endTime=endTime, startLoc = data$startLoc, endLoc = data$endLoc, bike=bike, memberType=memberType, stations = stations)
 }

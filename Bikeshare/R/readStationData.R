@@ -1,5 +1,5 @@
 readStationData = function(stationPath, city){
-    if(identical(city,.cities()$WAS)){
+    if(identical(city,.cities()$WAS) || identical(city,.cities()$LON)){
         doc = xmlTreeParse(file=stationPath)
         stationNodes = doc$doc$children$stations
         
