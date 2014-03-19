@@ -33,5 +33,8 @@ readStationData(stationPath, city)
 BikeshareStation
 }
 \examples{
-#readStationData("data/was/bikeStations.xml", .cities[["WAS"]])
+\dontrun{
+stations = readStationData(system.file("extData/bikeStations.xml", package="Bikeshare"),.cities()$WAS)
+
+}
 }

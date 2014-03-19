@@ -24,5 +24,11 @@ John Sears
   readStationData
 }
 \examples{
- # TODO
+\dontrun{
+# Load data
+stations = readStationData(system.file("extData/bikeStations.xml",
+  package="Bikeshare"),.cities()$WAS)
+# Convert to a data.frame for analysis
+stations.df = makeStationDataFrame(stations)
+}
 }

@@ -5,10 +5,8 @@
 \alias{.cities}
 
 \title{Class "BikeshareCity"  }
-\description{Object representing city-specific bikeshare data}
-\section{Objects from the Class}{
-Objects can be created by calls of the form \code{new("BikeshareCity", ...)}, or read from a typical file by  calling \code{scanGPSTRACK()}.
-}
+\description{Object representing city-specific bikeshare data information}
+
 \section{Slots}{
 	 \describe{
 	   \item{\code{name}}{Name of city}
@@ -22,6 +20,9 @@ Objects can be created by calls of the form \code{new("BikeshareCity", ...)}, or
 	     available}
 	   \item{\code{timeFormat}}{Format string to pull date/time from}
   }
+}
+\author{
+  John Sears
 }
 
 

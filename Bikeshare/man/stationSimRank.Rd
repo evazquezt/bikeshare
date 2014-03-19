@@ -40,7 +40,11 @@ John Sears
 }
 
 \examples{
-# stationSimRank(bikeshareData, 31074)
+\dontrun{
+stations = readStationData(system.file("extData/bikeStations.xml", package="Bikeshare"),.cities()$WAS)
+bikeshareData = readTripData(system.file("extData/2010-4th-quarter.csv", package="Bikeshare"), .cities()$WAS, stations)
+ranks = stationSimRank(bikeshareData, 31074)
+}
 }
 
 % R documentation directory.

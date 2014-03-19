@@ -36,5 +36,9 @@ readTripData(path,city, stations)
 }
 
 \examples{
-#bd = readTripData(path="data/2010-4th-quarter.csv",city="WAS", stations=stations)
+\dontrun{
+stations = readStationData(system.file("extData/bikeStations.xml", package="Bikeshare"),.cities()$WAS)
+bd = readTripData(path=system.file("extData/2010-4th-quarter.csv",
+package="Bikeshare"),city=.cities()$WAS, stations=stations)
+}
 }

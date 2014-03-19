@@ -1,7 +1,7 @@
 \name{buildDestinationMatrix}
 \alias{buildDestinationMatrix}
 \title{
-  Function to build an matrix counting trips from rows to columns.
+ Build Matrix Counting Trips from Rows to Columns.
 }
 \description{
   Matrix returned has n (number of stations) rows and columns.  Element
@@ -28,3 +28,14 @@ buildDestinationMatrix(bikeshareData,tripSubset,stationSubset)
   John Sears & Sara Kwasnick
 }
 
+\examples{
+\dontrun{
+# Load data
+stations = readStationData(system.file("extData/bikeStations.xml", package="Bikeshare"),.cities()$WAS)
+bd = readTripData(path=system.file("extData/2010-4th-quarter.csv",
+package="Bikeshare"),city=.cities()$WAS, stations=stations)
+
+# Build matrix
+destinationMatrix = buildDestinationMatrix(bd, stationSubset="numBikes < 12")
+}
+}

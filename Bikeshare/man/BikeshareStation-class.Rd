@@ -5,9 +5,7 @@
 \alias{as.data.frame.BikeshareStation}
 \title{Class "BikeshareStation"}
 \description{Object representing city-specific bikeshare data}
-\section{Objects from the Class}{
-Objects can be created by calls of the form \code{new("BikeshareStation", ...)}, or read from a typical file by  calling \code{scanGPSTRACK()}.
-}
+
 \section{Slots}{
 	 \describe{
 	   \item{\code{name}}{Name of station}
@@ -18,6 +16,9 @@ Objects can be created by calls of the form \code{new("BikeshareStation", ...)},
 	   \item{\code{stationId}}{Station id number}
 	   \item{\code{numBikes}}{Max number of bikes in station}
   }
+}
+\author{
+  John Sears
 }
 
 

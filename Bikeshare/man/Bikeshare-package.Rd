@@ -24,7 +24,4 @@ Imports: \tab XML \cr
   
   Maintainer: Sara Kwasnick and John Sears 
 }
-\references{
-~~ Literature or other references for background information ~~
-}
 \keyword{ package }

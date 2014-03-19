@@ -36,6 +36,6 @@ John Sears
   readTripData
 }
 \examples{
-showClass("BikeshareData")
+# readTripData(system.file("extData/2010-4th-quarter.csv", package="Bikeshare"), .cities()$WAS, stations)
 }
 \keyword{classes}
