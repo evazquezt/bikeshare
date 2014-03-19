@@ -61,7 +61,7 @@ plotTrips(bd,stationSubset=closeStations,zoom=14,alpha=.5)
 
 \section{Analysis}
 Now let's try some simple analysis. Suppose, for example, that we wanted to get a sense of how the total number of visits to a station correlates with the number of bike slots. 
-<<>>=
+<<fig=TRUE>>=
 ## convert the station data object to a dataframe
 stationDF <- makeStationDataFrame(stations)
 ## Find total visits to each station
@@ -112,7 +112,7 @@ summary(model)
 In general, we can regress usage of station on distance of nearest n stations to try to predict demand at a new station.
 
 To explore an alternative concept of "closeness" between stations, we can run the SimRank algorithm on station 31200.  This will give us the likelihood that a cyclist departing from station 31200 goes to each of the other stations.  The results are easy to visualize as a bubble plot weighted by the SimRank coefficients.
-<<>>=
+<<fig=TRUE>>=
 stationDF <- makeStationDataFrame(stations)
 stationDF$ranks <- data.frame(stationSimRank(bd,31200))[,1]
 
