@@ -8,17 +8,17 @@
 \maketitle
 
 \section{Motivation}
-The Bikeshare package is designed to aid social science research into municipal bike-sharing programs.  Benefits of use are streamlined data loading (with out-of-the-box support for many cities), graphical data exploration via integration with Google Maps API, and geographic data manipulation such as car versus bike distance calculation.
+The Bikeshare package is designed to aid social science research into municipal bike-sharing programs.  Benefits of use are streamlined data loading (with out-of-the-box support for several city-specific formats), graphical data exploration via integration with Google Maps API, and geographic data manipulation such as car versus bike distance calculation.
 
-Our goal is that this package dramatically reduces the start-up costs of engaging in data-driven research of municipal bikeshare systems. 
+Our goal for this package is to dramatically reduce the start-up costs of engaging in data-driven research in bikeshare systems. 
 
 We loosely group our functionality into three functional groups: 
 \begin{itemize}
-\item[1.] Ease of data loading and cleaning
-\item[2.] Numerical analysis via cutting-edge graph algorithms
-\item[3.] Powerful visualization tools leveraging the Google Maps API
+\item[1.] Data loading and cleaning
+\item[2.] Quantitative analysis
+\item[3.] Visualization tools
 \end{itemize}
-To illustrate the utility of the \texttt{Bikeshare} package, we will run through a typical use-case scenario based on publicly available data from Capital Bikeshare in Washington, DC.
+To illustrate the utility of the \texttt{Bikeshare} package, we will run through an example use-case scenario based on publicly available data from Capital Bikeshare in Washington, DC.
 
 \section{Loading the Data}
 Bikeshare data typically comprises two data files: a list of stations and a list of data on individual trips.  The two datasets are tied together by station ID numbers.  In addition to station IDs, the station data contains: station name, latitude, longitude, number of bike spaces, installation date and removal date, if applicable. The trips data contains: start times, end times, start location, end location, bike ID number, and member type (for example, subscribers vs. one-time users).
@@ -111,7 +111,7 @@ summary(model)
 @
 In general, we can regress usage of station on distance of nearest n stations to try to predict demand at a new station.
 
-To explore an alternative concept of "closeness" between stations, we can run the SimRank algorithm on station 31200.  This will give us the likelihood that a cyclist departing from station 31200 goes to each of the other stations.  The results are easy to visualize as a bubble plot weighted by the SimRank coefficients.
+To explore an alternative concept of "closeness" between stations, we can run the SimRank algorithm on station 31200.  This will give us the likelihood that a "random cyclist" departing from station 31200 traverses the system via each of the other stations.  The results are easy to visualize as a bubble plot weighted by the SimRank coefficients.
 <<fig=TRUE>>=
 stationDF <- makeStationDataFrame(stations)
 stationDF$ranks <- data.frame(stationSimRank(bd,31200))[,1]
