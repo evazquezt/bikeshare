@@ -1,5 +1,6 @@
 \name{getDistance}
 \alias{getDistance}
+\alias{distances}
 
 \title{
 A matrix of distances between stations
@@ -30,12 +31,11 @@ getDistance(stationData,fromSubset = TRUE,toSubset = TRUE,
 }
 }
 \details{
-Note that, without a developers' license, the Google Maps API limits queries to 2500 per day.
+Note that, without a developers' license, the Google Maps API limits queries to 2500 per day.  One example of a distance data frame which uses 313 queries can be found in \code{data(distances)} and is obtained from the call \code{as.data.frame(t(getDistance(stations,fromSubset="stationId==31200",mode="bicycling")))}.
 }
 \value{
 Returns a matrix.  Row names are the station IDs for all stations subsetted by fromSubset, and column names are the station IDs for all stations subsetted by toSubset.  If the subsets overlaps, entries may be redundant.  Element \code{[i,j]} of the matrix gives the biking distance between the row station \code{i} and column station \code{j}.
 }
-
 \author{
 Sara Kwasnick
 }
